@@ -34,12 +34,27 @@ Every plan requires independent `gpt-6-astra` and `gpt-6.1-sol` design reviews a
 high effort; unavailable reviews block readiness. Design readiness and verified
 implementation are separate states.
 
+The required [Git workflow](plugins/pdawgy-skills/skills/dawg-plan/references/git-workflow.md)
+gates every feature/fix on Git initialization consent and a committed base, then
+creates or resumes a dedicated task worktree. It records original repository and
+selected relative scope, mapping the project into that worktree. Plans, evidence,
+implementation and caller changes stay in the mapped target. After authorized
+implementation passes checks, it audits the entire index and commit delta,
+creates a Conventional Commit, and normally pushes the task feature/fix branch
+with remote OID confirmation. Unrelated staging, failed checks and delivery errors
+remain explicit blockers. Planning-only requests stop before implementation and
+delivery; final delivery receipts are reported in chat rather than requiring a
+self-referential tracked receipt.
+
 [dawg-init](plugins/pdawgy-skills/skills/dawg-init/SKILL.md) inspects an existing
 project or new directory and runs dawg-plan before guidance writes. It establishes
 coding instructions and compatible CLAUDE delegation, and delegates architecture
 work to dawg-architecture-maintain. Its assets contain reusable starting points
 for the three documents. Cleanup is identified during inspection and applied
-only after approval of concrete changes.
+only after approval of concrete changes. It adopts dawg-plan's mapped worktree
+project, preserves selected subdirectory scope, and delegates verified delivery
+back to that same workflow. A new directory requires Git initialization consent
+before its planning/guidance phase.
 
 [dawg-architecture-maintain](plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md)
 creates or synchronizes architecture documentation against source. Routine
@@ -56,6 +71,7 @@ flowchart TD
     Skills --> Maintain[dawg-architecture-maintain]
     Init --> Plan
     Init --> Maintain
+    Plan --> Worktree[Scoped task worktree and branch]
     Plan --> Reviews[Two independent design reviews]
     Reviews --> Artifacts[Target-project plan and verification artifacts]
     Init --> Guidance[Target-project AGENTS.md and CLAUDE.md]
@@ -71,7 +87,7 @@ models and high-effort delegation being available. Skill validation uses an
 external installed skill-creator validator with Python/PyYAML; that authoring
 tool is not a bundled runtime dependency.
 
-Plans are written in the project being worked on at
+Plans are written in the mapped project inside the task worktree at
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/`. Each has `PLAN.md` and a
 `verifications/` directory containing `verification.md`, reviews, and applicable
 logs/screenshots. The `dwag-plan` spelling is intentional. This repository's own

@@ -1,0 +1,17 @@
+{
+  "baseline": {
+    "calc.py": "def add(a, b): return a + b\n",
+    "config.txt": "mode=baseline\n",
+    "packages/app/README.md": "App scope fixture\n"
+  },
+  "source_final": {
+    "calc.py": "def add(a, b): return a + b\n",
+    "config.txt": "mode=user-wip\n",
+    "notes.txt": "keep this note\n",
+    "packages/app/README.md": "App scope fixture\n"
+  },
+  "resume_final": {
+    "calc.py": "def add(a, b): return a + b + 100\n\n\ndef subtract(a, b):\n    return a - b - 1\n",
+    "config.txt": "mode=unrelated-resume\n"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "AGENTS.md": "190573270d70fbf70f40fa71e9b272394fb7d6cded7da36c964a86c97a71cc7a",
+  "ARCHITECTURE.md": "b7973864f6620e7d3b75a4a484d1efad632723c24973c4e11dac0a6d00631e4a",
+  "README.md": "a70d78864b79c73854a2f69ff1fec7c513d789c97796f2f89a9006fa2869b5a5",
+  "plugins/pdawgy-skills/.codex-plugin/plugin.json": "9592dcb494078189a38afbee2d7dc365c1ffb3198fa5ee167fe32d09ecafdb36",
+  "plugins/pdawgy-skills/skills/dawg-init/SKILL.md": "615cd1494be63edb942ce58a498542f33dbcbae60eabe968bfb5a3d94850fd71",
+  "plugins/pdawgy-skills/skills/dawg-init/assets/AGENTS.md": "f6126438206c6b25d19f48f0b6f2a6d3a484b9160b468e664dbf276b6e6e21ae",
+  "plugins/pdawgy-skills/skills/dawg-plan/SKILL.md": "ce48d3a379d59b10e7c85fb0d7999b7d11788886f9e165844521928df1c9ef46",
+  "plugins/pdawgy-skills/skills/dawg-plan/agents/openai.yaml": "9fecb8a553641bb1e26767d225ec77842bfabd8768fdb845388bc032335f384e",
+  "plugins/pdawgy-skills/skills/dawg-plan/assets/PLAN.md": "76022378d3cb86feedcf3b9a6b8ae67d25939da5e4537a5ddbf17d811219ccf5",
+  "plugins/pdawgy-skills/skills/dawg-plan/assets/verification.md": "e0ad58de875017df4bd898c515f07f94260528ae96dfa5cd5f696e11f16c6261",
+  "plugins/pdawgy-skills/skills/dawg-plan/references/git-workflow.md": "7336425981e81efd75d97e9fab0ef224c821cb864e5cd072916d8da9c01bd3e8"
+}

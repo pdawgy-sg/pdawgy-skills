@@ -9,6 +9,13 @@
   diagrams, and break work into small parts with reproducible verification.
   Required design reviewers are `gpt-6-astra` and `gpt-6.1-sol`, both at high
   effort. Report unavailable dependencies instead of claiming the review ran.
+- Every feature/fix uses dawg-plan's dedicated Git worktree and task branch.
+  Preserve the selected target-relative scope inside it; keep the source checkout
+  and unrelated staged/dirty work intact. Outside Git, ask before initializing.
+  After authorized implementation passes required checks, inspect the whole index
+  and commit delta, create a task-only Conventional Commit, and push normally to
+  its feature/fix branch with remote OID confirmation. Respect planning-only and
+  explicit delivery limits; report blockers rather than bypassing checks.
 - Use the installed skill-creator workflow when authoring skills. Keep guidance
   concise, scoped to its purpose, and supported by resources only when useful.
 - Use [dawg-architecture-maintain](plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md)

@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Plan"
-  short_description: "Plan features and fixes with diagrams and evidence"
-  default_prompt: "Use $dawg-plan to understand this feature or fix and create a verifiable implementation plan."
+  short_description: "Plan and deliver verified changes in Git worktrees"
+  default_prompt: "Use $dawg-plan to plan this feature or fix in a dedicated Git worktree and verify, conventionally commit, and push after authorized implementation."

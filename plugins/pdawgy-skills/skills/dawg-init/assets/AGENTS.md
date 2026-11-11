@@ -14,7 +14,12 @@ rules. Keep this section about writing and checking code, not module inventories
 ## Dawg standards
 
 - Use `dawg-plan` for features and fixes. Resolve material uncertainty, keep work
-  in small parts, and record enough verification/evidence for each part.
+  in small parts, and record enough verification/evidence for each part. Use its
+  dedicated Git worktree/task branch and preserve selected subdirectory scope.
+  Outside Git, ask before initialization and wait. After authorized implementation
+  passes required checks, create a task-only Conventional Commit and push normally
+  to that feature/fix branch; confirm the remote commit. Preserve planning-only
+  limits and unrelated staged/dirty work; report delivery blockers honestly.
 - Keep code as simple as possible; add complexity only for a concrete requirement.
 - Do not add explanatory code comments. Express intent through clear names and
   simple code. Retain required license notices, interpreter/tool directives, and

@@ -1,0 +1,11 @@
+{
+  "base": "078c3e2eae7a0097d1fe4e78d6af2e49d039a684",
+  "branch": "codex/feature/subtract",
+  "commit": "b1616c044e0cc00be6f173fa2570ca1958fa6609",
+  "remote_oid": "b1616c044e0cc00be6f173fa2570ca1958fa6609",
+  "tested_calc_sha256": "6ff3ed034e98dcc3f53c7d5e3e0bcb61bde371749225e466e3973d200cb74f1c",
+  "staged_diff": "diff --git a/calc.py b/calc.py\nindex 9bc8bf7..48389ff 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1 +1,5 @@\n def add(a, b): return a + b\n+\n+\n+def subtract(a, b):\n+    return a - b",
+  "created_commit_delta": "diff --git a/calc.py b/calc.py\nindex 9bc8bf7..48389ff 100644\n--- a/calc.py\n+++ b/calc.py\n@@ -1 +1,5 @@\n def add(a, b): return a + b\n+\n+\n+def subtract(a, b):\n+    return a - b",
+  "preserved_source": true,
+  "task_status_before_resume": "clean"
+}

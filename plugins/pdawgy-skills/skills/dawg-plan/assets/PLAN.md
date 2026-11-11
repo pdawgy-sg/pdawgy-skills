@@ -1,8 +1,15 @@
 # <FIX|FEATURE>: <Plan name>
 
 Status: DRAFT | BLOCKED | READY | IMPLEMENTING | VERIFIED
-Project root: <absolute target project path>
+Project root: <mapped project path inside task worktree>
 Plan revision: <revision/date; update after material changes>
+Source repository root: <original checkout>
+Selected target-relative path: <scope inside repository, or .>
+Worktree repository root: <linked task worktree>
+Base commit and task branch: <revision; codex/feature/... or codex/fix/...>
+Remote and task destination branch: <chosen remote; same task branch name>
+Delivery snapshot: PLANNING ONLY | PENDING | COMMITTED | PUSHED | BLOCKED
+Final delivery receipt: <chat handoff; not a self-referential tracked receipt>
 
 ## Intent and scope
 
@@ -68,5 +75,11 @@ Checklist: [verifications/verification.md](verifications/verification.md)
 
 - Implementation authorization: <planning only, or existing user authorization>
 - Completion rule: all required checks passed with evidence; both design reviews
-  cover the final design. Design approval alone does not prove implementation.
+  cover the final design. Authorized implementation also requires a scoped
+  Conventional Commit and confirmed task-branch push unless the user limits
+  delivery. Design approval alone does not prove implementation or delivery.
 - Current result: <plan readiness, execution status, outstanding limitations>
+- Delivery checks: <entire index/staged scope, complete created commit delta,
+  tested source match, remote/task branch, required CI, and blockers>
+- Keep committed evidence as a pre-delivery snapshot; report the final commit/OID
+  receipt in chat without modifying the verified source or chasing its own hash.

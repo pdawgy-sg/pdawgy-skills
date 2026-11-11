@@ -1,0 +1,10 @@
+{
+  "original_repository_root": "/tmp/dawg-git-astra-eval/source",
+  "selected_target_relative": ".",
+  "worktree_repository_root": "/tmp/dawg-git-astra-eval/task-worktree",
+  "mapped_project": "/tmp/dawg-git-astra-eval/task-worktree",
+  "base": "259536170ba2cc15084969cb251ade31107ee556",
+  "task_branch": "codex/feature/subtract",
+  "remote": "/tmp/dawg-git-astra-eval/remote.git",
+  "authorization": "bounded fixture feature and local branch delivery; nested plan reviews explicitly deferred"
+}

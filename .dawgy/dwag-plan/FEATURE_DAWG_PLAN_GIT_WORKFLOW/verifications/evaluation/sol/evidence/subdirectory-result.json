@@ -1,0 +1,16 @@
+{
+  "original_repository_root": "/tmp/dawg-git-sol-eval/source",
+  "original_selected_target": "/tmp/dawg-git-sol-eval/source/packages/app",
+  "selected_target_relative": "packages/app",
+  "worktree_repository_root": "/tmp/dawg-git-sol-eval/task",
+  "mapped_project": "/tmp/dawg-git-sol-eval/task/packages/app",
+  "plan_path": "/tmp/dawg-git-sol-eval/task/packages/app/.dawgy/dwag-plan/FEATURE_AGENT_GUIDANCE/PLAN.md",
+  "verification_path": "/tmp/dawg-git-sol-eval/task/packages/app/.dawgy/dwag-plan/FEATURE_AGENT_GUIDANCE/verifications/verification.md",
+  "proposed_guidance_destinations": [
+    "/tmp/dawg-git-sol-eval/task/packages/app/AGENTS.md",
+    "/tmp/dawg-git-sol-eval/task/packages/app/CLAUDE.md",
+    "/tmp/dawg-git-sol-eval/task/packages/app/ARCHITECTURE.md"
+  ],
+  "applicable_fixture_instruction_files": [],
+  "scope_result": "No root-level or source-checkout guidance writes; no init applied."
+}
