@@ -30,9 +30,15 @@ project build/test framework in the current source package.
 [dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md) investigates a feature
 or fix, resolves material ambiguity, models its state transitions, and defines
 small verifiable tasks. Its assets provide plan and verification templates.
-Every plan requires independent `gpt-6-astra` and `gpt-6.1-sol` design reviews at
-high effort; unavailable reviews block readiness. Design readiness and verified
-implementation are separate states.
+Every plan requires a concrete TLA+ model/configuration and parent TLC run, followed
+by independent TLC execution and semantic review from `gpt-6-astra` and
+`gpt-6.1-sol` at high effort. The required
+[TLA+ guide](plugins/pdawgy-skills/skills/dawg-plan/references/tla-verification.md)
+defines domain/requirement mapping, enabled properties and assumptions, finite
+bounds, actual completion evidence, reachability checks, and shared final input
+identities. Missing, failed, incomplete or stale executions block readiness.
+Material formal-input or requirement changes invalidate all three receipts.
+Bounded model checking and implementation verification remain separate checks.
 
 The required [Git workflow](plugins/pdawgy-skills/skills/dawg-plan/references/git-workflow.md)
 gates every feature/fix on Git initialization consent and a committed base, then
@@ -84,13 +90,17 @@ The calling coding agent executes these workflows with its available file,
 shell, and subagent tools. The plugin supplies instructions and templates rather
 than a separate execution service. Its reviewer requirement depends on both exact
 models and high-effort delegation being available. Skill validation uses an
-external installed skill-creator validator with Python/PyYAML; that authoring
-tool is not a bundled runtime dependency.
+external installed skill-creator validator with Python/PyYAML. Formal planning
+also needs external Java/TLC tooling. Those tools are used by the calling agents;
+neither their binaries nor a separate model-checking service are bundled here.
 
 Plans are written in the mapped project inside the task worktree at
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/`. Each has `PLAN.md` and a
 `verifications/` directory containing `verification.md`, reviews, and applicable
-logs/screenshots. The `dwag-plan` spelling is intentional. This repository's own
+logs/screenshots. Its `tla/` subtree holds specifications/configs, tool/input
+identities, parent/reviewer runs and relevant counterexamples. Reviewers use their
+own fresh metadata/log locations and preserve evidence without editing the model.
+The `dwag-plan` spelling is intentional. This repository's own
 `.dawgy/` tree preserves development plans, snapshot validation helpers, and
 controlled evaluation projects. Those Python fixtures and copied guidance are
 historical test inputs and evidence, not additional plugin components.

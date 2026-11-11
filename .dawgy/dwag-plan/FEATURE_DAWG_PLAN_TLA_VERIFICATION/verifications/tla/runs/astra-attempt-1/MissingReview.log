@@ -1,0 +1,22 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 115 and seed 2431083618764608567 with 1 worker on 24 cores with 491MB heap and 64MB offheap memory [pid: 93] (Linux 7.2.11-arch1-1 amd64, Eclipse Adoptium 25.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /tmp/dawg-tla-astra-inputs-1/tla/PlanGate.tla
+Parsing file /tmp/Integers.tla
+Parsing file /tmp/TLC.tla
+Parsing file /tmp/Naturals.tla
+Parsing file /tmp/Sequences.tla
+Parsing file /tmp/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module PlanGate
+Starting... (2026-11-12 07:31:27)
+Error: TLC threw an unexpected exception.
+This was probably caused by an error in the spec or model.
+See the User Output or TLC Console for clues to what happened.
+The exception was a java.util.concurrent.ExecutionException
+: java.rmi.server.ExportException: Listen failed on port: 0; nested exception is: 
+	java.net.SocketException: Operation not permitted
+Finished in 00s at (2026-11-12 07:31:27)

@@ -41,9 +41,11 @@ Save the plan, diagrams, checklist and evidence in that mapped project's
 `.dawgy/dwag-plan/FEATURE_<PLAN_NAME>/` directory. Do not write back to the source
 checkout. Handle unborn baselines and unrelated work through dawg-plan's workflow.
 
-Honor the full workflow, including `gpt-6-astra` and `gpt-6.1-sol` design reviews
-at high effort. Do not write the target guidance files before the plan is ready.
-If the sibling skill or required reviewers are unavailable, report the blocker;
+Honor the full workflow, including the concrete TLA+ model/configuration, parent
+TLC checks, and independent TLC reruns/semantic reviews by `gpt-6-astra` and
+`gpt-6.1-sol` at high effort. Do not write target guidance before those current
+checks pass and the plan is ready. If the sibling skill, formal tools/execution
+or required reviewers are unavailable, report the blocker;
 continue inspection and drafting but do not invent a substitute review. Running
 the skill authorizes requested guidance creation/updates; it does not authorize
 the cleanup described below. Preserve any planning-only limit from the user.
@@ -77,7 +79,9 @@ facts; remove template prompts and unsupported sections from finished documents.
 Encode these Dawg coding standards in `AGENTS.md`:
 
 - Use `dawg-plan` for features and fixes; clarify material uncertainty and keep
-  tasks small with enough verification/evidence to prove they work. Require its
+  tasks small with enough verification/evidence to prove they work. Require TLA+
+  modeling and completed parent/both-reviewer TLC runs on matching final inputs,
+  with bounded claims and implementation checks still required. Require its
   task worktree/branch, ask before Git initialization when needed, and automatically
   conventionally commit/push authorized implementation only after required checks
   pass. Preserve planning-only and explicit delivery limits.

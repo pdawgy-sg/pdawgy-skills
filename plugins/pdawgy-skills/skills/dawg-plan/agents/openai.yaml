@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Plan"
-  short_description: "Plan and deliver verified changes in Git worktrees"
-  default_prompt: "Use $dawg-plan to plan this feature or fix in a dedicated Git worktree and verify, conventionally commit, and push after authorized implementation."
+  short_description: "Plan with TLA+ and independent reviewer model checks"
+  default_prompt: "Use $dawg-plan to plan this feature or fix in a Git worktree with TLA+ verification and independent TLC runs by both reviewers, then verify, commit, and push authorized implementation."

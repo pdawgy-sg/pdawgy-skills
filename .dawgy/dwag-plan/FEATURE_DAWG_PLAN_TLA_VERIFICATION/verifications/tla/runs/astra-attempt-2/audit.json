@@ -1,0 +1,28 @@
+{
+  "input_sha256": {
+    "run_tlc.py": "08aef3139ab1c5f9b1006a973b0c303be38ef141064109cdc00d54a0f573e460",
+    "tla/PlanGate.tla": "3cf6163591753c3786e82bf1f7fe936aba9ea2330056ece4b867f53e43b3d4de",
+    "tla/PlanGate.cfg": "326538716e53e3a88bce5c91dbe2fd58f6377c9c1996e109718476f4eda79d60",
+    "tla/PlanOnly.cfg": "bf4957471308effbcf93257f4a1882b6807a27e4785870e0238f06362c1f4947",
+    "tla/MissingReview.cfg": "1f1b29ebf4d90a02da8c0727ede127db1e63e9fb618a45686fe25444d73e6563",
+    "tla/ReachReady.cfg": "d5412f4e5f518e3abdfcddff3ffd22b0a9150e7eaae7ac80bf69432ea98e5cc3"
+  },
+  "source_and_private_inputs_unchanged": true,
+  "parent_and_reviewer_module_config_tool_identity_match": true,
+  "raw_logs_independently_inspected": true,
+  "standard_module_members_in_pinned_jar": {
+    "tla2sany/StandardModules/Integers.tla": "071da69e5eea383d361ef308ba12ecc931bf968fcea98175c3bca419bbd8cbf2",
+    "tla2sany/StandardModules/TLC.tla": "944ece590eec81ace059881c2a62064c06041efa81539a788cd40fa7d1da41ce",
+    "tla2sany/StandardModules/Naturals.tla": "73f2a68412039aa86f37ad08f0d0fef50fa8327d0ad8806f515548c75e9d9d84",
+    "tla2sany/StandardModules/Sequences.tla": "f613cffe14133769f0972b6f6e0139aaf0773004a51bac88ada382426e3eb7f4",
+    "tla2sany/StandardModules/FiniteSets.tla": "d94cb545256539bf782fc1914842dfe8c19c1d3d4e48b8327dd0c47b74922e1e"
+  },
+  "parsed_temp_module_paths_still_present": {
+    "/tmp/Integers.tla": false,
+    "/tmp/TLC.tla": false,
+    "/tmp/Naturals.tla": false,
+    "/tmp/Sequences.tla": false,
+    "/tmp/FiniteSets.tla": false
+  },
+  "scope": "finite safety checks, two named reviewers, revision 0..1; no liveness, arbitrary-code refinement, tool-truthfulness or Git-mechanics proof"
+}

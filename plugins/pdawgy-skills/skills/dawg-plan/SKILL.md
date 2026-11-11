@@ -1,6 +1,6 @@
 ---
 name: dawg-plan
-description: Plan software features and fixes in dedicated Git worktrees with clarifying questions, state diagrams, verifiable tasks, and independent reviews. After authorized implementation, verify, conventionally commit, and push the task branch. Use when planning a feature or fix or explicitly asked to use dawg-plan.
+description: Plan features and fixes in dedicated Git worktrees with TLA+ models, completed TLC checks, state diagrams, verifiable tasks, and two independent reviewers who rerun model checking. After authorized implementation, verify, conventionally commit, and push the task branch. Use when planning a feature or fix or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
@@ -47,7 +47,11 @@ worktree, not in the source checkout or installed skill's directory:
 .dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/
 ├── PLAN.md
 └── verifications/
-    └── verification.md
+    ├── verification.md
+    └── tla/
+        ├── <Module>.tla
+        ├── <Model>.cfg
+        └── runs/
 ```
 
 Use `FIX_` for a bug fix and `FEATURE_` for new behavior, followed by a concise
@@ -81,6 +85,21 @@ transition table. State invariants that must remain true. Map each transition
 and acceptance criterion to a verification item. One meaningful check may cover
 several transitions; do not create a separate test merely for every arrow.
 
+## Verify every plan with TLA+
+
+Read and follow [the required TLA+ workflow](references/tla-verification.md).
+Every plan includes a concrete TLA+ model/configuration of the requested behavior,
+mapped acceptance criteria/actions/properties, stated assumptions and finite bounds,
+and completed TLC checks. Keep diagrams and the model consistent. Parent and both
+reviewers must actually run the same final model/configuration; an opinion or
+inspection of someone else's log does not satisfy independent execution.
+
+Save reproducible logs, tool/input identities, state statistics, and relevant
+counterexamples under `verifications/tla/`. Missing tools, incomplete exploration,
+required-property violations, or stale/missing runs block readiness. Report bounded
+model-checking results separately from implementation tests; neither a diagram nor
+a generic process model proves an unrelated product feature works.
+
 ## Break work into small, verifiable parts
 
 Define bounded tasks (`T1`, `T2`, ...) in dependency order. Each task specifies:
@@ -105,7 +124,8 @@ label a command that cannot yet be confirmed and explain what must resolve it.
 
 ## Require two independent design reviews for every plan
 
-After drafting the concrete plan and checklist, spawn exactly two design review
+After drafting the concrete plan/checklist and TLA+ module/configuration, and
+completing the parent's required TLC checks, spawn exactly two design review
 subagents, concurrently when supported:
 
 - `gpt-6-astra` at `high` reasoning effort.
@@ -114,12 +134,17 @@ subagents, concurrently when supported:
 Use the runtime's subagent tool with explicit model and effort selections. If
 using `collaboration.spawn_agent`, set `fork_turns: "none"` so the overrides can
 be applied. Give each reviewer the same user requirements, confirmed decisions,
-relevant repository context, and paths to the draft plan and checklist. Ask each
+relevant repository context, and paths to the plan, checklist, TLA+ source/configs
+and parent run evidence. Ask each
 to independently inspect intent alignment, state transitions and invariants,
 task boundaries, acceptance coverage, reproducibility of evidence, and excessive
-testing or scope. Require actionable findings with severity and file references,
-or an explicit statement that no material issues were found. Reviewers should
-read and report without editing project files or running unsafe checks.
+testing or scope. Each must independently run TLC using fresh private state/log
+directories, audit enabled properties and raw outputs, and review abstraction,
+assumptions, bounds, relevant liveness/deadlock choices, reachability and requirement
+mapping. Require its own tool/input hashes, commands, results, and actionable
+findings with references or no material findings. Keep project source unchanged;
+write reviewer run evidence in separate locations for preservation. Do not run
+unsafe checks or treat a shared runner's summary as sufficient semantic review.
 
 Wait for both reviews. Save each returned review, its model and effort, and the
 reviewed plan revision under `verifications/design-review-astra.md` and
@@ -127,10 +152,13 @@ reviewed plan revision under `verifications/design-review-astra.md` and
 `PLAN.md`. Resolve material findings; return product decisions to the user when
 needed. After a material design change, have both reviewers reassess the updated
 design; reuse the two reviewers rather than spawning additional reviewers.
-Keep review records current with the final design. Readiness requires both
-reviews completed and no unresolved material findings.
+Material behavior/model/configuration/property/bound/assumption/fairness changes
+invalidate all three run receipts: rerun parent and both reviewers on the updated
+inputs and rereview. Keep records current with final input hashes. Readiness
+requires completed passing parent and both independent reviewer runs on those
+inputs, both semantic approvals, and no unresolved material findings.
 
-If either exact model, effort selection, or delegation is unavailable, record
+If either exact model, effort selection, delegation, or required TLC execution is unavailable, record
 which requirement is blocked and tell the user. Do not substitute models, invent
 reviews, or mark the plan ready. Continue independent drafting and investigation
 that do not depend on the unavailable review.
@@ -179,3 +207,6 @@ also distinguish committed work from confirmed remote delivery. Include the
 worktree path, task branch, verification results, Conventional Commit hash, remote
 branch confirmation, and any outstanding blocker. Retain the worktree and branch
 for review; do not implicitly merge into the base branch or remove the worktree.
+Report the TLA+ properties/bounds, actual run outcomes and formal limitations
+alongside implementation evidence and delivery, without claiming a general proof
+of code correctness.

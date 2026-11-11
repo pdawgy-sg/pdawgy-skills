@@ -9,8 +9,10 @@ manifest layout.
 
 - **dawg-plan** — Understand features and fixes, ask about missing requirements,
   diagram their state transitions, and break work into small verifiable tasks.
-  Every plan requires independent design reviews by `gpt-6-astra` and
-  `gpt-6.1-sol`, both at high effort. Features/fixes use a dedicated Git worktree
+  Every plan includes a TLA+ model/config and completed TLC runs by the parent,
+  `gpt-6-astra`, and `gpt-6.1-sol`, with both reviewers at high effort independently
+  checking model meaning and execution. Missing/stale/incomplete runs block
+  readiness; bounded model checks complement implementation tests. Features/fixes use a dedicated Git worktree
   and task branch; non-Git directories require initialization consent. After
   authorized implementation passes checks, the workflow creates a Conventional
   Commit and pushes the task branch with remote confirmation. Planning-only
@@ -32,6 +34,9 @@ Architecture stays current through coding-task maintenance, not a background job
 Plans are saved in the target project's
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/PLAN.md`, with the checklist and
 evidence in `verifications/verification.md` and the surrounding directory.
+Formal specifications, configurations and parent/reviewer logs live under that
+directory's `tla/`. Java and TLC are external authoring tools; the plugin does not
+bundle them. Material formal-input/requirement changes require all three reruns.
 The target project is mapped into the task worktree, preserving any selected
 subdirectory. Branches default to `codex/feature/<slug>` or `codex/fix/<slug>`.
 Missing identity/remotes, unresolved unrelated staging, failed checks, or rejected
@@ -57,6 +62,7 @@ pdawgy-skills/
             │   ├── SKILL.md
             │   ├── agents/openai.yaml
             │   ├── references/git-workflow.md
+            │   ├── references/tla-verification.md
             │   └── assets/
             │       ├── PLAN.md
             │       └── verification.md
