@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dawg Plan"
+  short_description: "Plan features and fixes with diagrams and evidence"
+  default_prompt: "Use $dawg-plan to understand this feature or fix and create a verifiable implementation plan."

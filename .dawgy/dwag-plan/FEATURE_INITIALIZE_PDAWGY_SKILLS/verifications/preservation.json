@@ -1,0 +1,25 @@
+{
+  "baseline_file_count": 125,
+  "missing_original_files": [],
+  "changed_original_files": [],
+  "added_files_outside_this_plan": [
+    "AGENTS.md",
+    "ARCHITECTURE.md",
+    "CLAUDE.md"
+  ],
+  "all_original_bytes_preserved": true,
+  "cleanup_candidates": [],
+  "cleanup_applied": false,
+  "document_hashes_before_noop_reinspection": {
+    "AGENTS.md": "534a5b1fdc528767370caff051436b186573c57e5f38513f76a4912a29791342",
+    "CLAUDE.md": "6a3c3f61e7e00f6a9a44fafc766df1913a30e130965cacd40c60dc0539b395ae",
+    "ARCHITECTURE.md": "642ec942bc151fe34acdee32c455bc4e26bb0e18b3c94eaf0b7d2fffc8dd90fa"
+  },
+  "document_hashes_after_noop_reinspection": {
+    "AGENTS.md": "534a5b1fdc528767370caff051436b186573c57e5f38513f76a4912a29791342",
+    "CLAUDE.md": "6a3c3f61e7e00f6a9a44fafc766df1913a30e130965cacd40c60dc0539b395ae",
+    "ARCHITECTURE.md": "642ec942bc151fe34acdee32c455bc4e26bb0e18b3c94eaf0b7d2fffc8dd90fa"
+  },
+  "noop_reinspection": "Both required reviewers read the actual root docs against current source and found no further edit necessary; no files were written by either pass.",
+  "passed": true
+}

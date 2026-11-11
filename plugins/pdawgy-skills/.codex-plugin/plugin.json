@@ -1,0 +1,12 @@
+{
+  "name": "pdawgy-skills",
+  "version": "0.2.0",
+  "description": "A personal collection of reusable skills for Codex.",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Pdawgy Skills",
+    "shortDescription": "Reusable personal workflows for Codex",
+    "longDescription": "A collection of personal skills packaged together for use in Codex.",
+    "category": "Productivity"
+  }
+}

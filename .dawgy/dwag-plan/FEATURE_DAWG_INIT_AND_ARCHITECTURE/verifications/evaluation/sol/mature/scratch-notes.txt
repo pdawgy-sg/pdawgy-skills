@@ -1,0 +1,1 @@
+Investigating how None values should behave. Do not delete my notes.

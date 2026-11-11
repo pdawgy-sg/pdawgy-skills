@@ -1,0 +1,21 @@
+{
+  "mature": {
+    "added": [],
+    "removed": [],
+    "changed": [
+      "ARCHITECTURE.md"
+    ]
+  },
+  "claude-existing": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "empty": {
+    "added": [
+      "ARCHITECTURE.md"
+    ],
+    "removed": [],
+    "changed": []
+  }
+}

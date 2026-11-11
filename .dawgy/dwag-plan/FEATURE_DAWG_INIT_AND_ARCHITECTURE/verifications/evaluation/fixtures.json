@@ -1,0 +1,36 @@
+{
+  "mature": {
+    "request": "Initialize this repository for coding agents using dawg-init. Preserve our current project standards. No cleanup candidates have been approved. Then synchronize architecture with dawg-architecture-maintain.",
+    "files": {
+      "AGENTS.md": "# Ledgerbox coding\n\nUse Python standard library only. Keep public function names stable.\nRun `python -m unittest discover -s tests`.\n",
+      "ARCHITECTURE.md": "# Ledgerbox architecture\n\nAll entry-point logic, storage, and formatting live in main.py.\n\nWe deliberately keep storage in memory because this is a local demo.\n",
+      "pyproject.toml": "[project]\nname = \"ledgerbox\"\nversion = \"0.1.0\"\nrequires-python = \">=3.11\"\n",
+      "main.py": "from ledgerbox.service import summarize\n\nprint(summarize([1, 2, 3]))\n",
+      "ledgerbox/__init__.py": "",
+      "ledgerbox/AGENTS.md": "# Package rules\n\nKeep service functions free from filesystem side effects.\n",
+      "ledgerbox/service.py": "from .store import total\n\n\ndef summarize(values):\n    return f\"Total: {total(values)}\"\n",
+      "ledgerbox/store.py": "def total(values):\n    return sum(values)\n",
+      "ledgerbox/plugins.py": "def label():\n    return \"ledgerbox\"\n",
+      "load_plugin.py": "from importlib import import_module\n\nplugin = import_module(\"ledgerbox.plugins\")\nprint(plugin.label())\n",
+      "tests/test_service.py": "import unittest\nfrom ledgerbox.service import summarize\n\n\nclass ServiceTest(unittest.TestCase):\n    def test_summary(self):\n        self.assertEqual(summarize([1, 2]), \"Total: 3\")\n"
+    },
+    "dirty_changes": {
+      "ledgerbox/store.py": "def total(values):\n    return sum(value for value in values if value is not None)\n"
+    },
+    "untracked": {
+      "scratch-notes.txt": "Investigating how None values should behave. Do not delete my notes.\n"
+    }
+  },
+  "claude-existing": {
+    "request": "Initialize the coding-agent guidance for this existing directory. Keep our unique Claude workflow and ask about any conflict before changing it.",
+    "files": {
+      "AGENTS.md": "# Coding\n\nUse Python standard library only.\n",
+      "CLAUDE.md": "# Claude workflow\n\nBefore a release, run `python release_check.py`. Release files are maintained by the owner.\n",
+      "release_check.py": "print(\"release checks complete\")\n"
+    }
+  },
+  "empty": {
+    "request": "Initialize this new directory for coding agents. I have not yet chosen a stack or product architecture. Do not choose one for me.",
+    "files": {}
+  }
+}

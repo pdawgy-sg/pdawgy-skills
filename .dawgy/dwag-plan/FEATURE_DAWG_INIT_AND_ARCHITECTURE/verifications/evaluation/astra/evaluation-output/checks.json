@@ -1,0 +1,23 @@
+{
+  "changed_existing_files": [
+    "mature/ARCHITECTURE.md"
+  ],
+  "added_files": [
+    "empty/ARCHITECTURE.md"
+  ],
+  "existing_files_preserved_except_allowed_architecture": 14,
+  "mature_second_pass_byte_identical": true,
+  "mature_second_pass_sha256": "ec068ca7fc26e6acd49988e54abe1c5dc62f5ac8d15e81472f6d06bae9992b62",
+  "empty_project_contains_only_architecture": true,
+  "target_init_guidance_not_applied": true,
+  "architecture_relative_links_resolve": true,
+  "reviewed_skill_hashes": {
+    "plugins/pdawgy-skills/skills/dawg-init/SKILL.md": "aab8a7ecb7772bbb124100a21047b255ff88246ec9a569a82ced1dc033f886fd",
+    "plugins/pdawgy-skills/skills/dawg-init/agents/openai.yaml": "0d46d455b6c855e614aba5b7cbc9087134166eb930138c2fba7d18857c94954c",
+    "plugins/pdawgy-skills/skills/dawg-init/assets/AGENTS.md": "44c5600604b5e69b25e75ea2edf75e55c2e32d2ae189faa0e94b829caa08162c",
+    "plugins/pdawgy-skills/skills/dawg-init/assets/CLAUDE.md": "6a3c3f61e7e00f6a9a44fafc766df1913a30e130965cacd40c60dc0539b395ae",
+    "plugins/pdawgy-skills/skills/dawg-init/assets/ARCHITECTURE.md": "eee7ad9717b2068fdb9c67824f6e8c52f5abcb8659f5249dc2d3898b024d9bb4",
+    "plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md": "f24859b56fe8ca4a36ce4668c8fbbdce2432551b1522581e91a2934365c7a577",
+    "plugins/pdawgy-skills/skills/dawg-architecture-maintain/agents/openai.yaml": "92042c9e3d5c08a32ff9845ceb05ce5da5699ef5a357ed93a253cc1203210332"
+  }
+}

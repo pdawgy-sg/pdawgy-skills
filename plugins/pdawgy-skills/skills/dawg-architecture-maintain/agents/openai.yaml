@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dawg Architecture Maintain"
+  short_description: "Keep architecture aligned with implemented code"
+  default_prompt: "Use $dawg-architecture-maintain to check and update ARCHITECTURE.md against the current codebase."

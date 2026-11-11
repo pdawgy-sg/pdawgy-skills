@@ -1,0 +1,20 @@
+{
+  "name": "pdawgy-skills",
+  "interface": {
+    "displayName": "Pdawgy Skills"
+  },
+  "plugins": [
+    {
+      "name": "pdawgy-skills",
+      "source": {
+        "source": "local",
+        "path": "./plugins/pdawgy-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

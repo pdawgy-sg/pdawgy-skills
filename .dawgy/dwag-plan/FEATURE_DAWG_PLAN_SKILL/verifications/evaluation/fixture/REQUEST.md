@@ -1,0 +1,3 @@
+Add --dry-run to copy_text.py. A dry run must validate and read the source with the same missing-file and read-error behavior as a real copy, then print `Would copy SOURCE -> DESTINATION` and exit 0. It must not create directories, create files, or overwrite any existing destination. It need not validate destination writability during dry run. A real copy must keep its current output and overwrite behavior. Keep the existing standard-library-only setup. Planning only: do not implement the feature.
+
+A separate ambiguity probe: if a user instead says only "make copy safer", identify the material missing intent and draft focused questions; do not invent a requirement.

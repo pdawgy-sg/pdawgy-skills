@@ -1,0 +1,46 @@
+{
+  "install_command": "codex plugin add pdawgy-skills@pdawgy-skills --json",
+  "verification_command": "codex plugin list --marketplace pdawgy-skills --json",
+  "plugin_id": "pdawgy-skills@pdawgy-skills",
+  "installed": true,
+  "enabled": true,
+  "version": "0.2.0",
+  "installed_path": "/home/chy/.codex/plugins/cache/pdawgy-skills/pdawgy-skills/0.2.0",
+  "matching_source_files": [
+    ".codex-plugin/plugin.json",
+    "skills/dawg-plan/SKILL.md",
+    "skills/dawg-init/SKILL.md",
+    "skills/dawg-architecture-maintain/SKILL.md",
+    "skills/dawg-architecture-maintain/agents/openai.yaml",
+    "skills/dawg-init/agents/openai.yaml",
+    "skills/dawg-init/assets/AGENTS.md",
+    "skills/dawg-init/assets/CLAUDE.md",
+    "skills/dawg-init/assets/ARCHITECTURE.md",
+    "skills/dawg-plan/agents/openai.yaml",
+    "skills/dawg-plan/assets/PLAN.md",
+    "skills/dawg-plan/assets/verification.md"
+  ],
+  "listing": {
+    "installed": [
+      {
+        "pluginId": "pdawgy-skills@pdawgy-skills",
+        "name": "pdawgy-skills",
+        "marketplaceName": "pdawgy-skills",
+        "version": "0.2.0",
+        "installed": true,
+        "enabled": true,
+        "source": {
+          "source": "local",
+          "path": "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills/plugins/pdawgy-skills"
+        },
+        "marketplaceSource": {
+          "sourceType": "local",
+          "source": "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills"
+        },
+        "installPolicy": "AVAILABLE",
+        "authPolicy": "ON_INSTALL"
+      }
+    ],
+    "available": []
+  }
+}

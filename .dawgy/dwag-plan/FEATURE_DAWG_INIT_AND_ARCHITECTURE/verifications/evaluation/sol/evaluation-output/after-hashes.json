@@ -1,0 +1,24 @@
+{
+  "mature": {
+    "AGENTS.md": "41c7e83562e3b502f6fef6665e269ff542c7dc86963196562977a27852256c45",
+    "ARCHITECTURE.md": "3e3f2b4eb71bcdc9f22b608551b5cc1919b47492a5a15574f6a113299be19498",
+    "ledgerbox/AGENTS.md": "3e98b707b2411dc629c7cf38dd9eba5add655c233dc43d985ed67ccc19349b17",
+    "ledgerbox/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ledgerbox/plugins.py": "1be7e6ed0c9083a7e37e5c5a6abfb8552cf55c26d42fd7f7f9140bacd6a0ce4e",
+    "ledgerbox/service.py": "470941b73f42fb4dcbca20850cdba9724126b3b9ac2220b35dac4d7f3ed3c347",
+    "ledgerbox/store.py": "9477b4edda8d16a0d2c0b92a0cdb4c3fd15b0da4497d89e2f16f7643fac4e3c6",
+    "load_plugin.py": "2332b41f5837da706515917e855d0eda2e76d797c0dc0d2a3258d84d0c199cd4",
+    "main.py": "20e153744a999a23f312f477d3bd3256ec93eebff0e7596a5979936a9517b8c0",
+    "pyproject.toml": "9402ed276aafcdc9c1ae2cfaaeeb79950c02b5401bedb4842820f1a33abc4845",
+    "scratch-notes.txt": "c8981270f78db9030891b4871c80ed8b08c3d5d40bee260c914b78731fb76581",
+    "tests/test_service.py": "e9a1f80df4b559ca6ddd1ca851d1e45c17bbac41043829dbc3e198f1dbc90458"
+  },
+  "claude-existing": {
+    "AGENTS.md": "b5ef1ae6f130187d3380aeb8fef015cf7304e5b9d92fa62fd04a51b99be150b3",
+    "CLAUDE.md": "3987957296e8a9085ddd05bb4183146b56bb5468bd34ff1ca6bafebf710bf0d4",
+    "release_check.py": "a90ef4ca75ae305d680b0d4f49f4ac7b25562e811244dca3a1749a438733bab0"
+  },
+  "empty": {
+    "ARCHITECTURE.md": "1943e5bbd067bdc8f888edf20f371125572b8b4a534dc6b2e89e20bc4a61e3ac"
+  }
+}

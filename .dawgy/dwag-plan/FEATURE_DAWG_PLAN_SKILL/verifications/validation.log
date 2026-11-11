@@ -1,0 +1,15 @@
+Python: 3.14.8
+PyYAML: 6.0.3
+Validator command: /usr/bin/python /home/chy/.codex/skills/.system/skill-creator/scripts/quick_validate.py /home/chy/Documents/ChatGPT/skill-related/pdawgy-skills/plugins/pdawgy-skills/skills/dawg-plan
+Exit: 0
+Skill is valid!
+PASS: parsed marketplace -> plugin -> skill discovery, UI metadata, invocation, template references, and README integration.
+PASS: whitespace checks include new, untracked skill files.
+Revision: main has no commits; all files uncommitted. SHA-256:
+200e14da0577aebbfcdf9253a9688e8823d7fd40f4000ef482122167aeca3ed5  plugins/pdawgy-skills/skills/dawg-plan/SKILL.md
+4647feb6f9181eba93423c369fe725ba3d8b40643ee9f55647da6ead13f86005  plugins/pdawgy-skills/skills/dawg-plan/agents/openai.yaml
+033d7c5a471540bf3ce8563655d675555791596e46263fd1f458a8a2d43c0786  plugins/pdawgy-skills/skills/dawg-plan/assets/PLAN.md
+d7e270cd620c98c99a2bcecec71582f0c5c180877949b3b9972f9a77c1b7c3f7  plugins/pdawgy-skills/skills/dawg-plan/assets/verification.md
+a542fea82e17200880c1d2b5e300d376d8ea74fcc94b7a692237668d5f31d953  README.md
+1af3438ade1fd3b8d6267881d8b0e4185ffd681c0aedad0b7095e8c3c89b411a  .agents/plugins/marketplace.json
+248c65cb60b946c36e2fc6bdcf13bd1ffca92edb9c0d7e53cfd14599ab21dc43  plugins/pdawgy-skills/.codex-plugin/plugin.json
