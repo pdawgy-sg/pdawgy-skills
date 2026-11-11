@@ -14,7 +14,11 @@ rules. Keep this section about writing and checking code, not module inventories
 ## Dawg standards
 
 - Use `dawg-plan` for features and fixes. Resolve material uncertainty, keep work
-  in small parts, and record enough verification/evidence for each part. Use its
+  in small parts, and record enough verification/evidence for each part. Include
+  a meaningful TLA+ model/config and completed parent plus both independent
+  reviewer TLC checks on identical final inputs before readiness. State bounds
+  and assumptions; retain implementation tests and rerun after material model or
+  requirement changes. Use its
   dedicated Git worktree/task branch and preserve selected subdirectory scope.
   Outside Git, ask before initialization and wait. After authorized implementation
   passes required checks, create a task-only Conventional Commit and push normally

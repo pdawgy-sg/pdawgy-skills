@@ -1,0 +1,183 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 41 and seed 2646374282325900581 with 1 worker on 24 cores with 491MB heap and 64MB offheap memory [pid: 611213] (Linux 7.2.11-arch1-1 amd64, Eclipse Adoptium 25.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-plan-tla-verification/.dawgy/dwag-plan/FEATURE_DAWG_PLAN_TLA_VERIFICATION/verifications/tla/PlanGate.tla
+Parsing file /tmp/Integers.tla
+Parsing file /tmp/TLC.tla
+Parsing file /tmp/Naturals.tla
+Parsing file /tmp/Sequences.tla
+Parsing file /tmp/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module PlanGate
+Starting... (2026-11-12 07:28:29)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-11-12 07:28:29.
+Error: Invariant NoReadyReached is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ parentRevision = -1
+/\ revision = 0
+/\ reviewResults = [astra |-> "pending", sol |-> "pending"]
+/\ approvals = {}
+/\ phase = "draft"
+/\ parentResult = "pending"
+/\ reviewRevisions = [astra |-> -1, sol |-> -1]
+/\ implementationPassed = FALSE
+
+State 2: <CheckParent line 26, col 5 to line 30, col 53 of module PlanGate>
+/\ parentRevision = 0
+/\ revision = 0
+/\ reviewResults = [astra |-> "pending", sol |-> "pending"]
+/\ approvals = {}
+/\ phase = "draft"
+/\ parentResult = "pass"
+/\ reviewRevisions = [astra |-> -1, sol |-> -1]
+/\ implementationPassed = FALSE
+
+State 3: <CheckReviewer line 33, col 5 to line 38, col 42 of module PlanGate>
+/\ parentRevision = 0
+/\ revision = 0
+/\ reviewResults = [astra |-> "pass", sol |-> "pending"]
+/\ approvals = {}
+/\ phase = "draft"
+/\ parentResult = "pass"
+/\ reviewRevisions = [astra |-> 0, sol |-> -1]
+/\ implementationPassed = FALSE
+
+State 4: <CheckReviewer line 33, col 5 to line 38, col 42 of module PlanGate>
+/\ parentRevision = 0
+/\ revision = 0
+/\ reviewResults = [astra |-> "pass", sol |-> "pass"]
+/\ approvals = {}
+/\ phase = "draft"
+/\ parentResult = "pass"
+/\ reviewRevisions = [astra |-> 0, sol |-> 0]
+/\ implementationPassed = FALSE
+
+State 5: <Approve line 41, col 5 to line 46, col 74 of module PlanGate>
+/\ parentRevision = 0
+/\ revision = 0
+/\ reviewResults = [astra |-> "pass", sol |-> "pass"]
+/\ approvals = {"astra"}
+/\ phase = "draft"
+/\ parentResult = "pass"
+/\ reviewRevisions = [astra |-> 0, sol |-> 0]
+/\ implementationPassed = FALSE
+
+State 6: <Approve line 41, col 5 to line 46, col 74 of module PlanGate>
+/\ parentRevision = 0
+/\ revision = 0
+/\ reviewResults = [astra |-> "pass", sol |-> "pass"]
+/\ approvals = {"astra", "sol"}
+/\ phase = "draft"
+/\ parentResult = "pass"
+/\ reviewRevisions = [astra |-> 0, sol |-> 0]
+/\ implementationPassed = FALSE
+
+State 7: <MarkReady line 57, col 5 to line 63, col 85 of module PlanGate>
+/\ parentRevision = 0
+/\ revision = 0
+/\ reviewResults = [astra |-> "pass", sol |-> "pass"]
+/\ approvals = {"astra", "sol"}
+/\ phase = "ready"
+/\ parentResult = "pass"
+/\ reviewRevisions = [astra |-> 0, sol |-> 0]
+/\ implementationPassed = FALSE
+
+The coverage statistics at 2026-11-12 07:28:29
+<Init line 15, col 1 to line 15, col 4 of module PlanGate>: 2:2
+  line 16, col 5 to line 23, col 35 of module PlanGate: 2
+<CheckParent line 25, col 1 to line 25, col 19 of module PlanGate>: 6:544
+  line 26, col 8 to line 26, col 22 of module PlanGate: 1088
+  |line 26, col 8 to line 26, col 12 of module PlanGate: 544
+  line 27, col 8 to line 27, col 29 of module PlanGate: 544
+  line 28, col 8 to line 28, col 33 of module PlanGate: 544
+  line 29, col 8 to line 30, col 53 of module PlanGate: 544
+<CheckReviewer line 32, col 1 to line 32, col 31 of module PlanGate>: 120:1077
+  line 33, col 8 to line 33, col 22 of module PlanGate: 2154
+  |line 33, col 8 to line 33, col 12 of module PlanGate: 1077
+  line 34, col 8 to line 34, col 67 of module PlanGate: 1077
+  line 35, col 8 to line 35, col 73 of module PlanGate: 1077
+  line 36, col 8 to line 36, col 42 of module PlanGate: 1077
+  line 37, col 8 to line 38, col 42 of module PlanGate: 1077
+<Approve line 40, col 1 to line 40, col 17 of module PlanGate>: 69:129
+  line 41, col 8 to line 41, col 22 of module PlanGate: 486
+  |line 41, col 8 to line 41, col 12 of module PlanGate: 357
+  line 42, col 8 to line 42, col 39 of module PlanGate: 486
+  |line 42, col 8 to line 42, col 30 of module PlanGate: 357
+  line 43, col 8 to line 43, col 43 of module PlanGate: 258
+  |line 43, col 8 to line 43, col 32 of module PlanGate: 129
+  |line 43, col 36 to line 43, col 43 of module PlanGate: 129
+  line 44, col 8 to line 44, col 45 of module PlanGate: 129
+  line 45, col 8 to line 46, col 74 of module PlanGate: 129
+<MarkReady line 56, col 1 to line 56, col 9 of module PlanGate>: 1:2
+  line 57, col 8 to line 57, col 22 of module PlanGate: 178
+  |line 57, col 8 to line 57, col 12 of module PlanGate: 177
+  line 58, col 8 to line 58, col 28 of module PlanGate: 178
+  |line 58, col 8 to line 58, col 19 of module PlanGate: 177
+  line 59, col 8 to line 59, col 32 of module PlanGate: 45
+  |line 59, col 8 to line 59, col 21 of module PlanGate: 44
+  |line 59, col 25 to line 59, col 32 of module PlanGate: 44
+  line 60, col 11 to line 60, col 29 of module PlanGate: 44
+  line 49, col 8 to line 49, col 28 of module PlanGate: 45
+  |line 49, col 8 to line 49, col 19 of module PlanGate: 44
+  line 50, col 8 to line 50, col 32 of module PlanGate: 45
+  |line 50, col 8 to line 50, col 21 of module PlanGate: 44
+  |line 50, col 25 to line 50, col 32 of module PlanGate: 44
+  line 52, col 12 to line 52, col 36 of module PlanGate: 53
+  |line 52, col 12 to line 52, col 27 of module PlanGate: 51
+  line 53, col 12 to line 53, col 40 of module PlanGate: 21
+  |line 53, col 12 to line 53, col 29 of module PlanGate: 19
+  |line 53, col 33 to line 53, col 40 of module PlanGate: 19
+  line 54, col 12 to line 54, col 26 of module PlanGate: 21
+  |line 54, col 12 to line 54, col 12 of module PlanGate: 19
+  |line 54, col 18 to line 54, col 26 of module PlanGate: 19
+  line 51, col 17 to line 51, col 25 of module PlanGate: 44
+  line 61, col 8 to line 61, col 23 of module PlanGate: 1
+  line 62, col 8 to line 63, col 85 of module PlanGate: 1
+<Revise line 65, col 1 to line 65, col 6 of module PlanGate>: 1:97
+  line 66, col 8 to line 66, col 29 of module PlanGate: 97
+  |line 66, col 8 to line 66, col 15 of module PlanGate: 175
+  |line 66, col 19 to line 66, col 29 of module PlanGate: 175
+  line 67, col 8 to line 67, col 26 of module PlanGate: 194
+  |line 67, col 8 to line 67, col 12 of module PlanGate: 97
+  line 68, col 8 to line 68, col 31 of module PlanGate: 97
+  line 69, col 8 to line 69, col 23 of module PlanGate: 97
+  line 70, col 8 to line 70, col 32 of module PlanGate: 97
+  line 71, col 8 to line 71, col 27 of module PlanGate: 97
+  line 72, col 8 to line 72, col 55 of module PlanGate: 97
+  line 73, col 8 to line 73, col 50 of module PlanGate: 97
+  line 74, col 8 to line 74, col 22 of module PlanGate: 97
+  line 75, col 8 to line 75, col 36 of module PlanGate: 97
+<Implement line 77, col 1 to line 77, col 9 of module PlanGate>: 0:0
+  line 78, col 8 to line 78, col 22 of module PlanGate: 175
+  line 80, col 8 to line 80, col 30 of module PlanGate: 0
+  line 81, col 8 to line 82, col 85 of module PlanGate: 0
+<Verify line 84, col 1 to line 84, col 14 of module PlanGate>: 0:0
+  line 85, col 8 to line 85, col 29 of module PlanGate: 350
+  line 86, col 8 to line 86, col 37 of module PlanGate: 0
+  line 87, col 8 to line 87, col 61 of module PlanGate: 0
+  line 88, col 8 to line 89, col 63 of module PlanGate: 0
+<Commit line 91, col 1 to line 91, col 6 of module PlanGate>: 0:0
+  line 92, col 8 to line 92, col 25 of module PlanGate: 175
+  line 94, col 8 to line 94, col 27 of module PlanGate: 0
+  line 95, col 8 to line 96, col 85 of module PlanGate: 0
+<Push line 98, col 1 to line 98, col 12 of module PlanGate>: 0:0
+  line 99, col 8 to line 99, col 26 of module PlanGate: 350
+  line 100, col 8 to line 100, col 59 of module PlanGate: 0
+  line 101, col 8 to line 102, col 85 of module PlanGate: 0
+<Hold line 104, col 1 to line 104, col 4 of module PlanGate>: 0:0
+  line 105, col 8 to line 105, col 39 of module PlanGate: 175
+  line 106, col 8 to line 106, col 21 of module PlanGate: 0
+<TypeOK line 122, col 1 to line 122, col 6 of module PlanGate>
+  line 123, col 5 to line 130, col 39 of module PlanGate: 198
+<NoReadyReached line 135, col 1 to line 135, col 14 of module PlanGate>
+  line 135, col 19 to line 135, col 33 of module PlanGate: 198
+End of statistics.
+1807 states generated, 198 distinct states found, 21 states left on queue.
+The depth of the complete state graph search is 7.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 10 and the 95th percentile is 4).
+Finished in 00s at (2026-11-12 07:28:29)

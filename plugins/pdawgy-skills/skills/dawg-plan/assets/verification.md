@@ -13,6 +13,9 @@ Final commit/push receipt: <report in chat after delivery; no self-referential c
 
 ## Coverage checklist
 
+- [ ] FORMAL — parent and both exact reviewers independently completed TLC on
+  identical current inputs; enabled properties/assumptions/bounds reviewed;
+  logs/receipts/traces under tla/; bounded claims and implementation gaps recorded.
 - [ ] V1 — <observable check; task IDs; acceptance IDs; transition IDs/invariants>
 
 List every required check. Every task, acceptance criterion, transition, and
@@ -36,10 +39,19 @@ proof in this directory; redact private data and credentials.
 
 ## Design review evidence
 
-- Astra: <pending or link to design-review-astra.md; model, effort, plan revision>
-- Sol: <pending or link to design-review-sol.md; model, effort, plan revision>
+- Parent TLC: <revision/input/tool hashes; exact command; configs; completed
+  outcomes/state counts; tla/runs/...; not run until actually executed>
+- Astra: <design-review-astra.md; gpt-6-astra/high; own TLC hashes/logs/results;
+  abstraction/requirement review; matching final model identity>
+- Sol: <design-review-sol.md; gpt-6.1-sol/high; own TLC hashes/logs/results;
+  abstraction/requirement review; matching final model identity>
+- Formal limits/probes: <finite bounds, assumptions, fairness/deadlock choices,
+  actual nominal reachability; expected negative traces separate from failures>
 
-These reviews validate the design, not the implementation.
+Changed behavior/model/config/dependencies/bounds/assumptions/fairness invalidate
+all three receipts. Missing, failed, stale or incomplete required executions block
+readiness. These checks validate a bounded abstraction; implementation verification
+and source correspondence remain required.
 
 ## Completion
 

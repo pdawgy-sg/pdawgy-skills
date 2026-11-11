@@ -1,0 +1,21 @@
+{
+  "reviewer": "gpt-6.1-sol/high",
+  "reviewed_plan_revision": 1,
+  "attempt_1": "/tmp/dawg-tla-sol-attempt-1",
+  "successful_attempt": "/tmp/dawg-tla-sol-attempt-2",
+  "runner_sha256": "08aef3139ab1c5f9b1006a973b0c303be38ef141064109cdc00d54a0f573e460",
+  "input_sha256": {
+    "run_tlc.py": "08aef3139ab1c5f9b1006a973b0c303be38ef141064109cdc00d54a0f573e460",
+    "PlanGate.tla": "3cf6163591753c3786e82bf1f7fe936aba9ea2330056ece4b867f53e43b3d4de",
+    "PlanGate.cfg": "326538716e53e3a88bce5c91dbe2fd58f6377c9c1996e109718476f4eda79d60",
+    "PlanOnly.cfg": "bf4957471308effbcf93257f4a1882b6807a27e4785870e0238f06362c1f4947",
+    "MissingReview.cfg": "1f1b29ebf4d90a02da8c0727ede127db1e63e9fb618a45686fe25444d73e6563",
+    "ReachReady.cfg": "d5412f4e5f518e3abdfcddff3ffd22b0a9150e7eaae7ac80bf69432ea98e5cc3"
+  },
+  "raw_log_sha256": {
+    "ReachReady.log": "014c26500ed932e41c2c02de26673acd54490d1ec8817fe0e3733a85a82faef4",
+    "MissingReview.log": "852e3c2a7bd30f7e5812d6caf66391fbe55112b32969233ea9490028b3fde978",
+    "PlanOnly.log": "23115fe3c5f16df16a8c9c1782bf01786f16f3c817a11e81087594328ee195cd",
+    "PlanGate.log": "a675b479d92e8fa01ddf9861e7fa4bb099f3a5979ca4d16498f9013f3c60e541"
+  }
+}

@@ -9,6 +9,13 @@
   diagrams, and break work into small parts with reproducible verification.
   Required design reviewers are `gpt-6-astra` and `gpt-6.1-sol`, both at high
   effort. Report unavailable dependencies instead of claiming the review ran.
+- Every plan includes a meaningful TLA+ model/configuration and actual completed
+  TLC checks by the parent and both reviewers on identical final inputs. Review
+  assumptions, finite bounds, properties, reachability and implementation mapping;
+  preserve logs/identities/counterexamples under the plan's `verifications/tla/`.
+  Missing, incomplete, failed or stale checks block readiness. Rerun all three
+  after material requirement/model/config changes. Bounded model checking
+  complements implementation verification and does not prove arbitrary code.
 - Every feature/fix uses dawg-plan's dedicated Git worktree and task branch.
   Preserve the selected target-relative scope inside it; keep the source checkout
   and unrelated staged/dirty work intact. Outside Git, ask before initializing.

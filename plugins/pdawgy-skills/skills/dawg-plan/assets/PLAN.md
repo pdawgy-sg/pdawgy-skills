@@ -46,6 +46,31 @@ stateDiagram-v2
 
 Invariants: <properties that must hold across transitions and how they are checked>
 
+## TLA+ specification and results
+
+- Module/configuration/imported dependencies: <paths under verifications/tla/>
+- Current model identity: <revision and content hashes of every effective input>
+- Abstraction, finite domains/constants and assumptions: <explicit checked scope>
+- Safety and applicable temporal properties: <names; fairness; deadlock settings;
+  state explicitly when no liveness property is checked>
+- Omissions and implementation correspondence: <what the model excludes and
+  concrete checks that still cover those requirements>
+
+| Acceptance / transition IDs | TLA action / property | Configuration / verification |
+| --- | --- | --- |
+| AC1 / TR1 | <actual behavior, not a generic planning process> | <config; check ID> |
+
+| Agent | Tool/input identity | Actual command and run evidence | Result / states / scope |
+| --- | --- | --- | --- |
+| Parent | <current hashes/version> | <verifications/tla/runs/...> | <not run or actual> |
+| Astra | <same final inputs> | <own independent run> | <not run or actual> |
+| Sol | <same final inputs> | <own independent run> | <not run or actual> |
+
+Reachability/sensitivity: <evidence nominal paths are reachable; focused negative
+or regression probe when useful; expected violations separate from required runs>.
+Any material behavior/model/config/bound/assumption/fairness change invalidates
+all three run receipts and requires new executions plus semantic review.
+
 ## Implementation tasks
 
 ### T1: <small deliverable>
@@ -67,7 +92,8 @@ one ID when it proves multiple tasks or transitions.
 | Astra | gpt-6-astra / high | <revision> | <pending or actual outcome> | verifications/design-review-astra.md |
 | Sol | gpt-6.1-sol / high | <revision> | <pending or actual outcome> | verifications/design-review-sol.md |
 
-Readiness: <both completed, material findings resolved, material questions closed>
+Readiness: <parent and both independent reviewer TLC executions passed on current
+inputs, both semantic reviews approved, material findings/questions resolved>
 
 ## Verification and handoff
 
@@ -75,7 +101,8 @@ Checklist: [verifications/verification.md](verifications/verification.md)
 
 - Implementation authorization: <planning only, or existing user authorization>
 - Completion rule: all required checks passed with evidence; both design reviews
-  cover the final design. Authorized implementation also requires a scoped
+  and TLA+ runs cover the final design/inputs. Bounded model checking does not
+  replace implementation tests. Authorized implementation also requires a scoped
   Conventional Commit and confirmed task-branch push unless the user limits
   delivery. Design approval alone does not prove implementation or delivery.
 - Current result: <plan readiness, execution status, outstanding limitations>
