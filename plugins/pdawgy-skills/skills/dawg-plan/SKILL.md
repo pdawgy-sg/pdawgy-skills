@@ -1,12 +1,23 @@
 ---
 name: dawg-plan
-description: Understand and plan software features and bug fixes with clarifying questions, state machine diagrams, small verifiable tasks, and independent design reviews. Use when planning a feature or fix, or when explicitly asked to use dawg-plan.
+description: Plan software features and fixes in dedicated Git worktrees with clarifying questions, state diagrams, verifiable tasks, and independent reviews. After authorized implementation, verify, conventionally commit, and push the task branch. Use when planning a feature or fix or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
 
 Understand what the user is building before choosing an implementation. Produce a
 plan another coding agent can execute and verify with inspectable evidence.
+
+## Require Git and a task worktree
+
+Read and follow [the Git workflow](references/git-workflow.md) on every invocation.
+It defines required preflight, worktree/scope mapping, and verified delivery.
+Before creating plan artifacts or implementing a feature/fix, confirm Git context
+and create or reuse its dedicated task worktree and branch. Outside Git, ask the
+user to initialize and wait for consent; do not silently initialize or proceed.
+Preserve an originally selected subdirectory by mapping it into the worktree.
+Tell callers the worktree repository root and mapped project directory, and use
+that mapped project for subsequent work. Do not implement in the source checkout.
 
 ## Understand the intended behavior
 
@@ -29,8 +40,8 @@ plan another coding agent can execute and verify with inspectable evidence.
 
 ## Save the plan in the target project
 
-Always create these artifacts under the project being planned, not in this
-installed skill's directory:
+Always create these artifacts under the mapped project directory in the task
+worktree, not in the source checkout or installed skill's directory:
 
 ```text
 .dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/
@@ -147,9 +158,24 @@ reason and next action. Keep the overall work unverified while required checks
 are failing, blocked, or not run. If checks expose a design gap, update the plan
 and obtain the required updated reviews before proceeding on the changed design.
 
+## Commit and push verified implementation
+
+After authorized implementation, automatically follow the delivery steps in
+[the Git workflow](references/git-workflow.md): pass all required checks, inspect
+the entire index and proposed commit, create a task-only Conventional Commit,
+confirm its delta/source matches the verified change, and push normally to the
+task feature/fix branch. Confirm the remote branch equals local HEAD. Preserve
+planning-only and explicit no-commit/no-push limits. Never deliver while required
+checks fail or remain blocked; report commit/push blockers separately from
+implementation verification. Final commit/remote receipts belong in the chat
+handoff, avoiding a tracked receipt that would need to contain its own commit ID.
+
 On completion, link `PLAN.md`, the checklist, and relevant evidence in chat.
 Summarize passed checks and any limitations. If evidence includes screenshots,
 save them inside `verifications/` and display them in chat with Markdown image
 embeds using absolute local paths. For large sets, group screenshots in multiple
 messages so each is shared. Distinguish a ready plan from verified implementation;
-never promise trust solely on an agent's assertion.
+also distinguish committed work from confirmed remote delivery. Include the
+worktree path, task branch, verification results, Conventional Commit hash, remote
+branch confirmation, and any outstanding blocker. Retain the worktree and branch
+for review; do not implicitly merge into the base branch or remove the worktree.

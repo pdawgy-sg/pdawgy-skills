@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "complete_staged_paths": [
+    "calc.py"
+  ],
+  "staged_blob_equals_tested_working_file": "48389ffce607949b682f9e6884e1d24624169999",
+  "tested_sha256": "6ff3ed034e98dcc3f53c7d5e3e0bcb61bde371749225e466e3973d200cb74f1c",
+  "entire_staged_diff_inspected": true,
+  "no_unstaged_changes": true
+}

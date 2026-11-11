@@ -1,0 +1,10 @@
+{
+  "commit": "9889934fade11f02bcf46693ddd905d0545fec6c",
+  "subject": "feat(calc): add subtraction",
+  "complete_changed_paths": [
+    "calc.py"
+  ],
+  "committed_blob": "48389ffce607949b682f9e6884e1d24624169999",
+  "tested_source_match": true,
+  "status": "COMMITTED; push not yet attempted"
+}

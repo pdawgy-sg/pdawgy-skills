@@ -1,0 +1,14 @@
+{
+  "source_repository": "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills",
+  "selected_target_relative": ".",
+  "worktree_repository": "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-plan-git-workflow",
+  "mapped_project": "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-plan-git-workflow",
+  "base_commit": "4947bf3ad1f85adf8abc9ed327d6c9a50fa7c282",
+  "task_branch": "codex/feature/dawg-plan-git-workflow",
+  "remote": "origin",
+  "remote_url": "https://github.com/pdawgy-sg/pdawgy-skills.git",
+  "initial_baseline_user_approved": true,
+  "initial_baseline_file_count": 139,
+  "github_push_dry_run": "exit 0; actual publishing waits for completed verification",
+  "delivery_snapshot": "implementation verified; commit/push receipt follows in chat"
+}

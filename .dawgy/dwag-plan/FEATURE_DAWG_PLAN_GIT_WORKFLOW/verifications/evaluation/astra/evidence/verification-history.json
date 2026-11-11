@@ -1,0 +1,8 @@
+[
+  {
+    "check": "exact textual equality of unstaged and staged diff output",
+    "status": "FAIL",
+    "cause": "Host Git mnemonic prefixes differ: unstaged i/w versus staged c/i. Patch content is unchanged; this was a presentation-sensitive evaluation assertion, not a source or skill failure.",
+    "resolution": "Inspect full staged delta and compare staged blob OID to working file OID plus the previously tested SHA-256. No commit or push occurred while this check was unresolved."
+  }
+]

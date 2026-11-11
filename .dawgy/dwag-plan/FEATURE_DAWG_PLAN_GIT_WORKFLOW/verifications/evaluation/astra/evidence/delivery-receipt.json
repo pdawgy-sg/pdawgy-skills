@@ -1,0 +1,12 @@
+{
+  "status": "PUSHED",
+  "branch": "codex/feature/subtract",
+  "local_head": "9889934fade11f02bcf46693ddd905d0545fec6c",
+  "remote_ref": "9889934fade11f02bcf46693ddd905d0545fec6c\trefs/heads/codex/feature/subtract",
+  "upstream": "origin/codex/feature/subtract",
+  "remote_heads_count": 1,
+  "source_preserved": true,
+  "main_not_pushed_or_merged": true,
+  "required_ci": "none in controlled fixture",
+  "receipt_location": "outside fixture Git repositories; no self-referential commit"
+}

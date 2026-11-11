@@ -1,0 +1,18 @@
+{
+  "head": "9889934fade11f02bcf46693ddd905d0545fec6c",
+  "index_diff": "diff --git c/calc.py i/calc.py\nindex 48389ff..6baa2f0 100644\n--- c/calc.py\n+++ i/calc.py\n@@ -1,4 +1,4 @@\n-def add(a, b): return a + b\n+def add(a, b): return a + b + 100\n \n \n def subtract(a, b):\ndiff --git c/config.txt i/config.txt\nindex 0535ecf..53ef519 100644\n--- c/config.txt\n+++ i/config.txt\n@@ -1 +1 @@\n-mode=baseline\n+mode=unrelated-resume",
+  "worktree_diff": "diff --git i/calc.py w/calc.py\nindex 6baa2f0..de3443a 100644\n--- i/calc.py\n+++ w/calc.py\n@@ -2,4 +2,4 @@ def add(a, b): return a + b + 100\n \n \n def subtract(a, b):\n-    return a - b\n+    return a - b - 1",
+  "index_entries": "100644 6baa2f01d65a2a623dcaa834befc80260b7dae17 0\tcalc.py\n100644 53ef51970e3f8fa71915eec7fef71846cf6c3285 0\tconfig.txt\n100644 4069bc940c2a0c669cbad47d73bf05adefbb1761 0\tpackages/app/README.md",
+  "files": {
+    "calc.py": "8f8d368c1540add00c4efac2e5ada1d3c59caffc1a2a40fc913eb4d05d51bb9d",
+    "config.txt": "ee30bfcacd33bbacfc1cff4f4fcb86820a09646ce2ba5f8c367525c1fa3980fc",
+    "packages/app/README.md": "80fce91ac48c58e0357a13a145825aca0b5143c31f0125b5a235c6e7571a8771"
+  },
+  "source_files": {
+    "calc.py": "1c3eafab9aa411fd3674bb233f9447d5e0d8b808c79c2b22fe7d721729c30f46",
+    "config.txt": "f42bad532670ddff97c4e9da0163a2ec629606f4f55bc63f0070e15124bad494",
+    "notes.txt": "b0572907238f11e8bf64ef8757a809c16602cf5a143879617a5024c9e2e82ed0",
+    "packages/app/README.md": "80fce91ac48c58e0357a13a145825aca0b5143c31f0125b5a235c6e7571a8771"
+  },
+  "remote": "9889934fade11f02bcf46693ddd905d0545fec6c\trefs/heads/codex/feature/subtract"
+}

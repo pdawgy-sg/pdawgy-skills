@@ -1,0 +1,18 @@
+{
+  "selected_target": "/tmp/dawg-git-astra-eval/source/packages/app",
+  "selected_relative_path": "packages/app",
+  "mapped_project": "/tmp/dawg-git-astra-eval/task-worktree/packages/app",
+  "git_operation_root": "/tmp/dawg-git-astra-eval/task-worktree",
+  "project_command_root": "/tmp/dawg-git-astra-eval/task-worktree/packages/app",
+  "plan_root": "/tmp/dawg-git-astra-eval/task-worktree/packages/app/.dawgy/dwag-plan/FEATURE_INITIALIZE_APP",
+  "guidance_destinations": [
+    "/tmp/dawg-git-astra-eval/task-worktree/packages/app/AGENTS.md",
+    "/tmp/dawg-git-astra-eval/task-worktree/packages/app/CLAUDE.md",
+    "/tmp/dawg-git-astra-eval/task-worktree/packages/app/ARCHITECTURE.md"
+  ],
+  "applicable_fixture_instruction_files": [],
+  "scope_rule": "Read mapped ancestors and relevant descendants; do not promote nested rules to repository-wide rules. Fixture has no such instruction files.",
+  "actual_init_applied": false,
+  "scope_expansion": false,
+  "note": "Path inspection only. A real separate init task requires its own matching task worktree/branch; this probe does not authorize appropriating the subtraction worktree."
+}

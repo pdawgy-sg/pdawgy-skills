@@ -11,8 +11,9 @@ first, preserve its valid standards, and make Dawg the shared workflow.
 ## Inspect before prescribing
 
 Resolve the user's intended target directory. Inspect Git state when Git exists,
-including staged, unstaged, and untracked work; an ordinary directory needs no
-Git initialization. Do not silently expand a subdirectory request to an entire
+including staged, unstaged, and untracked work. Outside Git, ask the user to
+initialize and wait before proceeding to planning or guidance writes, following
+dawg-plan's Git prerequisite. Do not silently expand a subdirectory request to an entire
 monorepo. Read applicable ancestor and nested instructions before proposing edits.
 
 Inspect existing `AGENTS.md`, `CLAUDE.md`, `ARCHITECTURE.md`, README, manifests,
@@ -32,8 +33,13 @@ Read and execute the bundled [dawg-plan workflow](../dawg-plan/SKILL.md) for the
 initialization. Reuse a matching current plan when continuing the same task;
 update it instead of creating a nested or duplicate plan. Include the intended
 instruction changes, architecture work, and any separately gated cleanup in its
-scope. Save its plan, state diagrams, checklist, and evidence in the target
-project's `.dawgy/dwag-plan/FEATURE_<PLAN_NAME>/` directory.
+scope. Adopt its task worktree and mapped project directory for all subsequent
+guidance/architecture changes and evidence. Preserve the selected target-relative
+path: a subdirectory request maps into that same subdirectory inside the worktree,
+not the worktree repository root. Re-read applicable scoped instructions there.
+Save the plan, diagrams, checklist and evidence in that mapped project's
+`.dawgy/dwag-plan/FEATURE_<PLAN_NAME>/` directory. Do not write back to the source
+checkout. Handle unborn baselines and unrelated work through dawg-plan's workflow.
 
 Honor the full workflow, including `gpt-6-astra` and `gpt-6.1-sol` design reviews
 at high effort. Do not write the target guidance files before the plan is ready.
@@ -71,7 +77,10 @@ facts; remove template prompts and unsupported sections from finished documents.
 Encode these Dawg coding standards in `AGENTS.md`:
 
 - Use `dawg-plan` for features and fixes; clarify material uncertainty and keep
-  tasks small with enough verification/evidence to prove they work.
+  tasks small with enough verification/evidence to prove they work. Require its
+  task worktree/branch, ask before Git initialization when needed, and automatically
+  conventionally commit/push authorized implementation only after required checks
+  pass. Preserve planning-only and explicit delivery limits.
 - Keep code as simple as the behavior permits. Add complexity only for a concrete
   requirement. Do not add explanatory code comments; use clear names and code.
   Retain required license notices, interpreter/tool directives, and functional
@@ -113,3 +122,7 @@ Save evidence under that plan's `verifications/`; follow dawg-plan's screenshot
 save/share rules when screenshots are relevant. Link the plan, checklist, and
 changed documents in chat. Report initialization, verification, and cleanup
 approval/execution statuses separately so pending cleanup is visible.
+After authorized initialization and verification, let dawg-plan perform its
+task-only Conventional Commit and confirmed task-branch push. Preserve unrelated
+index entries and scoped work, and report delivery blockers separately. Do not
+start a duplicate planning or delivery cycle.

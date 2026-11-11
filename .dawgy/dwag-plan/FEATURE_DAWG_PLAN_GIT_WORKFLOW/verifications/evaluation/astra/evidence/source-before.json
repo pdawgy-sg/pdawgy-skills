@@ -1,0 +1,11 @@
+{
+  "files": {
+    "calc.py": "1c3eafab9aa411fd3674bb233f9447d5e0d8b808c79c2b22fe7d721729c30f46",
+    "config.txt": "f42bad532670ddff97c4e9da0163a2ec629606f4f55bc63f0070e15124bad494",
+    "notes.txt": "b0572907238f11e8bf64ef8757a809c16602cf5a143879617a5024c9e2e82ed0",
+    "packages/app/README.md": "80fce91ac48c58e0357a13a145825aca0b5143c31f0125b5a235c6e7571a8771"
+  },
+  "status": "## main\n M config.txt\n?? notes.txt",
+  "diff": "diff --git i/config.txt w/config.txt\nindex 0535ecf..f1d2d19 100644\n--- i/config.txt\n+++ w/config.txt\n@@ -1 +1 @@\n-mode=baseline\n+mode=user-wip",
+  "head": "259536170ba2cc15084969cb251ade31107ee556"
+}
