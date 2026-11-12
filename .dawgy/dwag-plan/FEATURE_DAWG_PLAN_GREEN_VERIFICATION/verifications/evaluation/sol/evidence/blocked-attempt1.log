@@ -1,0 +1,15 @@
+{
+  "check": "B1",
+  "status": "BLOCKED",
+  "checked": false,
+  "command": [
+    "/tmp/dawg-green-sol-eval/blocked/uniquely-absent-review-tool-sol-20261112"
+  ],
+  "cwd": "/tmp/dawg-green-sol-eval/blocked",
+  "exit": null,
+  "launch_error_type": "FileNotFoundError",
+  "errno": 2,
+  "actual": "[Errno 2] No such file or directory: '/tmp/dawg-green-sol-eval/blocked/uniquely-absent-review-tool-sol-20261112'",
+  "needed_action": "Provide the correct installed tool path or authorize an isolated tool installation/setup; no installation or skip approval is supplied.",
+  "resolution": null
+}

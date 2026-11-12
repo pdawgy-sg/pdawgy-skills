@@ -1,0 +1,170 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 12 and seed -4769662462404242694 with 1 worker on 24 cores with 491MB heap and 64MB offheap memory [pid: 3834961] (Linux 7.2.11-arch1-1 amd64, Eclipse Adoptium 25.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /tmp/dawg-green-astra-inputs-1/tla/Recovery.tla
+Parsing file /tmp/Integers.tla
+Parsing file /tmp/TLC.tla
+Parsing file /tmp/Naturals.tla
+Parsing file /tmp/Sequences.tla
+Parsing file /tmp/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Recovery
+Starting... (2026-11-12 13:43:27)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-11-12 13:43:27.
+Error: Invariant NoRecoveredCompletion is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ results = [tests |-> "notrun", verification |-> "notrun"]
+/\ revision = 0
+/\ history = {}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> FALSE, verification |-> FALSE]
+/\ open = {}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> -1, verification |-> -1]
+
+State 2: <Run line 21, col 5 to line 31, col 25 of module Recovery>
+/\ results = [tests |-> "pass", verification |-> "notrun"]
+/\ revision = 0
+/\ history = {}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> TRUE, verification |-> FALSE]
+/\ open = {}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> 0, verification |-> -1]
+
+State 3: <Run line 21, col 5 to line 31, col 25 of module Recovery>
+/\ results = [tests |-> "pass", verification |-> "fail"]
+/\ revision = 0
+/\ history = {"verification"}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> TRUE, verification |-> TRUE]
+/\ open = {"verification"}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> 0, verification |-> 0]
+
+State 4: <Repair line 34, col 5 to line 37, col 85 of module Recovery>
+/\ results = [tests |-> "pass", verification |-> "fail"]
+/\ revision = 0
+/\ history = {"verification"}
+/\ repairReady = [tests |-> FALSE, verification |-> TRUE]
+/\ logged = [tests |-> TRUE, verification |-> TRUE]
+/\ open = {"verification"}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> 0, verification |-> 0]
+
+State 5: <Run line 21, col 5 to line 31, col 25 of module Recovery>
+/\ results = [tests |-> "pass", verification |-> "pass"]
+/\ revision = 0
+/\ history = {"verification"}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> TRUE, verification |-> TRUE]
+/\ open = {}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> 0, verification |-> 0]
+
+State 6: <Complete line 42, col 5 to line 45, col 91 of module Recovery>
+/\ results = [tests |-> "pass", verification |-> "pass"]
+/\ revision = 0
+/\ history = {"verification"}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> TRUE, verification |-> TRUE]
+/\ open = {}
+/\ phase = "verified"
+/\ checkedRevision = [tests |-> 0, verification |-> 0]
+
+The coverage statistics at 2026-11-12 13:43:27
+<Init line 10, col 1 to line 10, col 4 of module Recovery>: 2:2
+  line 11, col 5 to line 18, col 45 of module Recovery: 2
+<Run line 20, col 1 to line 20, col 18 of module Recovery>: 52:304
+  line 21, col 8 to line 21, col 40 of module Recovery: 791
+  |line 21, col 8 to line 21, col 12 of module Recovery: 487
+  |line 21, col 18 to line 21, col 40 of module Recovery: 487
+  line 22, col 8 to line 22, col 24 of module Recovery: 724
+  |line 22, col 8 to line 22, col 12 of module Recovery: 487
+  |line 22, col 21 to line 22, col 24 of module Recovery: 487
+  line 22, col 29 to line 22, col 46 of module Recovery: 67
+  |line 22, col 29 to line 22, col 39 of module Recovery: 487
+  |line 22, col 41 to line 22, col 45 of module Recovery: 487
+  line 23, col 8 to line 23, col 25 of module Recovery: 304
+  line 24, col 8 to line 24, col 52 of module Recovery: 304
+  line 25, col 8 to line 25, col 70 of module Recovery: 304
+  line 26, col 8 to line 26, col 76 of module Recovery: 304
+  |line 26, col 16 to line 26, col 76 of module Recovery: 304
+  ||line 26, col 19 to line 26, col 33 of module Recovery: 304
+  ||line 26, col 40 to line 26, col 53 of module Recovery: 104
+  ||line 26, col 60 to line 26, col 76 of module Recovery: 200
+  line 27, col 8 to line 28, col 56 of module Recovery: 304
+  |line 27, col 19 to line 28, col 56 of module Recovery: 304
+  ||line 27, col 22 to line 27, col 53 of module Recovery: 304
+  |||line 27, col 22 to line 27, col 36 of module Recovery: 304
+  |||line 27, col 41 to line 27, col 53 of module Recovery: 200
+  ||line 28, col 24 to line 28, col 43 of module Recovery: 200
+  ||line 28, col 50 to line 28, col 56 of module Recovery: 104
+  line 29, col 8 to line 29, col 91 of module Recovery: 304
+  |line 29, col 18 to line 29, col 91 of module Recovery: 304
+  ||line 29, col 19 to line 29, col 24 of module Recovery: 304
+  ||line 29, col 33 to line 29, col 90 of module Recovery: 304
+  ||line 29, col 44 to line 29, col 90 of module Recovery: 304
+  |||line 29, col 47 to line 29, col 61 of module Recovery: 304
+  |||line 29, col 68 to line 29, col 71 of module Recovery: 104
+  |||line 29, col 78 to line 29, col 90 of module Recovery: 200
+  line 30, col 8 to line 30, col 59 of module Recovery: 304
+  line 31, col 8 to line 31, col 25 of module Recovery: 304
+<Repair line 33, col 1 to line 33, col 13 of module Recovery>: 56:83
+  line 34, col 8 to line 34, col 24 of module Recovery: 243
+  |line 34, col 8 to line 34, col 12 of module Recovery: 160
+  line 35, col 8 to line 35, col 21 of module Recovery: 241
+  |line 35, col 8 to line 35, col 12 of module Recovery: 158
+  |line 35, col 18 to line 35, col 21 of module Recovery: 158
+  line 36, col 8 to line 36, col 58 of module Recovery: 83
+  line 37, col 8 to line 37, col 85 of module Recovery: 83
+<Complete line 41, col 1 to line 41, col 8 of module Recovery>: 3:4
+  line 42, col 8 to line 42, col 24 of module Recovery: 82
+  |line 42, col 8 to line 42, col 12 of module Recovery: 79
+  line 43, col 11 to line 43, col 26 of module Recovery: 78
+  line 39, col 31 to line 39, col 49 of module Recovery: 99
+  |line 39, col 31 to line 39, col 40 of module Recovery: 93
+  line 39, col 54 to line 39, col 82 of module Recovery: 25
+  |line 39, col 54 to line 39, col 71 of module Recovery: 19
+  |line 39, col 75 to line 39, col 82 of module Recovery: 19
+  line 39, col 22 to line 39, col 27 of module Recovery: 78
+  line 43, col 45 to line 43, col 53 of module Recovery: 7
+  |line 43, col 45 to line 43, col 48 of module Recovery: 4
+  |line 43, col 52 to line 43, col 53 of module Recovery: 4
+  line 44, col 8 to line 44, col 26 of module Recovery: 3
+  line 45, col 8 to line 45, col 91 of module Recovery: 3
+<Invalidate line 47, col 1 to line 47, col 10 of module Recovery>: 11:35
+  line 48, col 8 to line 48, col 29 of module Recovery: 35
+  |line 48, col 8 to line 48, col 15 of module Recovery: 77
+  |line 48, col 19 to line 48, col 29 of module Recovery: 77
+  line 49, col 8 to line 49, col 31 of module Recovery: 35
+  line 50, col 8 to line 50, col 25 of module Recovery: 35
+  line 51, col 8 to line 51, col 45 of module Recovery: 35
+  line 52, col 8 to line 52, col 47 of module Recovery: 35
+  line 53, col 8 to line 53, col 46 of module Recovery: 35
+  line 54, col 8 to line 54, col 42 of module Recovery: 35
+<Hold line 56, col 1 to line 56, col 4 of module Recovery>: 0:1
+  line 56, col 9 to line 56, col 26 of module Recovery: 78
+  |line 56, col 9 to line 56, col 13 of module Recovery: 77
+  line 56, col 31 to line 56, col 44 of module Recovery: 1
+<TypeOK line 65, col 1 to line 65, col 6 of module Recovery>
+  line 66, col 5 to line 73, col 42 of module Recovery: 123
+<IssueRecorded line 74, col 1 to line 74, col 13 of module Recovery>
+  line 74, col 18 to line 74, col 59 of module Recovery: 123
+  |line 74, col 34 to line 74, col 59 of module Recovery: 142
+  |line 74, col 27 to line 74, col 30 of module Recovery: 123
+<NoRecoveredCompletion line 77, col 1 to line 77, col 21 of module Recovery>
+  line 77, col 26 to line 77, col 62 of module Recovery: 123
+  |line 77, col 28 to line 77, col 61 of module Recovery: 123
+  ||line 77, col 28 to line 77, col 45 of module Recovery: 123
+  ||line 77, col 50 to line 77, col 61 of module Recovery: 3
+End of statistics.
+410 states generated, 123 distinct states found, 44 states left on queue.
+The depth of the complete state graph search is 6.
+The average outdegree of the complete state graph is 2 (minimum is 0, the maximum 7 and the 95th percentile is 4).
+Finished in 00s at (2026-11-12 13:43:27)

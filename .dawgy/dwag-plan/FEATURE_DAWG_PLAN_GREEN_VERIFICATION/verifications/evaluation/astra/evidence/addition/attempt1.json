@@ -1,0 +1,17 @@
+{
+  "attempt": 1,
+  "argv": [
+    "/usr/bin/python3",
+    "-B",
+    "check.py"
+  ],
+  "cwd": "/tmp/dawg-green-astra-eval/addition",
+  "source_sha256": {
+    "calc.py": "d5ef0469661a81c7af6a7e032965e51bd28e2bbf43146a95ae7166027df65a79",
+    "check.py": "7d0c670e9481f4d5b18b81ccf4c93dea331a0f0442d2a9a766ae116311bc07ae"
+  },
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/tmp/dawg-green-astra-eval/addition/check.py\", line 2, in <module>\n    assert add(2, 3) == 5\n           ^^^^^^^^^^^^^^\nAssertionError\n",
+  "log_sha256": "7f287f926f9a1146c0bbca55ed5f8e09a1cc0b5abc66643930a81eb97a74dc6e"
+}

@@ -65,7 +65,11 @@ unstaged, and untracked work in a reused task worktree as well.
 Complete the reviewed plan's required checks with enough observable evidence to
 prove intended behavior and a relevant regression boundary. Keep checks focused;
 no new framework or broad Git failure simulator is required. Failed, blocked or
-unrun required checks stop commit/push. A plan-only task stops at its reviewed
+unrun required checks stop commit/push. Apply the
+[recovery loop](recovery-loop.md): record observed failures and attempts, diagnose,
+repair within scope, and rerun failed/affected checks until current required
+results are green with no unresolved implementation issues. Do not finish merely
+at the first red result. A plan-only task stops at its reviewed
 plan, with no automatic implementation commit/push.
 
 Save implementation evidence under the mapped project's plan `verifications/`.
@@ -121,7 +125,9 @@ required repository checks/CI; if a required gate runs after push, delivery rema
 pending until its outcome is verified. No force push, implicit main/base merge,
 hook bypass, or automated worktree removal. On authentication, permission,
 non-fast-forward or other failures, preserve the commit/worktree, report the exact
-blocker and resume safely after resolution. Do not claim remote delivery merely
+blocker in the same persistent failure register, work through authorized remedies,
+request needed outside input, and resume safely after resolution. Keep independent
+work moving while genuinely blocked. Do not claim remote delivery merely
 because a local commit exists.
 
 Commit the implementation verification snapshot before delivery. Report final

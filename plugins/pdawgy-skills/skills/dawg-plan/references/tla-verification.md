@@ -36,6 +36,10 @@ fix, reproduce the bad behavior/violated property when feasible and then check t
 corrected model. Preserve traces and distinguish intended probe violations from
 production-model failures. Never fix a counterexample merely by deleting its
 property, excluding the bad state, or weakening the requirement.
+Use the [recovery loop](recovery-loop.md) for unexpected formal failures: record
+the issue/attempt, diagnose and correct it, then actually rerun. Preserve failed
+traces after resolution. Material corrections invalidate all three receipts as
+specified below; a failure report alone is not a completed verification task.
 
 ## Run TLC and preserve evidence
 

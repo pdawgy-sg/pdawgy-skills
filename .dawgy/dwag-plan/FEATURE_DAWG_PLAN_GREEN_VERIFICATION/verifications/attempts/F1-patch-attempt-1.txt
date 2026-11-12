@@ -1,0 +1,7 @@
+Operation: apply_patch integration edits for Git/TLA/caller/docs/version.
+Actual outcome: patch rejected; no operations applied.
+Tool result:
+apply_patch verification failed: invalid patch: multiple operations target /home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-plan-green-verification/README.md
+
+Cause: the proposed patch declared two separate update operations for README.md.
+Correction planned: combine the README hunks under one update operation and retry.

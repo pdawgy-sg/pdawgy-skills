@@ -23,6 +23,13 @@
   and commit delta, create a task-only Conventional Commit, and push normally to
   its feature/fix branch with remote OID confirmation. Respect planning-only and
   explicit delivery limits; report blockers rather than bypassing checks.
+- During implementation/verification, record every observed non-green result
+  in the plan's `verifications/failures.md` with linked check IDs and preserved
+  attempts. Diagnose, apply authorized corrections and rerun failed/affected
+  checks until the phase's required results pass on current inputs and issues
+  resolve. Reopen recurrences; retain old failed logs and invalidate stale passes.
+  Request genuine external dependencies while continuing independent work. Do
+  not stop at a failure report, weaken checks, or claim unresolved work complete.
 - Use the installed skill-creator workflow when authoring skills. Keep guidance
   concise, scoped to its purpose, and supported by resources only when useful.
 - Use [dawg-architecture-maintain](plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md)

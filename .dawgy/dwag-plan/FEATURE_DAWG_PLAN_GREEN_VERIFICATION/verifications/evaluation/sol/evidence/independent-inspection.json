@@ -1,0 +1,6 @@
+{
+  "activity": "Independent read-only source/assertion inspection while B1 blocked",
+  "result": "Current calc/check syntax parses; assertion is original and unchanged; no extra source file or hidden check suppression exists.",
+  "B1_remains": "BLOCKED",
+  "checked": false
+}

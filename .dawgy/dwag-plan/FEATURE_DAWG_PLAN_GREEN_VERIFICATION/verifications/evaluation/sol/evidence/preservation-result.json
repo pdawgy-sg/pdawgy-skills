@@ -1,0 +1,12 @@
+{
+  "attempt1_original_log_sha256": "1d41312e32e834c20370c8b203e3636a92acdfc38a7fd9118af3a640901560fe",
+  "attempt1_current_log_sha256": "1d41312e32e834c20370c8b203e3636a92acdfc38a7fd9118af3a640901560fe",
+  "attempt3_original_log_sha256": "1d41312e32e834c20370c8b203e3636a92acdfc38a7fd9118af3a640901560fe",
+  "attempt3_current_log_sha256": "1d41312e32e834c20370c8b203e3636a92acdfc38a7fd9118af3a640901560fe",
+  "initial_check_sha256": "7d0c670e9481f4d5b18b81ccf4c93dea331a0f0442d2a9a766ae116311bc07ae",
+  "final_check_sha256": "7d0c670e9481f4d5b18b81ccf4c93dea331a0f0442d2a9a766ae116311bc07ae",
+  "final_calc_sha256": "1c3eafab9aa411fd3674bb233f9447d5e0d8b808c79c2b22fe7d721729c30f46",
+  "final_resolution_attempt": "attempt4",
+  "recovered_case": "PASS; F1 RESOLVED",
+  "separate_blocked_case": "B1 BLOCKED; unchecked; unresolved by design"
+}

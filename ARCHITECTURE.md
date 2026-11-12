@@ -40,6 +40,16 @@ identities. Missing, failed, incomplete or stale executions block readiness.
 Material formal-input or requirement changes invalidate all three receipts.
 Bounded model checking and implementation verification remain separate checks.
 
+The required [recovery loop](plugins/pdawgy-skills/skills/dawg-plan/references/recovery-loop.md)
+turns observed non-green results into persistent, check-linked issues. The
+failure-register asset supplies `verifications/failures.md`; immutable attempts
+record diagnosis, correction, current input identity and rerun evidence. Agents
+repair and recheck until each phase's required results are green with no unresolved
+issues, reopen regressions and preserve historical failures. Genuine external
+dependencies stay explicitly blocked while independent work continues. Planned
+later phases and exact expected negative probes are kept separate from actual
+unresolved product failures.
+
 The required [Git workflow](plugins/pdawgy-skills/skills/dawg-plan/references/git-workflow.md)
 gates every feature/fix on Git initialization consent and a committed base, then
 creates or resumes a dedicated task worktree. It records original repository and
@@ -97,7 +107,8 @@ neither their binaries nor a separate model-checking service are bundled here.
 Plans are written in the mapped project inside the task worktree at
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/`. Each has `PLAN.md` and a
 `verifications/` directory containing `verification.md`, reviews, and applicable
-logs/screenshots. Its `tla/` subtree holds specifications/configs, tool/input
+logs/screenshots. `failures.md` is the durable issue/attempt register, linked to
+the checklist. Its `tla/` subtree holds specifications/configs, tool/input
 identities, parent/reviewer runs and relevant counterexamples. Reviewers use their
 own fresh metadata/log locations and preserve evidence without editing the model.
 The `dwag-plan` spelling is intentional. This repository's own

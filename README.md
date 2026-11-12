@@ -27,6 +27,12 @@ manifest layout.
   Preserves accurate documents without cosmetic churn. Invoke it with
   `$dawg-architecture-maintain`.
 
+During implementation and verification, Dawg records observed failures in the
+plan's `verifications/failures.md`, diagnoses and repairs them, and reruns failed
+and affected checks until required results are current/green. It retains failed
+attempts and reopens regressions. Genuine blockers remain explicit while useful
+independent work continues; unresolved issues prevent completion/delivery.
+
 Dawg guidance favors simple code, no explanatory code comments, and proportionate
 verification. Required notices and functional/tool directives remain intact.
 Architecture stays current through coding-task maintenance, not a background job.
@@ -63,9 +69,11 @@ pdawgy-skills/
             │   ├── agents/openai.yaml
             │   ├── references/git-workflow.md
             │   ├── references/tla-verification.md
+            │   ├── references/recovery-loop.md
             │   └── assets/
             │       ├── PLAN.md
-            │       └── verification.md
+            │       ├── verification.md
+            │       └── failures.md
             ├── dawg-init/
             │   ├── SKILL.md
             │   ├── agents/openai.yaml

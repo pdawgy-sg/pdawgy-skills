@@ -1,0 +1,6 @@
+Operation: apply_patch final plan/checklist evidence metadata update.
+Actual: rejected; no patch operations applied.
+Error: Failed to find expected lines in PLAN.md:
+Concrete recovery and
+final-source checks remain pending; implementation is now ready and authorized.
+Cause to confirm: expected wrapped text did not match the actual document.

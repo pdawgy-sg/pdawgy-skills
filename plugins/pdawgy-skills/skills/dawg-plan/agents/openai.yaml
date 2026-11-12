@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Plan"
-  short_description: "Plan with TLA+ and independent reviewer model checks"
-  default_prompt: "Use $dawg-plan to plan this feature or fix in a Git worktree with TLA+ verification and independent TLC runs by both reviewers, then verify, commit, and push authorized implementation."
+  short_description: "Plan with TLA+ and repair checks until green"
+  default_prompt: "Use $dawg-plan to plan this feature or fix with TLA+ and independent reviews, then record and repair failures until required checks pass during authorized implementation before commit and push."

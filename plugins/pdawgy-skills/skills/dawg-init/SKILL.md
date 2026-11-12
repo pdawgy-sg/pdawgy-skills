@@ -121,6 +121,11 @@ anything not run. Check that useful original rules and nested scope survived,
 CLAUDE delegation reaches AGENTS, and architecture claims match source. Rerunning
 init should make no cosmetic changes to already accurate guidance. If approved
 cleanup changes code, run only relevant focused checks and preserve results.
+Follow dawg-plan's persistent failure register and recovery loop: record any
+observed non-green result, diagnose/correct within authorization, and rerun failed
+and affected checks until the current phase is green. Keep real blockers explicit,
+continue independent work and request missing input. Preserve failed history and
+do not hand off initialization as complete while required issues remain open.
 
 Save evidence under that plan's `verifications/`; follow dawg-plan's screenshot
 save/share rules when screenshots are relevant. Link the plan, checklist, and

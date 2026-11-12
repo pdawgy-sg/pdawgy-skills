@@ -1,0 +1,128 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 15 and seed -2966912601219170054 with 1 worker on 24 cores with 491MB heap and 64MB offheap memory [pid: 3834827] (Linux 7.2.11-arch1-1 amd64, Eclipse Adoptium 25.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /tmp/dawg-green-astra-inputs-1/tla/Recovery.tla
+Parsing file /tmp/Integers.tla
+Parsing file /tmp/TLC.tla
+Parsing file /tmp/Naturals.tla
+Parsing file /tmp/Sequences.tla
+Parsing file /tmp/FiniteSets.tla
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module Recovery
+Starting... (2026-11-12 13:43:27)
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-11-12 13:43:27.
+Error: Invariant CompletesOnlyGreen is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ results = [tests |-> "notrun", verification |-> "notrun"]
+/\ revision = 0
+/\ history = {}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> FALSE, verification |-> FALSE]
+/\ open = {}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> -1, verification |-> -1]
+
+State 2: <Run line 21, col 5 to line 31, col 25 of module Recovery>
+/\ results = [tests |-> "fail", verification |-> "notrun"]
+/\ revision = 0
+/\ history = {"tests"}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> TRUE, verification |-> FALSE]
+/\ open = {"tests"}
+/\ phase = "working"
+/\ checkedRevision = [tests |-> 0, verification |-> -1]
+
+State 3: <Complete line 42, col 5 to line 45, col 91 of module Recovery>
+/\ results = [tests |-> "fail", verification |-> "notrun"]
+/\ revision = 0
+/\ history = {"tests"}
+/\ repairReady = [tests |-> FALSE, verification |-> FALSE]
+/\ logged = [tests |-> TRUE, verification |-> FALSE]
+/\ open = {"tests"}
+/\ phase = "verified"
+/\ checkedRevision = [tests |-> 0, verification |-> -1]
+
+The coverage statistics at 2026-11-12 13:43:27
+<Init line 10, col 1 to line 10, col 4 of module Recovery>: 2:2
+  line 11, col 5 to line 18, col 45 of module Recovery: 2
+<Run line 20, col 1 to line 20, col 18 of module Recovery>: 13:27
+  line 21, col 8 to line 21, col 40 of module Recovery: 60
+  |line 21, col 8 to line 21, col 12 of module Recovery: 33
+  |line 21, col 18 to line 21, col 40 of module Recovery: 33
+  line 22, col 8 to line 22, col 24 of module Recovery: 60
+  |line 22, col 8 to line 22, col 12 of module Recovery: 33
+  |line 22, col 21 to line 22, col 24 of module Recovery: 33
+  line 22, col 29 to line 22, col 46 of module Recovery: 33
+  line 23, col 8 to line 23, col 25 of module Recovery: 27
+  line 24, col 8 to line 24, col 52 of module Recovery: 27
+  line 25, col 8 to line 25, col 70 of module Recovery: 27
+  line 26, col 8 to line 26, col 76 of module Recovery: 27
+  |line 26, col 16 to line 26, col 76 of module Recovery: 27
+  ||line 26, col 19 to line 26, col 33 of module Recovery: 27
+  ||line 26, col 40 to line 26, col 53 of module Recovery: 10
+  ||line 26, col 60 to line 26, col 76 of module Recovery: 17
+  line 27, col 8 to line 28, col 56 of module Recovery: 27
+  |line 27, col 19 to line 28, col 56 of module Recovery: 27
+  ||line 27, col 22 to line 27, col 53 of module Recovery: 27
+  |||line 27, col 22 to line 27, col 36 of module Recovery: 27
+  |||line 27, col 41 to line 27, col 53 of module Recovery: 17
+  ||line 28, col 24 to line 28, col 43 of module Recovery: 17
+  ||line 28, col 50 to line 28, col 56 of module Recovery: 10
+  line 29, col 8 to line 29, col 91 of module Recovery: 27
+  |line 29, col 18 to line 29, col 91 of module Recovery: 27
+  ||line 29, col 19 to line 29, col 24 of module Recovery: 27
+  ||line 29, col 33 to line 29, col 90 of module Recovery: 27
+  ||line 29, col 44 to line 29, col 90 of module Recovery: 27
+  |||line 29, col 47 to line 29, col 61 of module Recovery: 27
+  |||line 29, col 68 to line 29, col 71 of module Recovery: 10
+  |||line 29, col 78 to line 29, col 90 of module Recovery: 17
+  line 30, col 8 to line 30, col 59 of module Recovery: 27
+  line 31, col 8 to line 31, col 25 of module Recovery: 27
+<Repair line 33, col 1 to line 33, col 13 of module Recovery>: 1:2
+  line 34, col 8 to line 34, col 24 of module Recovery: 12
+  |line 34, col 8 to line 34, col 12 of module Recovery: 10
+  line 35, col 8 to line 35, col 21 of module Recovery: 12
+  |line 35, col 8 to line 35, col 12 of module Recovery: 10
+  |line 35, col 18 to line 35, col 21 of module Recovery: 10
+  line 36, col 8 to line 36, col 58 of module Recovery: 2
+  line 37, col 8 to line 37, col 85 of module Recovery: 2
+<Complete line 41, col 1 to line 41, col 8 of module Recovery>: 1:2
+  line 42, col 8 to line 42, col 24 of module Recovery: 6
+  |line 42, col 8 to line 42, col 12 of module Recovery: 5
+  line 43, col 11 to line 43, col 26 of module Recovery: 5
+  line 43, col 60 to line 43, col 71 of module Recovery: 6
+  |line 43, col 60 to line 43, col 66 of module Recovery: 5
+  |line 43, col 70 to line 43, col 71 of module Recovery: 5
+  line 44, col 8 to line 44, col 26 of module Recovery: 1
+  line 45, col 8 to line 45, col 91 of module Recovery: 1
+<Invalidate line 47, col 1 to line 47, col 10 of module Recovery>: 3:3
+  line 48, col 8 to line 48, col 29 of module Recovery: 3
+  line 49, col 8 to line 49, col 31 of module Recovery: 3
+  line 50, col 8 to line 50, col 25 of module Recovery: 3
+  line 51, col 8 to line 51, col 45 of module Recovery: 3
+  line 52, col 8 to line 52, col 47 of module Recovery: 3
+  line 53, col 8 to line 53, col 46 of module Recovery: 3
+  line 54, col 8 to line 54, col 42 of module Recovery: 3
+<Hold line 56, col 1 to line 56, col 4 of module Recovery>: 0:0
+  line 56, col 9 to line 56, col 26 of module Recovery: 3
+  line 56, col 31 to line 56, col 44 of module Recovery: 0
+<TypeOK line 65, col 1 to line 65, col 6 of module Recovery>
+  line 66, col 5 to line 73, col 42 of module Recovery: 19
+<IssueRecorded line 74, col 1 to line 74, col 13 of module Recovery>
+  line 74, col 18 to line 74, col 59 of module Recovery: 19
+  |line 74, col 34 to line 74, col 59 of module Recovery: 14
+  |line 74, col 27 to line 74, col 30 of module Recovery: 19
+<CompletesOnlyGreen line 75, col 1 to line 75, col 18 of module Recovery>
+  line 75, col 23 to line 75, col 65 of module Recovery: 19
+  |line 75, col 23 to line 75, col 40 of module Recovery: 19
+  |line 75, col 45 to line 75, col 65 of module Recovery: 1
+End of statistics.
+27 states generated, 19 distinct states found, 14 states left on queue.
+The depth of the complete state graph search is 3.
+The average outdegree of the complete state graph is 5 (minimum is 3, the maximum 7 and the 95th percentile is 7).
+Finished in 00s at (2026-11-12 13:43:27)

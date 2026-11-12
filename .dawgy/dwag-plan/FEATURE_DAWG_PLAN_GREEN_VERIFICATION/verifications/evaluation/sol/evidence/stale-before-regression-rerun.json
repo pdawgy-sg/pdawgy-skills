@@ -1,0 +1,8 @@
+{
+  "V1": "NOT RUN / STALE",
+  "checked": false,
+  "F1": "prior closure retained; current source invalidates its evidence",
+  "current_calc_sha256": "136acdc87813c2312f86224b9e23f654383aadcbe10b339bfaf6295bdb98c285",
+  "old_pass_attempt": "attempt2",
+  "next_action": "rerun unchanged V1 against current input"
+}

@@ -1,0 +1,18 @@
+{
+  "F1_status": "RESOLVED",
+  "F2_status": "RESOLVED",
+  "unresolved_actual_task_issues": 0,
+  "evidence_hashes": {
+    "failures.md": "4f32435e64b56c02148e388538d27552a5fa140f2d9448db61dba304d492c502",
+    "attempts/F1-patch-attempt-1.txt": "160af02264fb581fa61b164bcd4ca53fcd33e7073f98a0de208e12fd8dfc8fc1",
+    "attempts/F2-readme-before.txt": "0a3f0c9bd887e8194c0db9de546c35fada790bb7cae2c6a7d8180f5162350523",
+    "validation.log": "ba4086a8b6228f54d0cbc76d7c2ae41f9f64d7ead04b245f544cf97b22291518",
+    "tested-source.json": "e92cd01fd51f1ce3b58599bac973dda2194f4b89d51a7e30b3141d4e621f26e2"
+  },
+  "observations": [
+    "F1 preserved duplicate-README-target tool rejection; corrected integration and current validation are linked.",
+    "F2 preserved before-layout showing interruption; current README has contiguous three-item Included skills list and separately spaced recovery paragraph.",
+    "Current reviewed source hashes equal the complete tested-source.json map.",
+    "No prior failure evidence was overwritten by this reviewer."
+  ]
+}
