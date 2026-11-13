@@ -5,23 +5,26 @@
 - Read [ARCHITECTURE.md](ARCHITECTURE.md) for design context. Keep this file focused
   on how to change and verify the repository.
 - Use the bundled [dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md)
-  workflow for features and fixes. Resolve material uncertainty, show state
-  diagrams, and break work into small parts with reproducible verification.
-  Required design reviewers are `gpt-6-astra` and `gpt-6.1-sol`, both at high
-  effort. Report unavailable dependencies instead of claiming the review ran.
+  workflow for features, fixes and refactors. Resolve material uncertainty,
+  show state diagrams, and break work into small parts with reproducible verification.
+  Classify size with a concrete rationale: small work requires only `gpt-6.1-sol`
+  at high effort; large work adds `gpt-6-astra` at high effort. Follow dawg-plan's
+  impact/risk criteria and escalate on growth. Missing required reviewers block
+  readiness; optional Astra does not block small work. Do not claim unavailable
+  reviews ran.
 - Every plan includes a meaningful TLA+ model/configuration and actual completed
-  TLC checks by the parent and both reviewers on identical final inputs. Review
-  assumptions, finite bounds, properties, reachability and implementation mapping;
+  TLC checks by the parent and every required reviewer on identical final inputs.
+  Review assumptions, finite bounds, properties, reachability and implementation mapping;
   preserve logs/identities/counterexamples under the plan's `verifications/tla/`.
-  Missing, incomplete, failed or stale checks block readiness. Rerun all three
-  after material requirement/model/config changes. Bounded model checking
+  Missing, incomplete, failed or stale checks block readiness. Rerun the parent
+  and all required reviewers after material requirement/model/config changes. Bounded model checking
   complements implementation verification and does not prove arbitrary code.
-- Every feature/fix uses dawg-plan's dedicated Git worktree and task branch.
+- Every feature/fix/refactor uses dawg-plan's dedicated Git worktree and task branch.
   Preserve the selected target-relative scope inside it; keep the source checkout
   and unrelated staged/dirty work intact. Outside Git, ask before initializing.
   After authorized implementation passes required checks, inspect the whole index
   and commit delta, create a task-only Conventional Commit, and push normally to
-  its feature/fix branch with remote OID confirmation. Respect planning-only and
+  its task branch with remote OID confirmation. Respect planning-only and
   explicit delivery limits; report blockers rather than bypassing checks.
 - During implementation/verification, record every observed non-green result
   in the plan's `verifications/failures.md` with linked check IDs and preserved
@@ -34,7 +37,7 @@
   concise, scoped to its purpose, and supported by resources only when useful.
 - Use [dawg-architecture-maintain](plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md)
   in the same task when implemented changes affect components, interfaces,
-  dependencies, or flows. Check architecture at feature/fix completion; preserve
+  dependencies, or flows. Check architecture at task completion; preserve
   an accurate document rather than making cosmetic edits.
 
 ## Coding standards

@@ -41,7 +41,7 @@ authorization; do not request permission for every ordinary fix or rerun.
 
 If code, behavior, configuration or relevant inputs change, invalidate affected
 prior passes and check the new input identity. Material formal/requirement changes
-also require parent and both reviewers to rerun/review as the TLA+ workflow says.
+also require parent and every required reviewer to rerun/review as the TLA+ workflow says.
 Verification log updates alone do not change the tested implementation.
 
 Do not endlessly rerun an unchanged failing command without diagnosis or changed
@@ -75,7 +75,7 @@ resolution. Preserve the full failed history after closure.
 
 Green is phase-specific:
 
-- Plan readiness: current parent/both-reviewer formal runs and semantic approvals;
+- Plan readiness: current parent/all-required-reviewer formal runs and semantic approvals;
   future implementation tests remain planned, not falsely executed.
 - Implementation completion: all required implementation/artifact checks are PASS
   on current inputs and no implementation failure/blocker remains unresolved.

@@ -12,10 +12,11 @@ Delivery checkpoint: <planning-only, or verified pre-delivery snapshot>
 Final commit/push receipt: <report in chat after delivery; no self-referential commit>
 Failure register: [failures.md](failures.md)
 Current phase / green gate: <required checks for this phase; open F IDs>
+Review tier / rationale / required models: <small: Sol/high; large: Sol+Astra/high; changes>
 
 ## Coverage checklist
 
-- [ ] FORMAL — parent and both exact reviewers independently completed TLC on
+- [ ] FORMAL — parent and every tier-required exact reviewer independently completed TLC on
   identical current inputs; enabled properties/assumptions/bounds reviewed;
   logs/receipts/traces under tla/; bounded claims and implementation gaps recorded.
 - [ ] V1 — <observable check; task IDs; acceptance IDs; transition IDs/invariants>
@@ -52,15 +53,16 @@ unresolved. Keep later planned phases and exact expected negative probes distinc
 
 - Parent TLC: <revision/input/tool hashes; exact command; configs; completed
   outcomes/state counts; tla/runs/...; not run until actually executed>
-- Astra: <design-review-astra.md; gpt-6-astra/high; own TLC hashes/logs/results;
-  abstraction/requirement review; matching final model identity>
+- Astra (large only): <design-review-astra.md with gpt-6-astra/high and own current
+  TLC/semantic review; for small mark not required, no execution claimed>
 - Sol: <design-review-sol.md; gpt-6.1-sol/high; own TLC hashes/logs/results;
   abstraction/requirement review; matching final model identity>
 - Formal limits/probes: <finite bounds, assumptions, fairness/deadlock choices,
   actual nominal reachability; expected negative traces separate from failures>
 
 Changed behavior/model/config/dependencies/bounds/assumptions/fairness invalidate
-all three receipts. Missing, failed, stale or incomplete required executions block
+the parent and all required reviewer receipts.
+Scope growth requires the large-tier reviewer set before readiness. Missing, failed, stale or incomplete required executions block
 readiness. These checks validate a bounded abstraction; implementation verification
 and source correspondence remain required.
 

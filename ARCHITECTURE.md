@@ -27,17 +27,20 @@ project build/test framework in the current source package.
 
 ## Workflow composition
 
-[dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md) investigates a feature
-or fix, resolves material ambiguity, models its state transitions, and defines
+[dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md) investigates a feature,
+fix or refactor, resolves material ambiguity, models its state transitions, and defines
 small verifiable tasks. Its assets provide plan and verification templates.
 Every plan requires a concrete TLA+ model/configuration and parent TLC run, followed
-by independent TLC execution and semantic review from `gpt-6-astra` and
-`gpt-6.1-sol` at high effort. The required
+by independent TLC execution and semantic review from `gpt-6.1-sol` at high effort
+for small work, adding `gpt-6-astra` at high effort for large work. The plan records
+size/risk rationale and the required set. Scope growth revokes readiness until
+the expanded set approves current inputs; missing optional Astra does not block
+small work. The required
 [TLA+ guide](plugins/pdawgy-skills/skills/dawg-plan/references/tla-verification.md)
 defines domain/requirement mapping, enabled properties and assumptions, finite
 bounds, actual completion evidence, reachability checks, and shared final input
 identities. Missing, failed, incomplete or stale executions block readiness.
-Material formal-input or requirement changes invalidate all three receipts.
+Material formal-input or requirement changes invalidate the parent and every required reviewer receipt.
 Bounded model checking and implementation verification remain separate checks.
 
 The required [recovery loop](plugins/pdawgy-skills/skills/dawg-plan/references/recovery-loop.md)
@@ -51,12 +54,12 @@ later phases and exact expected negative probes are kept separate from actual
 unresolved product failures.
 
 The required [Git workflow](plugins/pdawgy-skills/skills/dawg-plan/references/git-workflow.md)
-gates every feature/fix on Git initialization consent and a committed base, then
+gates every feature/fix/refactor on Git initialization consent and a committed base, then
 creates or resumes a dedicated task worktree. It records original repository and
 selected relative scope, mapping the project into that worktree. Plans, evidence,
 implementation and caller changes stay in the mapped target. After authorized
 implementation passes checks, it audits the entire index and commit delta,
-creates a Conventional Commit, and normally pushes the task feature/fix branch
+creates a Conventional Commit, and normally pushes the task branch
 with remote OID confirmation. Unrelated staging, failed checks and delivery errors
 remain explicit blockers. Planning-only requests stop before implementation and
 delivery; final delivery receipts are reported in chat rather than requiring a
@@ -101,7 +104,7 @@ flowchart TD
     Init --> Plan
     Init --> Maintain
     Plan --> Worktree[Scoped task worktree and branch]
-    Plan --> Reviews[Two independent design reviews]
+    Plan --> Reviews[Size-based independent design reviews]
     Reviews --> Artifacts[Target-project plan and verification artifacts]
     Init --> Guidance[Target-project AGENTS.md and CLAUDE.md]
     Maintain --> Architecture[Target-project ARCHITECTURE.md]
@@ -111,8 +114,8 @@ flowchart TD
 
 The calling coding agent executes these workflows with its available file,
 shell, and subagent tools. The plugin supplies instructions and templates rather
-than a separate execution service. Its reviewer requirement depends on both exact
-models and high-effort delegation being available. Skill validation uses an
+than a separate execution service. Its reviewer requirement depends on Sol/high delegation for small work and
+Sol/high plus Astra/high for large work; unavailable required models block readiness. Skill validation uses an
 external installed skill-creator validator with Python/PyYAML. Formal planning
 also needs external Java/TLC tooling. Those tools are used by the calling agents;
 neither their binaries nor a separate model-checking service are bundled here.

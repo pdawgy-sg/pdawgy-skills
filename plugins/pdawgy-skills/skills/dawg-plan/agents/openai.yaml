@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Plan"
-  short_description: "Plan with TLA+ and repair checks until green"
-  default_prompt: "Use $dawg-plan to plan this feature or fix with TLA+ and independent reviews, then record and repair failures until required checks pass during authorized implementation before commit and push."
+  short_description: "Plan with size-based review and verified recovery"
+  default_prompt: "Use $dawg-plan to plan this feature, fix or refactor with TLA+, Sol/high review for small work or Sol/high plus Astra/high for large work, then record and repair failures until required checks pass during authorized implementation before commit and push."
