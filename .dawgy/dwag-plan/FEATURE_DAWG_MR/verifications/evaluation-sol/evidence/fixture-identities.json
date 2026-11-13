@@ -1,0 +1,17 @@
+{
+  "shipping": {
+    "base": "4fee0028ef162896cfc02a7af4ab00137a17c7d4",
+    "head": "7ff8c71ea4473d82d999dd2eca399bcfebfdda83",
+    "request": "Use $dawg-mr to quickly draft an MR message for these committed changes.",
+    "target": "main from committed AGENTS.md"
+  },
+  "empty_request": {
+    "base": "7ff8c71ea4473d82d999dd2eca399bcfebfdda83",
+    "head": "7ff8c71ea4473d82d999dd2eca399bcfebfdda83"
+  },
+  "ambiguous": {
+    "base": "11c6cc52ece415fc47ab7cba5ef06c21142854a1",
+    "head": "e23fc45dcb52379971f415c3733926e9f04a7668",
+    "request": "Use $dawg-mr to quickly draft an MR message for these committed changes."
+  }
+}

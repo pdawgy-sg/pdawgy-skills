@@ -1,0 +1,50 @@
+{
+  "reviewer": "gpt-6.1-sol/high",
+  "plan_revision": 1,
+  "runner_sha256": "632f7775696760065dd1ff856130d4f68edc126d86a5c53367f483b3cc5554b8",
+  "input_sha256": {
+    "run_tlc.py": "632f7775696760065dd1ff856130d4f68edc126d86a5c53367f483b3cc5554b8",
+    "MrDraft.tla": "db3c6030a23d837c85992514d4df4959a32f70425fca346708b8e60aa03dc40c",
+    "DraftWitness.cfg": "0fc6e0f3a9df1b170e3a07677688aac9f0237aa05ab00ee81aeaaf36a4369474",
+    "EvidenceFault.cfg": "f7ca1f6494d187660696baa3e9f61183ab068d07c91da912c483b965a3b286e2",
+    "MrDraft.cfg": "7f57a51534a42a1801165ccd5d8621310d7f8d221cc9faffec6df508b8c1e0ff"
+  },
+  "raw_log_sha256": {
+    "MrDraft.log": "286325c1080371d9c9b20b5a3218242c007d7199e107ff7dc4899bc7e0688a64",
+    "EvidenceFault.log": "7a42ef87f0c26d794da7cef9651726486b5a6aad270272e02955c748f5ae9268",
+    "DraftWitness.log": "3431cc1b105f1eb6bc7f27656d5e118f3efa11495c615778331be56a90467ee6"
+  },
+  "parent_tool_input_match": true,
+  "outcomes": [
+    {
+      "config": "MrDraft.cfg",
+      "exit": 0,
+      "states": [
+        "1128",
+        "72",
+        "0"
+      ],
+      "expected_violation": null
+    },
+    {
+      "config": "EvidenceFault.cfg",
+      "exit": 12,
+      "states": [
+        "859",
+        "67",
+        "7"
+      ],
+      "expected_violation": "EvidenceSound"
+    },
+    {
+      "config": "DraftWitness.cfg",
+      "exit": 12,
+      "states": [
+        "857",
+        "65",
+        "7"
+      ],
+      "expected_violation": "NoDraft"
+    }
+  ]
+}

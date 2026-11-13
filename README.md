@@ -27,6 +27,11 @@ manifest layout.
   Preserves accurate documents without cosmetic churn. Invoke it with
   `$dawg-architecture-maintain`.
 
+- **dawg-mr** — Quickly review committed changes and draft an MR/PR message with
+  the problem, fix, blast radius, and verified/tested evidence. Labels missing or
+  stale results honestly; drafts in chat without publishing or running tests.
+  Invoke it with `$dawg-mr`.
+
 During implementation and verification, Dawg records observed failures in the
 plan's `verifications/failures.md`, diagnoses and repairs them, and reruns failed
 and affected checks until required results are current/green. It retains failed
@@ -81,7 +86,10 @@ pdawgy-skills/
             │       ├── AGENTS.md
             │       ├── CLAUDE.md
             │       └── ARCHITECTURE.md
-            └── dawg-architecture-maintain/
+            ├── dawg-architecture-maintain/
+            │   ├── SKILL.md
+            │   └── agents/openai.yaml
+            └── dawg-mr/
                 ├── SKILL.md
                 └── agents/openai.yaml
 ```

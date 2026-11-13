@@ -1,0 +1,9 @@
+{
+  "head": "e23fc45dcb52379971f415c3733926e9f04a7668",
+  "refs": "refs/heads/develop cbda4f91853849b63ab71ba2195b930f20e71286\nrefs/heads/feature/change e23fc45dcb52379971f415c3733926e9f04a7668\nrefs/heads/main 496fb4ea8c8f4814e4d03fa7f36b65bffd6bf05d",
+  "status": "## feature/change",
+  "index_sha256": "d9e0482dcc0cff09d2f592e29f3172b69e9b38ba0869315fc656a2b09ac82771",
+  "files": {
+    "value.txt": "437531926f9d417081e2d55f00cd703eb0b08ee7f175b80b884c25fbd4f16f91"
+  }
+}

@@ -3,7 +3,7 @@
 ## Purpose and scope
 
 Pdawgy Skills is a skills-only Codex plugin distributed through a repository
-marketplace. The current package contains three instruction-driven workflows.
+marketplace. The current package contains four instruction-driven workflows.
 There is no application service, bundled MCP server, lifecycle hook, or declared
 project build/test framework in the current source package.
 
@@ -78,6 +78,13 @@ synchronization reuses a calling task's context and evidence without recursively
 invoking init or restarting its plan. Proposed feature/refactor work routes to
 dawg-plan. Accurate documents remain byte-identical on a no-op run.
 
+[dawg-mr](plugins/pdawgy-skills/skills/dawg-mr/SKILL.md) is a read-only drafting
+workflow. It pins a committed comparison range, inspects changed behavior and
+relevant consumers, and classifies verification evidence by revision and source.
+Its MR/PR message covers problem, fix, blast radius and verified/tested outcomes,
+including failures or missing evidence. Drafting does not invoke dawg-plan,
+launch tests, alter Git state or publish an MR. It adds no scripts or services.
+
 ```mermaid
 flowchart TD
     Marketplace[Repository marketplace] --> Manifest[Plugin manifest]
@@ -85,6 +92,8 @@ flowchart TD
     Skills --> Init[dawg-init]
     Skills --> Plan[dawg-plan]
     Skills --> Maintain[dawg-architecture-maintain]
+    Skills --> MR[dawg-mr]
+    MR --> Message[Committed-change MR draft in chat]
     Init --> Plan
     Init --> Maintain
     Plan --> Worktree[Scoped task worktree and branch]

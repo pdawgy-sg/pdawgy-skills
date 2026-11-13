@@ -1,0 +1,100 @@
+{
+  "java_version": "openjdk version \"25.0.5\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode, sharing)",
+  "java_binary": "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+  "java_sha256": "1bf1aaef01e4f8d7c85d913c60fb2ee4624cbe54d4053254c59657b7ea913b25",
+  "tlc_jar": "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+  "tlc_jar_sha256": "936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88",
+  "outcomes": [
+    {
+      "config": "MrDraft.cfg",
+      "module_sha256": "db3c6030a23d837c85992514d4df4959a32f70425fca346708b8e60aa03dc40c",
+      "config_sha256": "7f57a51534a42a1801165ccd5d8621310d7f8d221cc9faffec6df508b8c1e0ff",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-l1gvjyyn",
+        "-config",
+        "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/MrDraft.cfg",
+        "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/MrDraft.tla"
+      ],
+      "exit_code": 0,
+      "expected_violation": null,
+      "states": [
+        "1128",
+        "72",
+        "0"
+      ],
+      "expected_outcome_observed": true
+    },
+    {
+      "config": "EvidenceFault.cfg",
+      "module_sha256": "db3c6030a23d837c85992514d4df4959a32f70425fca346708b8e60aa03dc40c",
+      "config_sha256": "f7ca1f6494d187660696baa3e9f61183ab068d07c91da912c483b965a3b286e2",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-3_x16kgy",
+        "-config",
+        "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/EvidenceFault.cfg",
+        "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/MrDraft.tla"
+      ],
+      "exit_code": 12,
+      "expected_violation": "EvidenceSound",
+      "states": [
+        "859",
+        "67",
+        "7"
+      ],
+      "expected_outcome_observed": true
+    },
+    {
+      "config": "DraftWitness.cfg",
+      "module_sha256": "db3c6030a23d837c85992514d4df4959a32f70425fca346708b8e60aa03dc40c",
+      "config_sha256": "0fc6e0f3a9df1b170e3a07677688aac9f0237aa05ab00ee81aeaaf36a4369474",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-2oq573p2",
+        "-config",
+        "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/DraftWitness.cfg",
+        "/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/MrDraft.tla"
+      ],
+      "exit_code": 12,
+      "expected_violation": "NoDraft",
+      "states": [
+        "857",
+        "65",
+        "7"
+      ],
+      "expected_outcome_observed": true
+    }
+  ],
+  "all_expected_outcomes_observed": true
+}

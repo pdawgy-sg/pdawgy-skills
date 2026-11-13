@@ -1,0 +1,268 @@
+[
+  {
+    "argv": [
+      "git",
+      "init",
+      "-b",
+      "main"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "Initialized empty Git repository in /tmp/dawg-mr-astra-eval/project/.git/\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "config",
+      "user.name",
+      "Fixture Author"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "config",
+      "user.email",
+      "fixture@example.invalid"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "chore: establish reporting example"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "[main (root-commit) 3550b82] chore: establish reporting example\n 8 files changed, 28 insertions(+)\n create mode 100644 .gitlab/merge_request_templates/Default.md\n create mode 100644 AGENTS.md\n create mode 100644 REQUEST.md\n create mode 100644 average.py\n create mode 100644 check_empty.py\n create mode 100644 check_legacy.py\n create mode 100644 check_nonempty.py\n create mode 100644 summary.py\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "3550b821faa436389688c9d5b45101b4fbb39033\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "check_nonempty.py"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "nonempty PASS\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "switch",
+      "-c",
+      "feature/empty-average"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "Switched to a new branch 'feature/empty-average'\n"
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "check_empty.py"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "empty summary PASS\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/usr/bin/python3",
+      "-B",
+      "check_legacy.py"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/dawg-mr-astra-eval/project/check_legacy.py\", line 7, in <module>\n    raise AssertionError(\"legacy consumer expects ZeroDivisionError\")\nAssertionError: legacy consumer expects ZeroDivisionError\n"
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "average.py",
+      "verification/records.json"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "fix: support empty daily summaries"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "[feature/empty-average 85dde0f] fix: support empty daily summaries\n 2 files changed, 51 insertions(+), 1 deletion(-)\n create mode 100644 verification/records.json\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "85dde0f8bc9e3929e56443088ebb842f6398a614\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "average.py"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/project",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "init",
+      "-b",
+      "release-a"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "Initialized empty Git repository in /tmp/dawg-mr-astra-eval/ambiguous/.git/\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "config",
+      "user.name",
+      "Fixture Author"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "config",
+      "user.email",
+      "fixture@example.invalid"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "chore: initial"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "[release-a (root-commit) eb6c081] chore: initial\n 1 file changed, 1 insertion(+)\n create mode 100644 value.txt\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "branch",
+      "release-b"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "switch",
+      "-c",
+      "feature/value"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "",
+    "stderr": "Switched to a new branch 'feature/value'\n"
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "."
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "fix: update value"
+    ],
+    "cwd": "/tmp/dawg-mr-astra-eval/ambiguous",
+    "exit": 0,
+    "stdout": "[feature/value 74c1fe4] fix: update value\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+    "stderr": ""
+  }
+]

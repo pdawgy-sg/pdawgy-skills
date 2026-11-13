@@ -1,0 +1,112 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 118 and seed 946236729987259681 with 1 worker on 24 cores with 491MB heap and 64MB offheap memory [pid: 2910534] (Linux 7.2.11-arch1-1 amd64, Eclipse Adoptium 25.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/MrDraft.tla
+Parsing file /tmp/Naturals.tla
+Parsing file /tmp/FiniteSets.tla
+Parsing file /tmp/Sequences.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module MrDraft
+Starting... (2026-11-13 11:27:03)
+Computing initial states...
+Computed 2 initial states...
+Computed 4 initial states...
+Computed 8 initial states...
+Computed 16 initial states...
+Finished computing initial states: 32 distinct states generated at 2026-11-13 11:27:03.
+Error: Invariant EvidenceSound is violated.
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ result = "none"
+/\ dirty = FALSE
+/\ baseKnown = TRUE
+/\ hasChanges = TRUE
+/\ phase = "scope"
+/\ evidence = "stale-pass"
+/\ topics = {}
+
+State 2: <Resolve line 15, col 12 to line 18, col 82 of module MrDraft>
+/\ result = "none"
+/\ dirty = FALSE
+/\ baseKnown = TRUE
+/\ hasChanges = TRUE
+/\ phase = "inspect"
+/\ evidence = "stale-pass"
+/\ topics = {}
+
+State 3: <Draft line 19, col 10 to line 24, col 64 of module MrDraft>
+/\ result = "passed"
+/\ dirty = FALSE
+/\ baseKnown = TRUE
+/\ hasChanges = TRUE
+/\ phase = "draft"
+/\ evidence = "stale-pass"
+/\ topics = {"problem", "fix", "blast-radius", "verified-tested"}
+
+The coverage statistics at 2026-11-13 11:27:03
+<Init line 8, col 1 to line 8, col 4 of module MrDraft>: 64:64
+  line 9, col 12 to line 9, col 32 of module MrDraft: 2
+  line 10, col 12 to line 10, col 33 of module MrDraft: 4
+  line 11, col 12 to line 11, col 32 of module MrDraft: 8
+  line 12, col 12 to line 12, col 28 of module MrDraft: 32
+  line 14, col 12 to line 14, col 22 of module MrDraft: 64
+<Resolve line 15, col 1 to line 15, col 7 of module MrDraft>: 32:33
+  line 15, col 15 to line 15, col 29 of module MrDraft: 94
+  |line 15, col 15 to line 15, col 19 of module MrDraft: 61
+  line 16, col 15 to line 17, col 71 of module MrDraft: 33
+  |line 16, col 24 to line 17, col 71 of module MrDraft: 33
+  ||line 16, col 27 to line 16, col 36 of module MrDraft: 33
+  ||line 17, col 30 to line 17, col 71 of module MrDraft: 17
+  line 18, col 15 to line 18, col 82 of module MrDraft: 33
+<Draft line 19, col 1 to line 19, col 5 of module MrDraft>: 3:4
+  line 19, col 13 to line 19, col 29 of module MrDraft: 63
+  |line 19, col 13 to line 19, col 17 of module MrDraft: 60
+  line 20, col 13 to line 20, col 28 of module MrDraft: 3
+  line 21, col 13 to line 22, col 82 of module MrDraft: 3
+  |line 21, col 23 to line 22, col 82 of module MrDraft: 4
+  line 23, col 13 to line 23, col 28 of module MrDraft: 3
+  |line 23, col 23 to line 23, col 28 of module MrDraft: 4
+  line 24, col 13 to line 24, col 64 of module MrDraft: 3
+<NewRequest line 25, col 1 to line 25, col 10 of module MrDraft>: 0:768
+  line 25, col 18 to line 25, col 56 of module MrDraft: 82
+  |line 25, col 18 to line 25, col 22 of module MrDraft: 58
+  |line 25, col 28 to line 25, col 56 of module MrDraft: 58
+  line 26, col 18 to line 26, col 33 of module MrDraft: 24
+  line 27, col 18 to line 27, col 39 of module MrDraft: 48
+  |line 27, col 33 to line 27, col 39 of module MrDraft: 24
+  line 28, col 18 to line 28, col 40 of module MrDraft: 96
+  |line 28, col 34 to line 28, col 40 of module MrDraft: 48
+  line 29, col 18 to line 29, col 39 of module MrDraft: 384
+  |line 29, col 32 to line 29, col 39 of module MrDraft: 96
+  line 30, col 18 to line 30, col 35 of module MrDraft: 768
+  |line 30, col 29 to line 30, col 35 of module MrDraft: 384
+  line 31, col 18 to line 31, col 33 of module MrDraft: 768
+  line 32, col 18 to line 32, col 29 of module MrDraft: 768
+<Hold line 33, col 1 to line 33, col 4 of module MrDraft>: 0:24
+  line 33, col 12 to line 33, col 50 of module MrDraft: 82
+  |line 33, col 12 to line 33, col 16 of module MrDraft: 58
+  |line 33, col 22 to line 33, col 50 of module MrDraft: 58
+  line 34, col 12 to line 34, col 25 of module MrDraft: 24
+<TypeOK line 37, col 1 to line 37, col 6 of module MrDraft>
+  line 37, col 11 to line 40, col 36 of module MrDraft: 67
+<ScopeSound line 41, col 1 to line 41, col 10 of module MrDraft>
+  line 41, col 15 to line 43, col 62 of module MrDraft: 67
+  |line 41, col 19 to line 41, col 75 of module MrDraft: 67
+  ||line 41, col 19 to line 41, col 48 of module MrDraft: 67
+  ||line 41, col 53 to line 41, col 75 of module MrDraft: 11
+  |line 42, col 19 to line 42, col 49 of module MrDraft: 67
+  ||line 42, col 19 to line 42, col 35 of module MrDraft: 67
+  ||line 42, col 40 to line 42, col 49 of module MrDraft: 16
+  |line 43, col 19 to line 43, col 61 of module MrDraft: 67
+  ||line 43, col 19 to line 43, col 33 of module MrDraft: 67
+  ||line 43, col 38 to line 43, col 61 of module MrDraft: 8
+<EvidenceSound line 44, col 1 to line 44, col 13 of module MrDraft>
+  line 44, col 18 to line 44, col 89 of module MrDraft: 67
+  |line 44, col 18 to line 44, col 32 of module MrDraft: 67
+  |line 44, col 38 to line 44, col 88 of module MrDraft: 3
+End of statistics.
+859 states generated, 67 distinct states found, 7 states left on queue.
+The depth of the complete state graph search is 3.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 1 and the 95th percentile is 1).
+Finished in 00s at (2026-11-13 11:27:03)

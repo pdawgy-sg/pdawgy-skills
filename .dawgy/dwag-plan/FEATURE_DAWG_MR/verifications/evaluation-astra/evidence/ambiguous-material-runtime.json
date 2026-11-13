@@ -1,0 +1,80 @@
+[
+  {
+    "argv": [
+      "git",
+      "status",
+      "--porcelain=v1"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "branch",
+      "-avv"
+    ],
+    "exit": 0,
+    "stdout": "* feature/value ff399d1 feat: add label\n  release-a     85553a9 chore: initial\n  release-b     b75edce feat: second value\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "remote",
+      "-v"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "ls-tree",
+      "-r",
+      "--name-only",
+      "HEAD"
+    ],
+    "exit": 0,
+    "stdout": "label.txt\nvalue.txt\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "log",
+      "--all",
+      "--oneline",
+      "--decorate"
+    ],
+    "exit": 0,
+    "stdout": "ff399d1 (HEAD -> feature/value) feat: add label\n85553a9 (release-a) chore: initial\nb75edce (release-b) feat: second value\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--stat",
+      "release-a",
+      "HEAD"
+    ],
+    "exit": 0,
+    "stdout": " label.txt | 1 +\n value.txt | 2 +-\n 2 files changed, 2 insertions(+), 1 deletion(-)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "diff",
+      "--stat",
+      "release-b",
+      "HEAD"
+    ],
+    "exit": 0,
+    "stdout": " label.txt | 1 +\n 1 file changed, 1 insertion(+)\n",
+    "stderr": ""
+  }
+]

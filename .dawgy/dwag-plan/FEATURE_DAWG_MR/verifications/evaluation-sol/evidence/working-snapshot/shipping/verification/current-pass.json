@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/usr/bin/python",
+    "-B",
+    "-m",
+    "checks.check_quote"
+  ],
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "producer": "fixture author during setup; not MR runtime",
+  "source_sha256": {
+    "shipping.py": "95fd8f3d6eb05cb51b43527037545c880314a8924acc3f868e473554e228f13f",
+    "checks/check_quote.py": "47574eab02a0855dd2e329e914e9b09d37a653d615c811aa9f658080e6dd0066"
+  },
+  "scope": "fractional and whole positive shipment quotes only"
+}

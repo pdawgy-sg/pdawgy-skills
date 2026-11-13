@@ -1,0 +1,1 @@
+Which integration target should I compare `feature/change` against: `main`, `develop`, or another base? Both local candidates have diverged, and this repository has no MR target guidance or configured upstream.

@@ -1,0 +1,9 @@
+Command: ['/usr/bin/python', '/home/chy/.codex/skills/.system/skill-creator/scripts/quick_validate.py', '/home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/plugins/pdawgy-skills/skills/dawg-mr'] 
+Exit: 0 
+Skill is valid!
+
+PASS: frontmatter/UI, JSON discovery/version and root Markdown resource paths
+Command: ['git', 'diff', '--check'] Exit: 0 
+Command: ['git', 'diff', '--no-index', '--check', '/dev/null', 'plugins/pdawgy-skills/skills/dawg-mr/SKILL.md'] Exit: 1 
+Command: ['git', 'diff', '--no-index', '--check', '/dev/null', 'plugins/pdawgy-skills/skills/dawg-mr/agents/openai.yaml'] Exit: 1 
+PASS: whitespace and current source fingerprints
