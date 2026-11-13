@@ -1,6 +1,6 @@
 ---
 name: dawg-init
-description: Initialize or improve a repository's coding-agent guidance using dawg-plan, shared Dawg coding standards, AGENTS.md, CLAUDE.md delegation, and source-grounded architecture documentation. Use when preparing an existing repository or new directory for coding agents.
+description: Initialize or improve a repository's coding-agent guidance using dawg-plan, shared Dawg coding standards, AGENTS.md, CLAUDE.md delegation, source-grounded architecture documentation, and local Dawg artifact ignore rules. Use when preparing an existing repository or new directory for coding agents.
 ---
 
 # Dawg Init
@@ -32,9 +32,9 @@ invent commands/components. Established facts do not need repeated confirmation.
 Read and execute the bundled [dawg-plan workflow](../dawg-plan/SKILL.md) for the
 initialization. Reuse a matching current plan when continuing the same task;
 update it instead of creating a nested or duplicate plan. Include the intended
-instruction changes, architecture work, and any separately gated cleanup in its
-scope. Adopt its task worktree and mapped project directory for all subsequent
-guidance/architecture changes and evidence. Preserve the selected target-relative
+instruction changes, architecture work, local artifact ignore rules, and any
+separately gated cleanup in its scope. Adopt its task worktree and mapped project
+directory for all subsequent guidance/architecture changes and evidence. Preserve the selected target-relative
 path: a subdirectory request maps into that same subdirectory inside the worktree,
 not the worktree repository root. Re-read applicable scoped instructions there.
 Save the plan, diagrams, checklist and evidence in that mapped project's
@@ -97,6 +97,30 @@ Encode these Dawg coding standards in `AGENTS.md`:
   completion; an unchanged architecture needs no cosmetic edit. Report missing
   required skills rather than claiming their workflows ran.
 
+## Ignore local Dawg artifacts
+
+After the initialization plan is ready, ensure `.dawgy/` is effectively ignored
+for the mapped project. Create its `.gitignore` if absent, or append `.dawgy/`
+while preserving existing rules, content and formatting. An existing equivalent
+repository rule that already covers this directory needs no duplicate or rewrite.
+Keep a subdirectory request scoped to its mapped project; do not edit a parent
+`.gitignore` or global excludes to accomplish it.
+
+Inspect negations and scoped instructions first. If an intentional inclusion rule
+or instruction conflicts, ask before overriding it and keep this step blocked
+until resolved. From the worktree Git root, verify the effective result with
+`git check-ignore --no-index -q -- <probe-path>`, where `<probe-path>` is
+`<project-relative-path>/.dawgy/dwag-plan/ignore-check` (omit the project prefix
+for a root project). Exit 0 confirms ignoring; exit 1 means it is not ignored. Other errors remain verification blockers.
+Record the rule source with verbose output when useful. Confirm a second run
+preserves the `.gitignore` bytes.
+
+Use `git ls-files` scoped to that project's `.dawgy` to identify already tracked
+artifacts. Report them: `.gitignore` does not untrack existing files. Do not delete
+or untrack them without separately approved cleanup. Keep new ignored plans and
+evidence local; do not force-add them during delivery. Include the ignore rule,
+effective check, idempotence and tracked-file findings in the initialization ledger.
+
 ## Identify cleanup automatically; apply it only after approval
 
 During investigation, identify possible redundant files, instructions, code,
@@ -118,8 +142,9 @@ Never use blanket reset/clean commands or remove dirty/untracked work as cleanup
 Use the initialization plan's verification ledger. Inspect document diffs and
 relative links; confirm project commands exist in source/configuration and label
 anything not run. Check that useful original rules and nested scope survived,
-CLAUDE delegation reaches AGENTS, and architecture claims match source. Rerunning
-init should make no cosmetic changes to already accurate guidance. If approved
+CLAUDE delegation reaches AGENTS, architecture claims match source, and the
+mapped `.dawgy/` is effectively ignored without changing tracked artifacts.
+Rerunning init should make no cosmetic changes to already accurate guidance. If approved
 cleanup changes code, run only relevant focused checks and preserve results.
 Follow dawg-plan's persistent failure register and recovery loop: record any
 observed non-green result, diagnose/correct within authorization, and rerun failed

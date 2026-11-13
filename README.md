@@ -21,7 +21,8 @@ manifest layout.
   `dawg-plan`, and create/update shared coding guidance. Keeps `AGENTS.md`
   focused on coding, creates missing `CLAUDE.md` delegation, and maintains
   source-grounded `ARCHITECTURE.md`. Proposes concrete redundancy cleanup and
-  applies it only after approval. Invoke it with `$dawg-init`.
+  applies it only after approval. Ensures `.dawgy/` is effectively ignored while
+  preserving existing rules and tracked artifacts. Invoke it with `$dawg-init`.
 - **dawg-architecture-maintain** — Synchronize `ARCHITECTURE.md` with implemented
   components and flows during relevant coding tasks, or check it directly.
   Preserves accurate documents without cosmetic churn. Invoke it with

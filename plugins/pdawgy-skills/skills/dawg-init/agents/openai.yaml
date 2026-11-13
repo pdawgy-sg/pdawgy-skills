@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Init"
   short_description: "Prepare repository guidance for coding agents"
-  default_prompt: "Use $dawg-init to understand this repository and initialize shared coding guidance and architecture documentation."
+  default_prompt: "Use $dawg-init to understand this repository and initialize shared coding guidance, architecture documentation, and .dawgy ignore rules."

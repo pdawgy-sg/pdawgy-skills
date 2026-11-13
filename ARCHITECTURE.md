@@ -70,7 +70,11 @@ for the three documents. Cleanup is identified during inspection and applied
 only after approval of concrete changes. It adopts dawg-plan's mapped worktree
 project, preserves selected subdirectory scope, and delegates verified delivery
 back to that same workflow. A new directory requires Git initialization consent
-before its planning/guidance phase.
+before its planning/guidance phase. After planning, initialization ensures the
+mapped project's `.dawgy/` is effectively ignored, creating/updating its scoped
+`.gitignore` only as needed. Existing rules and tracked artifacts are preserved;
+conflicting inclusion rules need user input. Effective Git checks and byte-stable
+reruns verify this step. New ignored plans/evidence remain local during delivery.
 
 [dawg-architecture-maintain](plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md)
 creates or synchronizes architecture documentation against source. Routine
@@ -123,7 +127,9 @@ own fresh metadata/log locations and preserve evidence without editing the model
 The `dwag-plan` spelling is intentional. This repository's own
 `.dawgy/` tree preserves development plans, snapshot validation helpers, and
 controlled evaluation projects. Those Python fixtures and copied guidance are
-historical test inputs and evidence, not additional plugin components.
+historical test inputs and evidence, not additional plugin components. Repository
+`.gitignore` excludes new `.dawgy/` artifacts; previously tracked history remains
+tracked.
 
 Repository sources and an installed plugin cache are separate copies. The local
 installation used during development was verified against the source package;
