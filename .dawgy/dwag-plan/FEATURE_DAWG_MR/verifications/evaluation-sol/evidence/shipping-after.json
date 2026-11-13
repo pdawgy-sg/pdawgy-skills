@@ -1,0 +1,23 @@
+{
+  "head": "7ff8c71ea4473d82d999dd2eca399bcfebfdda83",
+  "refs": "refs/heads/fix/round-shipping 7ff8c71ea4473d82d999dd2eca399bcfebfdda83\nrefs/heads/main 4fee0028ef162896cfc02a7af4ab00137a17c7d4",
+  "status": "## fix/round-shipping\nM  operator-notes.txt\n M shipping.py\n?? notes.txt\n?? verification/untracked-fake-pass.json",
+  "index_sha256": "f345aa23ffc250e43ba1a79180ff098f2efd525771f7063d71e58be7df487f05",
+  "files": {
+    ".gitlab/merge_request_templates/Default.md": "f624e8db2a8f6ebe9d75fe161e8824a3063e28d169b6861eaf9f0217d5d6b7c4",
+    "AGENTS.md": "5ee3799749e887fdc7fb427865601c65f34e260ed771a54eedf181e24c54b4dc",
+    "README.md": "7c93eeba2529ce4f336113e7afbdc76f35986573d84082f3e7fa4631f0a1b60e",
+    "checks/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "checks/check_cli_output.py": "4fb60817017ba9b74a333136d559942e6e09f36f8c56d6655c12d75f5229e6b7",
+    "checks/check_integer.py": "deb92d5627d657d4f1372a2102301addc4d0ff7f772e96ebd8e2a51e2cebf2a0",
+    "checks/check_quote.py": "47574eab02a0855dd2e329e914e9b09d37a653d615c811aa9f658080e6dd0066",
+    "cli.py": "f0779198a45dd5ca720eca2793724352a2258955394afeec3678a022fcddbba1",
+    "notes.txt": "fd1299513413798310abd373ecf495a96cd9624017f0e4c88fe16cc03354d566",
+    "operator-notes.txt": "4c6fa08d8eba7001ac734dce139a8422a692ae89d949c7cb8626ba55a8e9ada3",
+    "shipping.py": "f88d499df552915866c0da9c47a812ee06769141af31c3b8cb41fa6767515460",
+    "verification/current-failure.json": "d0f06dfd73e3c74d5a6149a15dacc3c23adc5c722e3a6a907429cfa556244ea1",
+    "verification/current-pass.json": "221caf12ca4bea5da76432339f57064810c65a06ee5c890d179253fd69a04c09",
+    "verification/stale.json": "be03606593c951def954ea43fcbee7ead1d1cb3cb914749534b0621bb8e9f0b1",
+    "verification/untracked-fake-pass.json": "00af86a8a75ec149b96ac847da1caefde0b7f2972dca3bfa26c6fef5dab55e53"
+  }
+}

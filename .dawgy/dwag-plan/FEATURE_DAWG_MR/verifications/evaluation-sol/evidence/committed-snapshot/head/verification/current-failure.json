@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/python",
+    "-B",
+    "-m",
+    "checks.check_cli_output"
+  ],
+  "exit": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 203, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/tmp/dawg-mr-sol-eval/shipping/checks/check_cli_output.py\", line 4, in <module>\n    assert result.stdout == \"Shipping: 10\\n\", repr(result.stdout)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '10\\n'\n",
+  "producer": "fixture author during setup; not MR runtime",
+  "source_sha256": {
+    "shipping.py": "95fd8f3d6eb05cb51b43527037545c880314a8924acc3f868e473554e228f13f",
+    "cli.py": "f0779198a45dd5ca720eca2793724352a2258955394afeec3678a022fcddbba1",
+    "checks/check_cli_output.py": "4fb60817017ba9b74a333136d559942e6e09f36f8c56d6655c12d75f5229e6b7"
+  },
+  "scope": "CLI label contract is still failing; actual stdout is 10 newline"
+}

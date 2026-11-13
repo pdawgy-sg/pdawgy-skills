@@ -3,7 +3,7 @@
 ## Purpose and scope
 
 Pdawgy Skills is a skills-only Codex plugin distributed through a repository
-marketplace. The current package contains three instruction-driven workflows.
+marketplace. The current package contains four instruction-driven workflows.
 There is no application service, bundled MCP server, lifecycle hook, or declared
 project build/test framework in the current source package.
 
@@ -40,6 +40,16 @@ identities. Missing, failed, incomplete or stale executions block readiness.
 Material formal-input or requirement changes invalidate all three receipts.
 Bounded model checking and implementation verification remain separate checks.
 
+The required [recovery loop](plugins/pdawgy-skills/skills/dawg-plan/references/recovery-loop.md)
+turns observed non-green results into persistent, check-linked issues. The
+failure-register asset supplies `verifications/failures.md`; immutable attempts
+record diagnosis, correction, current input identity and rerun evidence. Agents
+repair and recheck until each phase's required results are green with no unresolved
+issues, reopen regressions and preserve historical failures. Genuine external
+dependencies stay explicitly blocked while independent work continues. Planned
+later phases and exact expected negative probes are kept separate from actual
+unresolved product failures.
+
 The required [Git workflow](plugins/pdawgy-skills/skills/dawg-plan/references/git-workflow.md)
 gates every feature/fix on Git initialization consent and a committed base, then
 creates or resumes a dedicated task worktree. It records original repository and
@@ -60,13 +70,24 @@ for the three documents. Cleanup is identified during inspection and applied
 only after approval of concrete changes. It adopts dawg-plan's mapped worktree
 project, preserves selected subdirectory scope, and delegates verified delivery
 back to that same workflow. A new directory requires Git initialization consent
-before its planning/guidance phase.
+before its planning/guidance phase. After planning, initialization ensures the
+mapped project's `.dawgy/` is effectively ignored, creating/updating its scoped
+`.gitignore` only as needed. Existing rules and tracked artifacts are preserved;
+conflicting inclusion rules need user input. Effective Git checks and byte-stable
+reruns verify this step. New ignored plans/evidence remain local during delivery.
 
 [dawg-architecture-maintain](plugins/pdawgy-skills/skills/dawg-architecture-maintain/SKILL.md)
 creates or synchronizes architecture documentation against source. Routine
 synchronization reuses a calling task's context and evidence without recursively
 invoking init or restarting its plan. Proposed feature/refactor work routes to
 dawg-plan. Accurate documents remain byte-identical on a no-op run.
+
+[dawg-mr](plugins/pdawgy-skills/skills/dawg-mr/SKILL.md) is a read-only drafting
+workflow. It pins a committed comparison range, inspects changed behavior and
+relevant consumers, and classifies verification evidence by revision and source.
+Its MR/PR message covers problem, fix, blast radius and verified/tested outcomes,
+including failures or missing evidence. Drafting does not invoke dawg-plan,
+launch tests, alter Git state or publish an MR. It adds no scripts or services.
 
 ```mermaid
 flowchart TD
@@ -75,6 +96,8 @@ flowchart TD
     Skills --> Init[dawg-init]
     Skills --> Plan[dawg-plan]
     Skills --> Maintain[dawg-architecture-maintain]
+    Skills --> MR[dawg-mr]
+    MR --> Message[Committed-change MR draft in chat]
     Init --> Plan
     Init --> Maintain
     Plan --> Worktree[Scoped task worktree and branch]
@@ -97,13 +120,16 @@ neither their binaries nor a separate model-checking service are bundled here.
 Plans are written in the mapped project inside the task worktree at
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/`. Each has `PLAN.md` and a
 `verifications/` directory containing `verification.md`, reviews, and applicable
-logs/screenshots. Its `tla/` subtree holds specifications/configs, tool/input
+logs/screenshots. `failures.md` is the durable issue/attempt register, linked to
+the checklist. Its `tla/` subtree holds specifications/configs, tool/input
 identities, parent/reviewer runs and relevant counterexamples. Reviewers use their
 own fresh metadata/log locations and preserve evidence without editing the model.
 The `dwag-plan` spelling is intentional. This repository's own
 `.dawgy/` tree preserves development plans, snapshot validation helpers, and
 controlled evaluation projects. Those Python fixtures and copied guidance are
-historical test inputs and evidence, not additional plugin components.
+historical test inputs and evidence, not additional plugin components. Repository
+`.gitignore` excludes new `.dawgy/` artifacts; previously tracked history remains
+tracked.
 
 Repository sources and an installed plugin cache are separate copies. The local
 installation used during development was verified against the source package;

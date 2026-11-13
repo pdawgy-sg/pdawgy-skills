@@ -1,0 +1,27 @@
+{
+  "version": "0.6.0",
+  "installed_path": "/home/chy/.codex/plugins/cache/pdawgy-skills/pdawgy-skills/0.6.0",
+  "all_package_files_byte_identical": true,
+  "package_file_sha256": {
+    ".codex-plugin/plugin.json": "77240f8899c2ae3fe6b065bf67987b4350f9b15e1f6d40359e84a97a0ebc7710",
+    "skills/dawg-architecture-maintain/SKILL.md": "f24859b56fe8ca4a36ce4668c8fbbdce2432551b1522581e91a2934365c7a577",
+    "skills/dawg-init/SKILL.md": "8f3906be7753c33df7343c5635dca184af6df56b96507acdd952d8369e71a087",
+    "skills/dawg-plan/SKILL.md": "0fc062a86b4d8861beff950fce13b1e47a1164c1882da637e156ed4c025562be",
+    "skills/dawg-mr/SKILL.md": "a7f0e2c65e547a982e8445a6ae24440b9e80f309ec1cd1ff43ff2f1e24c6af65",
+    "skills/dawg-mr/agents/openai.yaml": "9bf0a2bc703ae4b8e1c298344fa8e901ad48a96a3f2e39128975a0b401e99e84",
+    "skills/dawg-plan/agents/openai.yaml": "b45fc85cba4b536e8a3292fb32f289b73ddcb7a8d77298d69963085af10e042e",
+    "skills/dawg-plan/assets/PLAN.md": "2bde1afdc6a4778f7aefd005c099a6f7c14206817b4608fe1411111c9ccd721e",
+    "skills/dawg-plan/assets/failures.md": "ba14d9ececf53039928f085e7e3e6a4fbdf939e3dfe1c3e581eb36f68de22906",
+    "skills/dawg-plan/assets/verification.md": "d3d85951c0b4bb58d641c7f8548b9a0c727fa409944468bb40aa5464f7461afd",
+    "skills/dawg-plan/references/git-workflow.md": "885719d9d69484372695853ca989808fee7402e60bf54613c01c8434962ca6d2",
+    "skills/dawg-plan/references/recovery-loop.md": "193b7522ed0ca1564e41a6774acfe890aa74de60430ad8f12e995552696949e6",
+    "skills/dawg-plan/references/tla-verification.md": "dfb6b89dce44c68c9365d853a21f59c3677e13df2719af51300b8b27a6930422",
+    "skills/dawg-init/agents/openai.yaml": "0d46d455b6c855e614aba5b7cbc9087134166eb930138c2fba7d18857c94954c",
+    "skills/dawg-init/assets/AGENTS.md": "deeb31bfdda7511b91830e2e9ca1c123fad062449893fb92e14851aa91fad425",
+    "skills/dawg-init/assets/ARCHITECTURE.md": "eee7ad9717b2068fdb9c67824f6e8c52f5abcb8659f5249dc2d3898b024d9bb4",
+    "skills/dawg-init/assets/CLAUDE.md": "6a3c3f61e7e00f6a9a44fafc766df1913a30e130965cacd40c60dc0539b395ae",
+    "skills/dawg-architecture-maintain/agents/openai.yaml": "92042c9e3d5c08a32ff9845ceb05ce5da5699ef5a357ed93a253cc1203210332"
+  },
+  "enabled": true,
+  "configured_marketplace_source_unchanged": true
+}

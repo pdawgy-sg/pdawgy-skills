@@ -1,0 +1,120 @@
+[
+  {
+    "argv": [
+      "git",
+      "init",
+      "-b",
+      "release-a"
+    ],
+    "exit": 0,
+    "stdout": "Initialized empty Git repository in /tmp/dawg-mr-astra-eval/ambiguous-material/.git/\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "config",
+      "user.name",
+      "Fixture Author"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "config",
+      "user.email",
+      "fixture@example.invalid"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "."
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "chore: initial"
+    ],
+    "exit": 0,
+    "stdout": "[release-a (root-commit) 85553a9] chore: initial\n 1 file changed, 1 insertion(+)\n create mode 100644 value.txt\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "switch",
+      "-c",
+      "release-b"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "Switched to a new branch 'release-b'\n"
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "."
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "feat: second value"
+    ],
+    "exit": 0,
+    "stdout": "[release-b b75edce] feat: second value\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "switch",
+      "-c",
+      "feature/value"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "Switched to a new branch 'feature/value'\n"
+  },
+  {
+    "argv": [
+      "git",
+      "add",
+      "."
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "git",
+      "commit",
+      "-m",
+      "feat: add label"
+    ],
+    "exit": 0,
+    "stdout": "[feature/value ff399d1] feat: add label\n 1 file changed, 1 insertion(+)\n create mode 100644 label.txt\n",
+    "stderr": ""
+  }
+]

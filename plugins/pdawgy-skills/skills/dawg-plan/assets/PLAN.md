@@ -81,6 +81,7 @@ all three run receipts and requires new executions plus semantic review.
 - Verification: <verification IDs; exact command or concrete procedure>
 - Expected result: <observable pass condition>
 - Evidence: <relative path inside verifications/>
+- Failure/recovery links: <F IDs and failed/affected checks; none if not observed>
 
 Repeat for the smallest useful remaining tasks. Keep shared verification under
 one ID when it proves multiple tasks or transitions.
@@ -98,6 +99,7 @@ inputs, both semantic reviews approved, material findings/questions resolved>
 ## Verification and handoff
 
 Checklist: [verifications/verification.md](verifications/verification.md)
+Failure register: [verifications/failures.md](verifications/failures.md)
 
 - Implementation authorization: <planning only, or existing user authorization>
 - Completion rule: all required checks passed with evidence; both design reviews
@@ -106,6 +108,8 @@ Checklist: [verifications/verification.md](verifications/verification.md)
   Conventional Commit and confirmed task-branch push unless the user limits
   delivery. Design approval alone does not prove implementation or delivery.
 - Current result: <plan readiness, execution status, outstanding limitations>
+- Green checkpoint: <phase; required passes on current inputs; unresolved F IDs;
+  diagnose/repair/rerun until issue exit criteria pass; retain failed history>
 - Delivery checks: <entire index/staged scope, complete created commit delta,
   tested source match, remote/task branch, required CI, and blockers>
 - Keep committed evidence as a pre-delivery snapshot; report the final commit/OID

@@ -10,6 +10,8 @@ Worktree repository / mapped project: <task worktree root; scoped project path>
 Base commit / task branch / remote destination: <record exact values>
 Delivery checkpoint: <planning-only, or verified pre-delivery snapshot>
 Final commit/push receipt: <report in chat after delivery; no self-referential commit>
+Failure register: [failures.md](failures.md)
+Current phase / green gate: <required checks for this phase; open F IDs>
 
 ## Coverage checklist
 
@@ -32,10 +34,19 @@ Keep boxes unchecked until their actual checks pass.
 - Status: NOT RUN
 - Blocker / next action: <if any>
 - Cleanup: <if needed>
+- Issue and attempt history: <linked F IDs, preserved failed attempts, correction,
+  affected-check reruns, final tested identity; no invented failures>
 
 Repeat for each verification ID. Record failed attempts and reruns rather than
 replacing a failure with an unexplained pass. Store logs, screenshots, and other
 proof in this directory; redact private data and credentials.
+
+An observed non-green result must enter failures.md promptly, then be diagnosed,
+corrected within authorization and rerun along with affected checks until green.
+Reopen recurrences; preserve failed logs after closure. Changed relevant inputs
+invalidate affected old passes. Record real blockers and needed input, ask early,
+continue independent work, and do not claim completion while required issues stay
+unresolved. Keep later planned phases and exact expected negative probes distinct.
 
 ## Design review evidence
 
@@ -57,6 +68,8 @@ and source correspondence remain required.
 
 - Required checks: <passed / total; blocked or failing IDs>
 - Remaining limitations: <specific items, or none>
+- All-green evidence: <current phase's required checks PASS on current inputs,
+  zero unresolved relevant F IDs, failed history retained; blocked is not complete>
 - Evidence shared in chat: <plan/checklist links and screenshot embeds, if any>
 - Commit/push prerequisites: <all checks passed, entire existing index/task hunks
   in scope, complete commit delta matches intended/tested source, identity/remote>

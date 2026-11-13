@@ -1,0 +1,6 @@
+{
+  "base": "3550b821faa436389688c9d5b45101b4fbb39033",
+  "head": "85dde0f8bc9e3929e56443088ebb842f6398a614",
+  "runtime_request": "Use $dawg-mr to quickly draft an MR message for these committed changes.",
+  "test_execution_phase": "SETUP ONLY; runtime does not execute these checks"
+}

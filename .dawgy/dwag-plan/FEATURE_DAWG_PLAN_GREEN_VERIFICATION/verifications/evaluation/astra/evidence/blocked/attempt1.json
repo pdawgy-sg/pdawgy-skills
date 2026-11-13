@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/tmp/dawg-green-astra-eval/blocked/required-verifier-2cc09c93-nonexistent",
+    "--verify"
+  ],
+  "cwd": "/tmp/dawg-green-astra-eval/blocked",
+  "process_started": false,
+  "exit": null,
+  "error_type": "FileNotFoundError",
+  "errno": 2,
+  "error": "[Errno 2] No such file or directory: '/tmp/dawg-green-astra-eval/blocked/required-verifier-2cc09c93-nonexistent'",
+  "status": "BLOCKED"
+}

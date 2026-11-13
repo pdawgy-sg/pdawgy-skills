@@ -21,11 +21,23 @@ manifest layout.
   `dawg-plan`, and create/update shared coding guidance. Keeps `AGENTS.md`
   focused on coding, creates missing `CLAUDE.md` delegation, and maintains
   source-grounded `ARCHITECTURE.md`. Proposes concrete redundancy cleanup and
-  applies it only after approval. Invoke it with `$dawg-init`.
+  applies it only after approval. Ensures `.dawgy/` is effectively ignored while
+  preserving existing rules and tracked artifacts. Invoke it with `$dawg-init`.
 - **dawg-architecture-maintain** — Synchronize `ARCHITECTURE.md` with implemented
   components and flows during relevant coding tasks, or check it directly.
   Preserves accurate documents without cosmetic churn. Invoke it with
   `$dawg-architecture-maintain`.
+
+- **dawg-mr** — Quickly review committed changes and draft an MR/PR message with
+  the problem, fix, blast radius, and verified/tested evidence. Labels missing or
+  stale results honestly; drafts in chat without publishing or running tests.
+  Invoke it with `$dawg-mr`.
+
+During implementation and verification, Dawg records observed failures in the
+plan's `verifications/failures.md`, diagnoses and repairs them, and reruns failed
+and affected checks until required results are current/green. It retains failed
+attempts and reopens regressions. Genuine blockers remain explicit while useful
+independent work continues; unresolved issues prevent completion/delivery.
 
 Dawg guidance favors simple code, no explanatory code comments, and proportionate
 verification. Required notices and functional/tool directives remain intact.
@@ -63,9 +75,11 @@ pdawgy-skills/
             │   ├── agents/openai.yaml
             │   ├── references/git-workflow.md
             │   ├── references/tla-verification.md
+            │   ├── references/recovery-loop.md
             │   └── assets/
             │       ├── PLAN.md
-            │       └── verification.md
+            │       ├── verification.md
+            │       └── failures.md
             ├── dawg-init/
             │   ├── SKILL.md
             │   ├── agents/openai.yaml
@@ -73,7 +87,10 @@ pdawgy-skills/
             │       ├── AGENTS.md
             │       ├── CLAUDE.md
             │       └── ARCHITECTURE.md
-            └── dawg-architecture-maintain/
+            ├── dawg-architecture-maintain/
+            │   ├── SKILL.md
+            │   └── agents/openai.yaml
+            └── dawg-mr/
                 ├── SKILL.md
                 └── agents/openai.yaml
 ```

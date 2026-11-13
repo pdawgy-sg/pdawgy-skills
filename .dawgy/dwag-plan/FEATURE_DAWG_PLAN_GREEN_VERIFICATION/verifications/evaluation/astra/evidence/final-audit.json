@@ -1,0 +1,18 @@
+{
+  "addition_exit_sequence": [
+    1,
+    0,
+    1,
+    0
+  ],
+  "same_issue_reopened_and_resolved": "F1",
+  "recording_before_each_repair": true,
+  "previous_pass_marked_stale_before_regression_rerun": true,
+  "all_attempt_logs_match_original_hashes": true,
+  "assertion_unchanged_all_attempts": true,
+  "final_tested_source_matches": true,
+  "blocked_case_status": "BLOCKED/incomplete",
+  "independent_inspection": "PASS",
+  "nested_planning_and_reviews": "explicitly deferred",
+  "source_repository_modified": false
+}

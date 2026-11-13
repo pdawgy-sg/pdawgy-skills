@@ -1,0 +1,62 @@
+{
+  "reviewer": "gpt-6.1-sol/high",
+  "approved_plan_revision": 1,
+  "runner_sha256": "d88a38daee62cf18839c4193703b40482ebafcdffdf6dcbafe00c5c470c5c2da",
+  "input_sha256": {
+    "run_tlc.py": "d88a38daee62cf18839c4193703b40482ebafcdffdf6dcbafe00c5c470c5c2da",
+    "Recovery.tla": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+    "MissingRecord.cfg": "db27fb621e6de7d9b082f173b23fd3ce35c467a7210a82e7810a07c4e3e0ca9e",
+    "Recovery.cfg": "73caa18525f85a3534c6e95f5389d0acc03c09732fa38cfaa3a170b5a9478df4",
+    "RecoveryWitness.cfg": "fd6dd8cf5882237565c1363e014db3c150b542304514084c6b10f62da6b5dce5",
+    "RedCompletion.cfg": "311924ab7256f203433cff3f02066869f142b6b02c46e2fd3d944e61ff0afece"
+  },
+  "raw_log_sha256": {
+    "Recovery.log": "d4355bb336a0547a1bc84327a58876425d74773cefd21746893451d90388fd68",
+    "MissingRecord.log": "774116f0cee64a31af88fc52c5ada8c7df2449caa9ac495ce682245fcaea282c",
+    "RedCompletion.log": "a15f0123c39fd207108e65053dd9e005ab6a73ae81efd63a01c91b4686826c8a",
+    "RecoveryWitness.log": "cd99b6c0e4b9230426e396ff1f4c99d18cfcaf7e2de4afa711270d43180ce22d"
+  },
+  "primary_input_tool_match": true,
+  "independently_audited_outcomes": [
+    {
+      "config": "Recovery.cfg",
+      "exit_code": 0,
+      "states": [
+        "1044",
+        "178",
+        "0"
+      ],
+      "expected_violation": null
+    },
+    {
+      "config": "MissingRecord.cfg",
+      "exit_code": 12,
+      "states": [
+        "4",
+        "4",
+        "2"
+      ],
+      "expected_violation": "IssueRecorded"
+    },
+    {
+      "config": "RedCompletion.cfg",
+      "exit_code": 12,
+      "states": [
+        "27",
+        "19",
+        "14"
+      ],
+      "expected_violation": "CompletesOnlyGreen"
+    },
+    {
+      "config": "RecoveryWitness.cfg",
+      "exit_code": 12,
+      "states": [
+        "410",
+        "123",
+        "44"
+      ],
+      "expected_violation": "NoRecoveredCompletion"
+    }
+  ]
+}

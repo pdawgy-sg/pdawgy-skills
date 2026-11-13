@@ -1,0 +1,30 @@
+{
+  "current-pass.json": {
+    "source_fingerprint_match": {
+      "shipping.py": true,
+      "checks/check_quote.py": true
+    },
+    "all_relevant_fingerprints_match": true,
+    "recorded_exit": 0,
+    "provenance": "fixture author during setup; not MR runtime"
+  },
+  "current-failure.json": {
+    "source_fingerprint_match": {
+      "shipping.py": true,
+      "cli.py": true,
+      "checks/check_cli_output.py": true
+    },
+    "all_relevant_fingerprints_match": true,
+    "recorded_exit": 1,
+    "provenance": "fixture author during setup; not MR runtime"
+  },
+  "stale.json": {
+    "source_fingerprint_match": {
+      "shipping.py": false,
+      "checks/check_integer.py": true
+    },
+    "all_relevant_fingerprints_match": false,
+    "recorded_exit": 0,
+    "provenance": "fixture author during setup"
+  }
+}

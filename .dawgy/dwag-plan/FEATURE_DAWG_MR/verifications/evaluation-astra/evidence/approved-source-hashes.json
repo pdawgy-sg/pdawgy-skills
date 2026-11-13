@@ -1,0 +1,17 @@
+{
+  "source_sha256": {
+    "plugins/pdawgy-skills/skills/dawg-mr/SKILL.md": "a7f0e2c65e547a982e8445a6ae24440b9e80f309ec1cd1ff43ff2f1e24c6af65",
+    "plugins/pdawgy-skills/skills/dawg-mr/agents/openai.yaml": "9bf0a2bc703ae4b8e1c298344fa8e901ad48a96a3f2e39128975a0b401e99e84",
+    "plugins/pdawgy-skills/.codex-plugin/plugin.json": "77240f8899c2ae3fe6b065bf67987b4350f9b15e1f6d40359e84a97a0ebc7710",
+    "README.md": "b29694b2afa8d4b8cd9ae3f673466541cea99029f3694b401c2f0eb32afdc3d5",
+    "ARCHITECTURE.md": "56e57f26f8bd5e5f90e35736dac5cdbebb2a8a20c3d13a2e283bea27f3dad100"
+  },
+  "formal_input_sha256": {
+    "run_tlc.py": "632f7775696760065dd1ff856130d4f68edc126d86a5c53367f483b3cc5554b8",
+    "tla/MrDraft.tla": "db3c6030a23d837c85992514d4df4959a32f70425fca346708b8e60aa03dc40c",
+    "tla/MrDraft.cfg": "7f57a51534a42a1801165ccd5d8621310d7f8d221cc9faffec6df508b8c1e0ff",
+    "tla/EvidenceFault.cfg": "f7ca1f6494d187660696baa3e9f61183ab068d07c91da912c483b965a3b286e2",
+    "tla/DraftWitness.cfg": "0fc6e0f3a9df1b170e3a07677688aac9f0237aa05ab00ee81aeaaf36a4369474"
+  },
+  "formal_inputs_unchanged_from_independent_execution": true
+}

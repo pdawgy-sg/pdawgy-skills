@@ -1,0 +1,21 @@
+{
+  "input_sha256": {
+    "run_tlc.py": "d88a38daee62cf18839c4193703b40482ebafcdffdf6dcbafe00c5c470c5c2da",
+    "tla/Recovery.tla": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+    "tla/Recovery.cfg": "73caa18525f85a3534c6e95f5389d0acc03c09732fa38cfaa3a170b5a9478df4",
+    "tla/MissingRecord.cfg": "db27fb621e6de7d9b082f173b23fd3ce35c467a7210a82e7810a07c4e3e0ca9e",
+    "tla/RedCompletion.cfg": "311924ab7256f203433cff3f02066869f142b6b02c46e2fd3d944e61ff0afece",
+    "tla/RecoveryWitness.cfg": "fd6dd8cf5882237565c1363e014db3c150b542304514084c6b10f62da6b5dce5"
+  },
+  "original_and_private_inputs_unchanged": true,
+  "parent_and_reviewer_identities_match": true,
+  "raw_logs_configurations_and_traces_independently_inspected": true,
+  "standard_module_member_hashes": {
+    "tla2sany/StandardModules/Integers.tla": "071da69e5eea383d361ef308ba12ecc931bf968fcea98175c3bca419bbd8cbf2",
+    "tla2sany/StandardModules/TLC.tla": "944ece590eec81ace059881c2a62064c06041efa81539a788cd40fa7d1da41ce",
+    "tla2sany/StandardModules/Naturals.tla": "73f2a68412039aa86f37ad08f0d0fef50fa8327d0ad8806f515548c75e9d9d84",
+    "tla2sany/StandardModules/Sequences.tla": "f613cffe14133769f0972b6f6e0139aaf0773004a51bac88ada382426e3eb7f4",
+    "tla2sany/StandardModules/FiniteSets.tla": "d94cb545256539bf782fc1914842dfe8c19c1d3d4e48b8327dd0c47b74922e1e"
+  },
+  "semantic_scope": "two representative checks; revision 0..1; protocol safety; atomic recording abstraction and abstract remediation; no actual file durability or unconditional success proof"
+}

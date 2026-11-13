@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dawg MR"
+  short_description: "Draft MR messages from committed changes"
+  default_prompt: "Use $dawg-mr to review committed changes and draft an MR message covering the problem, fix, blast radius, and what was verified or tested."

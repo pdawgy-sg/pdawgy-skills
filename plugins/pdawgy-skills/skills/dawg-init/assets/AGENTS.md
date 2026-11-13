@@ -24,6 +24,14 @@ rules. Keep this section about writing and checking code, not module inventories
   passes required checks, create a task-only Conventional Commit and push normally
   to that feature/fix branch; confirm the remote commit. Preserve planning-only
   limits and unrelated staged/dirty work; report delivery blockers honestly.
+- Record observed failures/blockers and every attempt in the plan's persistent
+  failure register. Diagnose, repair and rerun failed/affected checks until current
+  required results are green; reopen recurrences and retain failed history.
+  Invalidate stale passes. Ask for genuine outside dependencies and continue
+  independent work, without weakening checks or claiming unresolved work complete.
+- Keep local `.dawgy/` planning artifacts ignored. Preserve existing ignore rules
+  and do not force-add ignored plans/evidence. Report already tracked artifacts;
+  untracking or deletion requires separately approved cleanup.
 - Keep code as simple as possible; add complexity only for a concrete requirement.
 - Do not add explanatory code comments. Express intent through clear names and
   simple code. Retain required license notices, interpreter/tool directives, and

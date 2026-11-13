@@ -1,0 +1,24 @@
+{
+  "approved_revision": 1,
+  "independent_run": "/tmp/dawg-green-sol-attempt-1",
+  "unchanged_inputs": {
+    "Recovery.cfg": {
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "73caa18525f85a3534c6e95f5389d0acc03c09732fa38cfaa3a170b5a9478df4"
+    },
+    "MissingRecord.cfg": {
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "db27fb621e6de7d9b082f173b23fd3ce35c467a7210a82e7810a07c4e3e0ca9e"
+    },
+    "RedCompletion.cfg": {
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "311924ab7256f203433cff3f02066869f142b6b02c46e2fd3d944e61ff0afece"
+    },
+    "RecoveryWitness.cfg": {
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "fd6dd8cf5882237565c1363e014db3c150b542304514084c6b10f62da6b5dce5"
+    }
+  },
+  "no_contract_change_found": true,
+  "rerun_required": false
+}

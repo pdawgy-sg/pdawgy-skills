@@ -1,6 +1,6 @@
 ---
 name: dawg-plan
-description: Plan features and fixes in dedicated Git worktrees with TLA+ models, completed TLC checks, state diagrams, verifiable tasks, and two independent reviewers who rerun model checking. After authorized implementation, verify, conventionally commit, and push the task branch. Use when planning a feature or fix or explicitly asked to use dawg-plan.
+description: Plan features and fixes in Git worktrees with TLA+ checks, state diagrams and two independent reviewers. During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature or fix or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
@@ -48,6 +48,7 @@ worktree, not in the source checkout or installed skill's directory:
 ├── PLAN.md
 └── verifications/
     ├── verification.md
+    ├── failures.md
     └── tla/
         ├── <Module>.tla
         ├── <Model>.cfg
@@ -65,6 +66,9 @@ Choose a distinguishing suffix for a different task with a colliding name.
 Read and adapt [the plan template](assets/PLAN.md) and
 [the verification template](assets/verification.md). Replace template prompts
 with concrete content. Keep the plan and checklist synchronized as scope changes.
+Create `verifications/failures.md` from [the failure register](assets/failures.md)
+when implementation/verification begins; leave it honestly empty if no failures
+are observed. Link issue IDs to tasks and checks, preserving all attempt evidence.
 If project-root access is unavailable, report the blocker and provide a draft;
 do not claim the artifacts were saved.
 
@@ -185,6 +189,27 @@ ran when a tool or environment prevented it. Mark it blocked with a concrete
 reason and next action. Keep the overall work unverified while required checks
 are failing, blocked, or not run. If checks expose a design gap, update the plan
 and obtain the required updated reviews before proceeding on the changed design.
+
+## Record and repair until green
+
+Follow [the recovery loop](references/recovery-loop.md) during implementation and
+verification. An observed non-green check is work to resolve, not a completed
+handoff: promptly record the failure/blocker and evidence, diagnose its cause,
+apply an authorized correction, rerun the failed and affected checks, and repeat
+until the current phase's required checks pass with no unresolved issues.
+
+Preserve stable failure IDs and failed attempts; reopen recurrences. A patch or a
+single lucky rerun does not establish resolution. Invalidate affected old passes
+when tested inputs change. Do not weaken, skip, waive or overwrite checks/history
+to manufacture green. Apply the gate to the current phase: planning-only requests
+do not require tests for unimplemented features, and declared negative probes pass
+only on their exact expected outcomes.
+
+Use existing authorization for ordinary repairs and reruns. For a genuine missing
+permission, user decision or external dependency, record what is needed, ask early,
+and continue independent authorized work. Keep unresolved checks visibly blocked;
+do not claim completion or delivery, bypass authority, or blindly repeat an
+unchanged failing command. Resume the loop when the dependency is resolved.
 
 ## Commit and push verified implementation
 

@@ -1,0 +1,15 @@
+{
+  "reviewed_plan_revision": 1,
+  "current_input_sha256": {
+    "run_tlc.py": "d88a38daee62cf18839c4193703b40482ebafcdffdf6dcbafe00c5c470c5c2da",
+    "tla/Recovery.tla": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+    "tla/Recovery.cfg": "73caa18525f85a3534c6e95f5389d0acc03c09732fa38cfaa3a170b5a9478df4",
+    "tla/MissingRecord.cfg": "db27fb621e6de7d9b082f173b23fd3ce35c467a7210a82e7810a07c4e3e0ca9e",
+    "tla/RedCompletion.cfg": "311924ab7256f203433cff3f02066869f142b6b02c46e2fd3d944e61ff0afece",
+    "tla/RecoveryWitness.cfg": "fd6dd8cf5882237565c1363e014db3c150b542304514084c6b10f62da6b5dce5"
+  },
+  "executed_audit": "/tmp/dawg-green-astra-attempt-1/audit.json",
+  "all_match_executed_inputs": true,
+  "rerun_required": false,
+  "reason": "No material formal-input or protocol-contract change in authored source."
+}

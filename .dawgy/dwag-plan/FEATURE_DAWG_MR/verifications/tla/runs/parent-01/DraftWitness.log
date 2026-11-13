@@ -1,0 +1,104 @@
+TLC2 Version 2.19 of 08 August 2024 (rev: 5a47802)
+Running breadth-first search Model-Checking with fp 7 and seed -8896973699138589621 with 1 worker on 24 cores with 491MB heap and 64MB offheap memory [pid: 2906446] (Linux 7.2.11-arch1-1 amd64, Eclipse Adoptium 25.0.5 x86_64, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/chy/Documents/ChatGPT/skill-related/pdawgy-skills-worktrees/dawg-mr/.dawgy/dwag-plan/FEATURE_DAWG_MR/verifications/tla/MrDraft.tla
+Parsing file /tmp/Naturals.tla
+Parsing file /tmp/FiniteSets.tla
+Parsing file /tmp/Sequences.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module MrDraft
+Starting... (2026-11-13 11:26:35)
+Computing initial states...
+Computed 2 initial states...
+Computed 4 initial states...
+Computed 8 initial states...
+Computed 16 initial states...
+Finished computing initial states: 32 distinct states generated at 2026-11-13 11:26:36.
+Error: TLC threw an unexpected exception.
+This was probably caused by an error in the spec or model.
+See the User Output or TLC Console for clues to what happened.
+The exception was a java.lang.RuntimeException
+: In evaluation, the identifier phase is either undefined or not an operator.
+line 8, col 12 to line 8, col 16 of module MrDraft
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ result = "none"
+/\ dirty = FALSE
+/\ baseKnown = FALSE
+/\ hasChanges = FALSE
+/\ phase = "scope"
+/\ evidence = "current-pass"
+/\ topics = {}
+
+State 2: <Resolve line 15, col 12 to line 18, col 82 of module MrDraft>
+/\ result = "none"
+/\ dirty = FALSE
+/\ baseKnown = FALSE
+/\ hasChanges = FALSE
+/\ phase = "blocked"
+/\ evidence = "current-pass"
+/\ topics = {}
+
+Error: The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+0. Line 25, column 15 to line 26, column 22 in MrDraft
+1. Line 25, column 18 to line 25, column 56 in MrDraft
+2. Line 26, column 18 to line 26, column 22 in MrDraft
+3. Line 26, column 18 to line 26, column 21 in MrDraft
+4. Line 8, column 9 to line 14, column 22 in MrDraft
+5. Line 8, column 12 to line 8, column 26 in MrDraft
+6. Line 8, column 12 to line 8, column 16 in MrDraft
+
+
+The coverage statistics at 2026-11-13 11:26:36
+<Init line 8, col 1 to line 8, col 4 of module MrDraft>: 64:64
+  line 9, col 12 to line 9, col 32 of module MrDraft: 2
+  line 10, col 12 to line 10, col 33 of module MrDraft: 4
+  line 11, col 12 to line 11, col 32 of module MrDraft: 8
+  line 12, col 12 to line 12, col 28 of module MrDraft: 32
+  line 14, col 12 to line 14, col 22 of module MrDraft: 64
+<Resolve line 15, col 1 to line 15, col 7 of module MrDraft>: 32:33
+  line 15, col 15 to line 15, col 29 of module MrDraft: 68
+  |line 15, col 15 to line 15, col 19 of module MrDraft: 35
+  line 16, col 15 to line 17, col 71 of module MrDraft: 33
+  |line 16, col 24 to line 17, col 71 of module MrDraft: 33
+  ||line 16, col 27 to line 16, col 36 of module MrDraft: 33
+  ||line 17, col 30 to line 17, col 71 of module MrDraft: 16
+  line 18, col 15 to line 18, col 82 of module MrDraft: 33
+<Draft line 19, col 1 to line 19, col 5 of module MrDraft>: 0:0
+  line 19, col 13 to line 19, col 29 of module MrDraft: 34
+  line 20, col 13 to line 20, col 28 of module MrDraft: 0
+  line 21, col 13 to line 22, col 82 of module MrDraft: 0
+  line 23, col 13 to line 23, col 28 of module MrDraft: 0
+  line 24, col 13 to line 24, col 64 of module MrDraft: 0
+<NewRequest line 25, col 1 to line 25, col 10 of module MrDraft>: 0:0
+  line 25, col 18 to line 25, col 56 of module MrDraft: 34
+  line 26, col 18 to line 26, col 22 of module MrDraft: 2
+<Hold line 27, col 1 to line 27, col 4 of module MrDraft>: 0:0
+  line 27, col 12 to line 27, col 50 of module MrDraft: 32
+  line 28, col 12 to line 28, col 25 of module MrDraft: 0
+<TypeOK line 31, col 1 to line 31, col 6 of module MrDraft>
+  line 31, col 11 to line 34, col 36 of module MrDraft: 64
+<ScopeSound line 35, col 1 to line 35, col 10 of module MrDraft>
+  line 35, col 15 to line 37, col 62 of module MrDraft: 64
+  |line 35, col 19 to line 35, col 75 of module MrDraft: 64
+  ||line 35, col 19 to line 35, col 48 of module MrDraft: 64
+  ||line 35, col 53 to line 35, col 75 of module MrDraft: 8
+  |line 36, col 19 to line 36, col 49 of module MrDraft: 64
+  ||line 36, col 19 to line 36, col 35 of module MrDraft: 64
+  ||line 36, col 40 to line 36, col 49 of module MrDraft: 16
+  |line 37, col 19 to line 37, col 61 of module MrDraft: 64
+  ||line 37, col 19 to line 37, col 33 of module MrDraft: 64
+  ||line 37, col 38 to line 37, col 61 of module MrDraft: 8
+<EvidenceSound line 38, col 1 to line 38, col 13 of module MrDraft>
+  line 38, col 18 to line 38, col 89 of module MrDraft: 64
+<UnknownExplicit line 39, col 1 to line 39, col 15 of module MrDraft>
+  line 39, col 20 to line 41, col 71 of module MrDraft: 64
+<FourTopics line 42, col 1 to line 42, col 10 of module MrDraft>
+  line 42, col 15 to line 42, col 48 of module MrDraft: 64
+<NoDraft line 43, col 1 to line 43, col 7 of module MrDraft>
+  line 43, col 12 to line 43, col 26 of module MrDraft: 64
+End of statistics.
+64 states generated, 64 distinct states found, 31 states left on queue.
+Finished in 00s at (2026-11-13 11:26:36)

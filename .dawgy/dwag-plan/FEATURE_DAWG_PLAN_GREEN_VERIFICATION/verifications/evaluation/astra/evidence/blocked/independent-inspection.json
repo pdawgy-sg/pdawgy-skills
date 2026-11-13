@@ -1,0 +1,9 @@
+{
+  "check": "B2 independent safe read-only source inspection",
+  "status": "PASS",
+  "source": "/tmp/dawg-green-astra-eval/addition/calc.py",
+  "source_sha256": "1c3eafab9aa411fd3674bb233f9447d5e0d8b808c79c2b22fe7d721729c30f46",
+  "observed": "function returns a+b; no extra term",
+  "B1_status": "BLOCKED",
+  "blocked_case_complete": false
+}

@@ -1,0 +1,130 @@
+{
+  "java_version": "openjdk version \"25.0.5\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-25.0.5+8 (build 25.0.5+8-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.5+8 (build 25.0.5+8-LTS, mixed mode, sharing)",
+  "java_binary": "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+  "java_sha256": "1bf1aaef01e4f8d7c85d913c60fb2ee4624cbe54d4053254c59657b7ea913b25",
+  "tlc_jar": "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+  "tlc_jar_sha256": "936a262061c914694dfd669a543be24573c45d5aa0ff20a8b96b23d01e050e88",
+  "outcomes": [
+    {
+      "config": "Recovery.cfg",
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "73caa18525f85a3534c6e95f5389d0acc03c09732fa38cfaa3a170b5a9478df4",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-4vx_ehtx",
+        "-config",
+        "/tmp/dawg-green-astra-inputs-1/tla/Recovery.cfg",
+        "/tmp/dawg-green-astra-inputs-1/tla/Recovery.tla"
+      ],
+      "exit_code": 0,
+      "expected_violation": null,
+      "states": [
+        "1044",
+        "178",
+        "0"
+      ],
+      "expected_outcome_observed": true
+    },
+    {
+      "config": "MissingRecord.cfg",
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "db27fb621e6de7d9b082f173b23fd3ce35c467a7210a82e7810a07c4e3e0ca9e",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-a5dkb9iv",
+        "-config",
+        "/tmp/dawg-green-astra-inputs-1/tla/MissingRecord.cfg",
+        "/tmp/dawg-green-astra-inputs-1/tla/Recovery.tla"
+      ],
+      "exit_code": 12,
+      "expected_violation": "IssueRecorded",
+      "states": [
+        "4",
+        "4",
+        "2"
+      ],
+      "expected_outcome_observed": true
+    },
+    {
+      "config": "RedCompletion.cfg",
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "311924ab7256f203433cff3f02066869f142b6b02c46e2fd3d944e61ff0afece",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-pqwloebi",
+        "-config",
+        "/tmp/dawg-green-astra-inputs-1/tla/RedCompletion.cfg",
+        "/tmp/dawg-green-astra-inputs-1/tla/Recovery.tla"
+      ],
+      "exit_code": 12,
+      "expected_violation": "CompletesOnlyGreen",
+      "states": [
+        "27",
+        "19",
+        "14"
+      ],
+      "expected_outcome_observed": true
+    },
+    {
+      "config": "RecoveryWitness.cfg",
+      "module_sha256": "68760ea28785800914c3a16ed981f5bb44eba0815a69a48ff7a70d3fe70cf33b",
+      "config_sha256": "fd6dd8cf5882237565c1363e014db3c150b542304514084c6b10f62da6b5dce5",
+      "command": [
+        "/home/chy/.local/share/mise/installs/java/temurin-25.0.5+8.0.LTS/bin/java",
+        "-XX:+UseParallelGC",
+        "-Xmx512m",
+        "-cp",
+        "/home/chy/.local/share/mise/installs/http-tla2tools/1.7.4/tla2tools.jar",
+        "tlc2.TLC",
+        "-workers",
+        "1",
+        "-coverage",
+        "1",
+        "-metadir",
+        "/tmp/dawg-tlc-states-8afvdroo",
+        "-config",
+        "/tmp/dawg-green-astra-inputs-1/tla/RecoveryWitness.cfg",
+        "/tmp/dawg-green-astra-inputs-1/tla/Recovery.tla"
+      ],
+      "exit_code": 12,
+      "expected_violation": "NoRecoveredCompletion",
+      "states": [
+        "410",
+        "123",
+        "44"
+      ],
+      "expected_outcome_observed": true
+    }
+  ],
+  "all_expected_outcomes_observed": true
+}

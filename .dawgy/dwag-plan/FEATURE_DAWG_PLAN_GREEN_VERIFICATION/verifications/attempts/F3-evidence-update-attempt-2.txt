@@ -1,0 +1,3 @@
+Corrected exact inspected metadata, preserving model/source behavior.
+Actual: plan/checklist/review fields updated; local links resolve; all 14 tested source SHA-256 hashes unchanged.
+F3 exit criteria met; original failed metadata attempt retained.

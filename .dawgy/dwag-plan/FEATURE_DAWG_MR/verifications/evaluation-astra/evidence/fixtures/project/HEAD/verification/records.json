@@ -1,0 +1,50 @@
+{
+  "historical": {
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "check_nonempty.py"
+    ],
+    "exit": 0,
+    "stdout": "nonempty PASS\n",
+    "tested_commit": "3550b821faa436389688c9d5b45101b4fbb39033",
+    "source_sha256": {
+      "average.py": "487b1ab0923ae2da897e35367001324ac3207533dead1d8d37ce27eb969fd48f"
+    },
+    "provenance": "fixture author setup execution before fix"
+  },
+  "current": [
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "check_empty.py"
+      ],
+      "exit": 0,
+      "stdout": "empty summary PASS\n",
+      "stderr": "",
+      "source_sha256": {
+        "average.py": "7a440973a7c22b852f34ec0b3614acf6b8d4b0ec4bb0f09b96d54bd899a958c8",
+        "summary.py": "a712cb7f1951c1315d4bc005185e91f5a826df3b4fb4d2302dee647c8fd1cd80",
+        "check_empty.py": "ba4efb9b5e75ea0d25ebc673391cb3ff33cd66172c6ed7eb924c695bdb528823"
+      },
+      "provenance": "fixture author setup execution on exact listed source bytes"
+    },
+    {
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "check_legacy.py"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/tmp/dawg-mr-astra-eval/project/check_legacy.py\", line 7, in <module>\n    raise AssertionError(\"legacy consumer expects ZeroDivisionError\")\nAssertionError: legacy consumer expects ZeroDivisionError\n",
+      "source_sha256": {
+        "average.py": "7a440973a7c22b852f34ec0b3614acf6b8d4b0ec4bb0f09b96d54bd899a958c8",
+        "summary.py": "a712cb7f1951c1315d4bc005185e91f5a826df3b4fb4d2302dee647c8fd1cd80",
+        "check_legacy.py": "24bfbf07c2783c6f2d243bae4827ace2b5be7d05079d0c8878c797f302133187"
+      },
+      "provenance": "fixture author setup execution on exact listed source bytes"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/usr/bin/python",
+    "-B",
+    "-m",
+    "checks.check_integer"
+  ],
+  "exit": 0,
+  "stdout": "",
+  "stderr": "",
+  "producer": "fixture author during setup",
+  "source_sha256": {
+    "shipping.py": "8b459682c6d99340435b17e77eeee2b9cab647f8571eb0a8fd4851ef5584ef21",
+    "checks/check_integer.py": "deb92d5627d657d4f1372a2102301addc4d0ff7f772e96ebd8e2a51e2cebf2a0"
+  },
+  "scope": "integer weight only on pre-fix source"
+}

@@ -1,0 +1,17 @@
+{
+  "reviewer": "gpt-6-astra",
+  "effort": "high",
+  "plan_revision": "initial design revision (reviewed 2026-11-13)",
+  "input_sha256": {
+    "run_tlc.py": "632f7775696760065dd1ff856130d4f68edc126d86a5c53367f483b3cc5554b8",
+    "tla/MrDraft.tla": "db3c6030a23d837c85992514d4df4959a32f70425fca346708b8e60aa03dc40c",
+    "tla/MrDraft.cfg": "7f57a51534a42a1801165ccd5d8621310d7f8d221cc9faffec6df508b8c1e0ff",
+    "tla/EvidenceFault.cfg": "f7ca1f6494d187660696baa3e9f61183ab068d07c91da912c483b965a3b286e2",
+    "tla/DraftWitness.cfg": "0fc6e0f3a9df1b170e3a07677688aac9f0237aa05ab00ee81aeaaf36a4369474"
+  },
+  "before_after_identical": true,
+  "parent_02_matches": true,
+  "plan_sha256": "2ae1a5f8c0d4a6e323caa7d99c709347440ccdc78782a8e7f5381eae6920a404",
+  "verification_sha256": "d5f2d4fe5020b0c2755923fa77e16c588f84c47452528307d945ebf5450ab56e",
+  "raw_logs_independently_inspected": true
+}
