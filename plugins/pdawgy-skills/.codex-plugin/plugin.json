@@ -1,12 +1,12 @@
 {
   "name": "pdawgy-skills",
-  "version": "0.7.0",
-  "description": "A personal collection of reusable skills for Codex.",
+  "version": "0.8.0",
+  "description": "Shared Dawg workflows for Codex and Claude Code.",
   "skills": "./skills/",
   "interface": {
     "displayName": "Pdawgy Skills",
-    "shortDescription": "Reusable personal workflows for Codex",
-    "longDescription": "A collection of personal skills packaged together for use in Codex.",
+    "shortDescription": "Reusable Dawg workflows for coding agents",
+    "longDescription": "Shared Dawg skills packaged for Codex and Claude Code.",
     "category": "Productivity"
   }
 }

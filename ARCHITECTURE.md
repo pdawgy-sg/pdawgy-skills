@@ -2,8 +2,8 @@
 
 ## Purpose and scope
 
-Pdawgy Skills is a skills-only Codex plugin distributed through a repository
-marketplace. The current package contains four instruction-driven workflows.
+Pdawgy Skills is a skills-only plugin distributed through separate Codex and
+Claude Code marketplace catalogs in the same repository. The current package contains four instruction-driven workflows.
 There is no application service, bundled MCP server, lifecycle hook, or declared
 project build/test framework in the current source package.
 
@@ -14,11 +14,18 @@ project build/test framework in the current source package.
   `./plugins/pdawgy-skills`, resolves from the repository root. Installation is
   available to the user; the catalog declares an on-install authentication
   policy, while the package itself contains no connected service.
+- [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json) is the
+  native Claude Code catalog, with marketplace name/owner and the same plugin
+  source `./plugins/pdawgy-skills` relative to the repository root.
+- [plugins/pdawgy-skills/.claude-plugin/plugin.json](plugins/pdawgy-skills/.claude-plugin/plugin.json)
+  provides Claude Code's package name/version/author/description. Its standard
+  `skills/` directory is discovered automatically; no skill copies or host adapter
+  scripts are maintained. Both host manifests use the same name and version.
 - [plugins/pdawgy-skills/.codex-plugin/plugin.json](plugins/pdawgy-skills/.codex-plugin/plugin.json)
   is the Codex compatibility manifest. It owns the plugin identity, version,
   listing metadata, and `./skills/` discovery path relative to the plugin root.
 - Each directory beneath `plugins/pdawgy-skills/skills/` contains a `SKILL.md`
-  entrypoint and `agents/openai.yaml` UI metadata. Supporting assets belong to
+  entrypoint and `agents/openai.yaml` Codex UI metadata. Supporting assets belong to
   the skill that uses them; no bundled executable scripts are required by the
   current skills.
 - [README.md](README.md) describes the package and installation entry points.
@@ -94,8 +101,10 @@ launch tests, alter Git state or publish an MR. It adds no scripts or services.
 
 ```mermaid
 flowchart TD
-    Marketplace[Repository marketplace] --> Manifest[Plugin manifest]
-    Manifest --> Skills[Skill entrypoints and UI metadata]
+    CodexCatalog[Codex marketplace catalog] --> CodexManifest[Codex manifest]
+    ClaudeCatalog[Claude Code marketplace catalog] --> ClaudeManifest[Claude manifest]
+    CodexManifest --> Skills[Shared skill entrypoints]
+    ClaudeManifest --> Skills
     Skills --> Init[dawg-init]
     Skills --> Plan[dawg-plan]
     Skills --> Maintain[dawg-architecture-maintain]
@@ -119,6 +128,16 @@ Sol/high plus Astra/high for large work; unavailable required models block readi
 external installed skill-creator validator with Python/PyYAML. Formal planning
 also needs external Java/TLC tooling. Those tools are used by the calling agents;
 neither their binaries nor a separate model-checking service are bundled here.
+
+Claude Code installation loads all four skills through its native marketplace
+commands. GitHub installation pins `#main` explicitly; local checkout registration
+supports unpublished changes. Claude invokes skills as `/pdawgy-skills:<name>`;
+Codex uses `$<name>`. Packaging does not grant GPT reviewer access or configure a
+cross-model bridge. Planning/init retain exact selected-model/TLC requirements
+and report missing capabilities as blockers; installation is not evidence of a
+completed planning or coding workflow. Native validation and isolated CLI
+registration/install/inventory checks verify packaging without invoking an LLM
+or changing the developer's real Claude settings.
 
 Plans are written in the mapped project inside the task worktree at
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/`. Each has `PLAN.md` and a

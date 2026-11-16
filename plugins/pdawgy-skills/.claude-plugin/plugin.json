@@ -1,0 +1,9 @@
+{
+  "name": "pdawgy-skills",
+  "version": "0.8.0",
+  "description": "Shared Dawg workflows for Codex and Claude Code.",
+  "author": {
+    "name": "pdawgy"
+  },
+  "repository": "https://github.com/pdawgy-sg/pdawgy-skills"
+}

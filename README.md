@@ -1,9 +1,62 @@
 # Pdawgy Skills
 
-A personal Codex skills repository, distributed through a repo marketplace.
+A shared collection of coding-agent skills for Codex and Claude Code.
 
-This repository defines one plugin, `pdawgy-skills`, using the supported Codex
-manifest layout.
+One `pdawgy-skills` plugin contains the canonical skills. Each client has its own
+native marketplace catalog and manifest pointing to that same package.
+
+## Install in Claude Code
+
+Once the Claude Code marketplace files are merged into `main`, run these
+commands in your terminal to install that published version:
+
+```sh
+claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#main'
+claude plugin install pdawgy-skills@pdawgy-skills
+```
+
+Before that merge, install this feature-branch preview instead:
+
+```sh
+claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#codex/feature/claude-code-support'
+claude plugin install pdawgy-skills@pdawgy-skills
+```
+
+The explicit ref avoids relying on the repository's default branch. Choose one
+source for this marketplace name. Confirm installation with `claude plugin list`
+and inspect the four skills with `claude plugin details pdawgy-skills`. Start a
+new session to use them.
+
+To try an unpublished change from a checkout, run these from the repository root
+instead of adding the GitHub source:
+
+```sh
+claude plugin marketplace add .
+claude plugin install pdawgy-skills@pdawgy-skills
+```
+
+Use one source for the `pdawgy-skills` marketplace name. Claude Code's
+[marketplace guide](https://code.claude.com/docs/en/plugin-marketplaces) documents
+the registration/install flow and
+[Git ref support](https://code.claude.com/docs/en/plugins/host-marketplace)
+explains `#main` or another branch/tag.
+
+## Invoke skills
+
+| Skill | Codex | Claude Code |
+| --- | --- | --- |
+| Planning | `$dawg-plan` | `/pdawgy-skills:dawg-plan` |
+| Repository initialization | `$dawg-init` | `/pdawgy-skills:dawg-init` |
+| Architecture maintenance | `$dawg-architecture-maintain` | `/pdawgy-skills:dawg-architecture-maintain` |
+| MR description | `$dawg-mr` | `/pdawgy-skills:dawg-mr` |
+
+Installation supplies instructions, not model access or a reviewer bridge.
+`dawg-plan` and `dawg-init` retain the chosen Sol/high review for small work and
+Sol/high plus Astra/high for large work, and need Java/TLC for formal checks.
+The calling environment must provide those required capabilities; unavailable
+reviewers/tools remain explicit planning blockers. This package does not silently
+substitute Claude reviewers. `dawg-mr` drafts from committed changes without
+requiring the planning review cycle.
 
 ## Included skills
 
@@ -65,11 +118,15 @@ pdawgy-skills/
 ├── .agents/
 │   └── plugins/
 │       └── marketplace.json
+├── .claude-plugin/
+│   └── marketplace.json
 ├── .gitignore
 ├── README.md
 └── plugins/
     └── pdawgy-skills/
         ├── .codex-plugin/
+        │   └── plugin.json
+        ├── .claude-plugin/
         │   └── plugin.json
         └── skills/
             ├── dawg-plan/
@@ -97,8 +154,9 @@ pdawgy-skills/
                 └── agents/openai.yaml
 ```
 
-The marketplace catalog points to `./plugins/pdawgy-skills`, relative to the
-repository root. The plugin manifest points to its own `./skills/` directory.
+Both marketplace catalogs point to `./plugins/pdawgy-skills`, relative to the
+repository root. Codex declares `./skills/` in its manifest; Claude Code discovers
+the same standard `skills/` directory. Keep both manifest versions aligned.
 
 ## Add a skill
 
@@ -118,9 +176,9 @@ Write the workflow instructions here.
 
 Keep any supporting `scripts/`, `references/`, or `assets/` inside that skill's
 directory. Additional skills in this plugin do not need separate marketplace
-entries. Update the plugin version when releasing changes.
+entries. Update the version in both plugin manifests when releasing changes.
 
-## Register the marketplace locally
+## Install in Codex
 
 From this repository's root, run:
 
@@ -139,8 +197,11 @@ After publishing this repository to GitHub, it can also be registered with
 ## Add another plugin
 
 Create another directory under `plugins/` with its own manifest and skills. Add
-an entry to `.agents/plugins/marketplace.json` pointing to that directory.
+entries to `.agents/plugins/marketplace.json` and `.claude-plugin/marketplace.json`
+pointing to that directory.
 
 ## Reference
 
 [OpenAI plugin packaging and marketplace documentation](https://developers.openai.com/plugins/build/plugins)
+
+[Claude Code plugin manifest reference](https://code.claude.com/docs/en/plugins-reference)
