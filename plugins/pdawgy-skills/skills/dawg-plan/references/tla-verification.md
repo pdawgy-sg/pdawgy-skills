@@ -1,7 +1,7 @@
 # Required TLA+ verification
 
 Every plan requires a meaningful TLA+ specification and actual TLC model checking
-by the parent and both required reviewers before readiness. Keep the model as
+by the parent and every required reviewer before readiness. Keep the model as
 small as the requested behavior permits; keep its abstraction explicit.
 
 ## Model the requested behavior
@@ -38,7 +38,7 @@ production-model failures. Never fix a counterexample merely by deleting its
 property, excluding the bad state, or weakening the requirement.
 Use the [recovery loop](recovery-loop.md) for unexpected formal failures: record
 the issue/attempt, diagnose and correct it, then actually rerun. Preserve failed
-traces after resolution. Material corrections invalidate all three receipts as
+traces after resolution. Material corrections invalidate the parent and all required reviewer receipts as
 specified below; a failure report alone is not a completed verification task.
 
 ## Run TLC and preserve evidence
@@ -88,10 +88,11 @@ Do not overwrite failed attempts. Model input identity includes all imported
 project modules and effective configurations; a `.tla` filename or an old success
 log alone does not identify the checked model.
 
-## Both reviewers execute independently
+## Every required reviewer executes independently
 
-Give `gpt-6-astra`/high and `gpt-6.1-sol`/high the same final module/configurations,
-dependency identities, acceptance mapping and parent evidence. Each must:
+Use dawg-plan's recorded size classification: `gpt-6.1-sol`/high for small work;
+add `gpt-6-astra`/high for large work. Give every required reviewer the same final
+module/configurations, dependency identities, acceptance mapping and parent evidence. Each must:
 
 1. Read the actual spec/config and inspect assumptions, properties, abstraction,
    fairness/deadlock handling, finite scope, relevant reachability and omissions.
@@ -102,14 +103,17 @@ dependency identities, acceptance mapping and parent evidence. Each must:
    checked input hashes match the final parent inputs. Independently assess whether
    those inputs represent the requested behavior and intended implementation.
 
-Readiness requires the parent's and both reviewers' completed passing required
-checks on identical current inputs, both semantic approvals and resolved material
-findings. Missing/blocked/unrun reviewer execution is a blocker, not an approval.
+Readiness requires the parent's and every required reviewer's completed passing
+checks on identical current inputs, all required semantic approvals and resolved
+material findings. Missing/blocked/unrun required reviewer execution is a blocker. Astra
+is not required for small work; label it not required rather than pending/unrun.
 Keep expected negative/witness probes separate from successful required models.
 
 Material behavior, model/dependency, configuration/property, constant/bound,
-assumption or fairness changes invalidate all three receipts. Rerun the parent
-and both reviewers and reassess the changed contract. Unchanged exact inputs may
+assumption or fairness changes invalidate the parent and all required reviewer
+receipts. Rerun the parent and every required reviewer on the changed contract.
+Scope growth to large requires Astra before readiness; valid current receipts may
+remain only when their reviewed inputs are unchanged. Unchanged exact inputs may
 retain their executed receipts while reviewers inspect later implementation
 conformance; do not reuse stale results across a changed model or requirements.
 

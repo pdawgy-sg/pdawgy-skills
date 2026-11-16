@@ -1,6 +1,6 @@
 ---
 name: dawg-plan
-description: Plan features and fixes in Git worktrees with TLA+ checks, state diagrams and two independent reviewers. During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature or fix or explicitly asked to use dawg-plan.
+description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and size-based independent review (Sol for small work, Sol plus Astra for large work). During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
@@ -12,7 +12,7 @@ plan another coding agent can execute and verify with inspectable evidence.
 
 Read and follow [the Git workflow](references/git-workflow.md) on every invocation.
 It defines required preflight, worktree/scope mapping, and verified delivery.
-Before creating plan artifacts or implementing a feature/fix, confirm Git context
+Before creating plan artifacts or implementing a feature/fix/refactor, confirm Git context
 and create or reuse its dedicated task worktree and branch. Outside Git, ask the
 user to initialize and wait for consent; do not silently initialize or proceed.
 Preserve an originally selected subdirectory by mapping it into the worktree.
@@ -55,7 +55,7 @@ worktree, not in the source checkout or installed skill's directory:
         └── runs/
 ```
 
-Use `FIX_` for a bug fix and `FEATURE_` for new behavior, followed by a concise
+Use `FIX_` for a bug fix and `FEATURE_` for new behavior or a refactor, followed by a concise
 uppercase underscore-separated name, for example `FIX_RETRY_DUPLICATE_SUBMIT`.
 The directory is deliberately spelled `dwag-plan`; the skill is `dawg-plan`.
 Use `verifications/` consistently for all evidence, including screenshots.
@@ -72,7 +72,7 @@ are observed. Link issue IDs to tasks and checks, preserving all attempt evidenc
 If project-root access is unavailable, report the blocker and provide a draft;
 do not claim the artifacts were saved.
 
-## Model the feature or fix as a state machine
+## Model the feature, fix or refactor as a state machine
 
 Every plan includes at least one fenced Mermaid `stateDiagram-v2` diagram in
 `PLAN.md`, also shown in chat so the user can inspect the proposed flow.
@@ -80,7 +80,7 @@ Every plan includes at least one fenced Mermaid `stateDiagram-v2` diagram in
 Model the actual product or system behavior, not just the agent's work stages.
 Identify initial and terminal states, triggers, guards, effects, failure states,
 and recovery paths where applicable. Cover cancellation, retries, concurrency,
-and authorization only when relevant to the feature or fix. For stateless work,
+and authorization only when relevant to the feature, fix or refactor. For stateless work,
 model observable input, validation, and outcome states instead of inventing a
 persistent state store. Multiple diagrams are useful only for distinct flows.
 
@@ -94,8 +94,8 @@ several transitions; do not create a separate test merely for every arrow.
 Read and follow [the required TLA+ workflow](references/tla-verification.md).
 Every plan includes a concrete TLA+ model/configuration of the requested behavior,
 mapped acceptance criteria/actions/properties, stated assumptions and finite bounds,
-and completed TLC checks. Keep diagrams and the model consistent. Parent and both
-reviewers must actually run the same final model/configuration; an opinion or
+and completed TLC checks. Keep diagrams and the model consistent. Parent and every required
+reviewer must actually run the same final model/configuration; an opinion or
 inspection of someone else's log does not satisfy independent execution.
 
 Save reproducible logs, tool/input identities, state statistics, and relevant
@@ -126,46 +126,61 @@ rerun checks. A plan must be independently executable; instructions like "test
 it" or "verify it works" are insufficient. Use repository-supported commands;
 label a command that cannot yet be confirmed and explain what must resolve it.
 
-## Require two independent design reviews for every plan
+## Select independent reviewers by change size
 
-After drafting the concrete plan/checklist and TLA+ module/configuration, and
-completing the parent's required TLC checks, spawn exactly two design review
-subagents, concurrently when supported:
+Before delegation, classify the fix, feature or refactor as **small** or **large**.
+Record the tier, concrete rationale and required model/effort set in `PLAN.md`.
 
-- `gpt-6-astra` at `high` reasoning effort.
-- `gpt-6.1-sol` at `high` reasoning effort.
+- **Small:** A narrow, well-understood behavioral change with limited impact and
+  straightforward focused verification. Repeating one policy across documentation
+  or templates does not by itself make a change large.
+- **Large:** Interacting changes across components, broad refactoring, or meaningful
+  architecture, public-interface, data/migration, security, concurrency, or
+  deployment risk. Judge impact and uncertainty, not just file/line counts.
+  Investigate unclear scope; use the large tier when material size/risk uncertainty
+  remains. Resolve unclear product intent through the normal questions workflow.
 
-Use the runtime's subagent tool with explicit model and effort selections. If
-using `collaboration.spawn_agent`, set `fork_turns: "none"` so the overrides can
-be applied. Give each reviewer the same user requirements, confirmed decisions,
-relevant repository context, and paths to the plan, checklist, TLA+ source/configs
-and parent run evidence. Ask each
-to independently inspect intent alignment, state transitions and invariants,
-task boundaries, acceptance coverage, reproducibility of evidence, and excessive
-testing or scope. Each must independently run TLC using fresh private state/log
-directories, audit enabled properties and raw outputs, and review abstraction,
-assumptions, bounds, relevant liveness/deadlock choices, reachability and requirement
-mapping. Require its own tool/input hashes, commands, results, and actionable
-findings with references or no material findings. Keep project source unchanged;
-write reviewer run evidence in separate locations for preservation. Do not run
-unsafe checks or treat a shared runner's summary as sufficient semantic review.
+For **small** work, use only `gpt-6.1-sol` at `high` reasoning effort. For **large**
+work, use `gpt-6.1-sol` and `gpt-6-astra`, each at `high`, concurrently when supported.
+Do not spawn Astra for small work by default. An explicit user reviewer choice
+supersedes the default. Reassess as scope/risk changes: if work grows large, revoke
+readiness and add Astra before proceeding. Do not silently drop a required reviewer
+or downgrade the tier merely to avoid review.
 
-Wait for both reviews. Save each returned review, its model and effort, and the
-reviewed plan revision under `verifications/design-review-astra.md` and
-`verifications/design-review-sol.md`. Record findings and their dispositions in
-`PLAN.md`. Resolve material findings; return product decisions to the user when
-needed. After a material design change, have both reviewers reassess the updated
-design; reuse the two reviewers rather than spawning additional reviewers.
-Material behavior/model/configuration/property/bound/assumption/fairness changes
-invalidate all three run receipts: rerun parent and both reviewers on the updated
-inputs and rereview. Keep records current with final input hashes. Readiness
-requires completed passing parent and both independent reviewer runs on those
-inputs, both semantic approvals, and no unresolved material findings.
+After drafting the concrete plan/checklist and TLA+ inputs and completing the
+parent's required TLC checks, spawn the selected reviewer(s). Use explicit model
+and effort selections. For `collaboration.spawn_agent`, set `fork_turns: "none"`
+so overrides apply. Give every required reviewer the same current requirements,
+confirmed decisions, repository context, plan/checklist, formal inputs and parent
+evidence. Each independently reviews intent, state transitions/invariants, task
+boundaries, acceptance coverage, reproducibility and excessive testing/scope.
 
-If either exact model, effort selection, delegation, or required TLC execution is unavailable, record
-which requirement is blocked and tell the user. Do not substitute models, invent
-reviews, or mark the plan ready. Continue independent drafting and investigation
-that do not depend on the unavailable review.
+Every required reviewer must actually run TLC with fresh private state/log paths,
+audit enabled properties/raw outputs, and assess abstraction, assumptions, bounds,
+relevant liveness/deadlocks, reachability and requirement mapping. Require its own
+tool/input hashes, commands, results and actionable findings or no material findings.
+Keep project source unchanged and preserve separate reviewer evidence. Do not treat
+another agent's log or a shared runner summary as independent execution/review.
+
+Wait for every required review. Save model/effort, reviewed revision and findings
+in `verifications/design-review-sol.md` and, for large work,
+`verifications/design-review-astra.md`. For small work mark Astra not required,
+not missing/pending, and do not claim it ran. Record findings/dispositions in
+`PLAN.md`; resolve material findings and return missing product decisions to the
+user. Reuse required reviewers for reassessment after material design changes.
+
+Material requirement, behavior, model/dependency, config/property/bound/assumption
+or fairness changes invalidate the parent's and every required reviewer's receipts:
+rerun/review on identical final inputs. If only the required set expands and
+reviewed inputs are unchanged, retain valid current receipts and obtain the
+missing Astra execution and semantic review. Readiness requires the current parent
+run, every tier-required reviewer's current run and semantic approval, and no
+unresolved material findings.
+
+Unavailable required models/effort/delegation/TLC execution block readiness;
+record the exact dependency and tell the user. Missing Astra is not a blocker for
+small work. Do not substitute models or invent reviews. Continue independent
+drafting/investigation while a genuine required dependency remains blocked.
 
 ## Preserve evidence through implementation
 
@@ -217,7 +232,7 @@ After authorized implementation, automatically follow the delivery steps in
 [the Git workflow](references/git-workflow.md): pass all required checks, inspect
 the entire index and proposed commit, create a task-only Conventional Commit,
 confirm its delta/source matches the verified change, and push normally to the
-task feature/fix branch. Confirm the remote branch equals local HEAD. Preserve
+task branch. Confirm the remote branch equals local HEAD. Preserve
 planning-only and explicit no-commit/no-push limits. Never deliver while required
 checks fail or remain blocked; report commit/push blockers separately from
 implementation verification. Final commit/remote receipts belong in the chat

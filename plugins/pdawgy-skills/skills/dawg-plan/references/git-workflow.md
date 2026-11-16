@@ -1,6 +1,7 @@
 # Required Git workflow
 
-Apply this workflow to every feature/fix, including planning-only requests.
+Apply this workflow to every feature/fix/refactor, including planning-only requests.
+Refactors use a `codex/feature/<slug>` task branch and `FEATURE_` plan prefix.
 Implementation authorization includes automatic verified commit/push under this
 workflow unless the user explicitly limits delivery. Planning alone never
 authorizes implementation, committing, or pushing.
@@ -99,7 +100,8 @@ identity or change global Git settings.
 ## Conventional Commit and normal task-branch push
 
 Create the commit automatically once implementation verification and the staged
-scope checks pass. Use `feat: <summary>` for features or `fix: <summary>` for fixes,
+scope checks pass. Use `feat: <summary>` for features, `fix: <summary>` for fixes,
+or `refactor: <summary>` for refactors,
 optionally with a meaningful scope, for example
 `feat(planner): require isolated worktrees`. Respect the repository's established
 Conventional Commit rules. Do not bypass hooks. Hook failures block delivery;

@@ -42,8 +42,9 @@ Save the plan, diagrams, checklist and evidence in that mapped project's
 checkout. Handle unborn baselines and unrelated work through dawg-plan's workflow.
 
 Honor the full workflow, including the concrete TLA+ model/configuration, parent
-TLC checks, and independent TLC reruns/semantic reviews by `gpt-6-astra` and
-`gpt-6.1-sol` at high effort. Do not write target guidance before those current
+TLC checks, and size-based independent TLC reruns/semantic reviews: `gpt-6.1-sol`
+at high effort for small work, adding `gpt-6-astra` at high effort for large work.
+Record the tier/rationale and follow dawg-plan's escalation rules. Do not write target guidance before those current
 checks pass and the plan is ready. If the sibling skill, formal tools/execution
 or required reviewers are unavailable, report the blocker;
 continue inspection and drafting but do not invent a substitute review. Running
@@ -78,10 +79,13 @@ facts; remove template prompts and unsupported sections from finished documents.
 
 Encode these Dawg coding standards in `AGENTS.md`:
 
-- Use `dawg-plan` for features and fixes; clarify material uncertainty and keep
-  tasks small with enough verification/evidence to prove they work. Require TLA+
-  modeling and completed parent/both-reviewer TLC runs on matching final inputs,
-  with bounded claims and implementation checks still required. Require its
+- Use `dawg-plan` for features, fixes and refactors; clarify material uncertainty
+  and keep tasks small with enough verification/evidence to prove they work. Require TLA+
+  modeling and completed parent/all-required-reviewer TLC runs on matching inputs.
+  Require Sol/high for small work and add Astra/high for large work; record the
+  size rationale and reassess growth. Missing required reviewers block readiness;
+  optional Astra does not block small work. State bounded formal claims and retain
+  implementation checks. Require its
   task worktree/branch, ask before Git initialization when needed, and automatically
   conventionally commit/push authorized implementation only after required checks
   pass. Preserve planning-only and explicit delivery limits.
@@ -93,7 +97,7 @@ Encode these Dawg coding standards in `AGENTS.md`:
   or add frameworks merely to initialize agent guidance.
 - Read `ARCHITECTURE.md` for design context. Use `dawg-architecture-maintain` in
   the same task whenever implemented changes affect components, interfaces,
-  dependencies, data flow, or deployment. Check for relevance at feature/fix
+  dependencies, data flow, or deployment. Check for relevance at task
   completion; an unchanged architecture needs no cosmetic edit. Report missing
   required skills rather than claiming their workflows ran.
 

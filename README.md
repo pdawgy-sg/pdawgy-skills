@@ -7,12 +7,13 @@ manifest layout.
 
 ## Included skills
 
-- **dawg-plan** — Understand features and fixes, ask about missing requirements,
+- **dawg-plan** — Understand features, fixes and refactors, ask about missing requirements,
   diagram their state transitions, and break work into small verifiable tasks.
-  Every plan includes a TLA+ model/config and completed TLC runs by the parent,
-  `gpt-6-astra`, and `gpt-6.1-sol`, with both reviewers at high effort independently
-  checking model meaning and execution. Missing/stale/incomplete runs block
-  readiness; bounded model checks complement implementation tests. Features/fixes use a dedicated Git worktree
+  Every plan includes a TLA+ model/config and completed parent plus required
+  reviewer TLC runs. Small work uses only `gpt-6.1-sol` at high effort; large work
+  adds `gpt-6-astra` at high effort. Record an impact/risk rationale, reassess growth
+  and obtain current runs and semantic approval from the required set. Missing/stale/incomplete runs block
+  readiness; bounded model checks complement implementation tests. Features/fixes/refactors use a dedicated Git worktree
   and task branch; non-Git directories require initialization consent. After
   authorized implementation passes checks, the workflow creates a Conventional
   Commit and pushes the task branch with remote confirmation. Planning-only
@@ -48,7 +49,8 @@ Plans are saved in the target project's
 evidence in `verifications/verification.md` and the surrounding directory.
 Formal specifications, configurations and parent/reviewer logs live under that
 directory's `tla/`. Java and TLC are external authoring tools; the plugin does not
-bundle them. Material formal-input/requirement changes require all three reruns.
+bundle them. Material formal-input/requirement changes require the parent and all required
+reviewers to rerun.
 The target project is mapped into the task worktree, preserving any selected
 subdirectory. Branches default to `codex/feature/<slug>` or `codex/fix/<slug>`.
 Missing identity/remotes, unresolved unrelated staging, failed checks, or rejected

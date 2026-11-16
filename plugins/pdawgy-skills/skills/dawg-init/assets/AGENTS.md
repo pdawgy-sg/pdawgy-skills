@@ -13,16 +13,18 @@ rules. Keep this section about writing and checking code, not module inventories
 
 ## Dawg standards
 
-- Use `dawg-plan` for features and fixes. Resolve material uncertainty, keep work
-  in small parts, and record enough verification/evidence for each part. Include
-  a meaningful TLA+ model/config and completed parent plus both independent
-  reviewer TLC checks on identical final inputs before readiness. State bounds
-  and assumptions; retain implementation tests and rerun after material model or
+- Use `dawg-plan` for features, fixes and refactors. Resolve material uncertainty,
+  keep work in small parts, and record enough verification/evidence for each part. Include
+  a meaningful TLA+ model/config and completed parent plus every required reviewer
+  TLC check on identical final inputs. Small work requires gpt-6.1-sol/high; large
+  work adds gpt-6-astra/high. Record tier/rationale, reassess scope/risk growth, and
+  require the expanded set before readiness; missing optional Astra does not block.
+  Do not silently drop a required reviewer. State bounds and assumptions; retain implementation tests and rerun after material model or
   requirement changes. Use its
   dedicated Git worktree/task branch and preserve selected subdirectory scope.
   Outside Git, ask before initialization and wait. After authorized implementation
   passes required checks, create a task-only Conventional Commit and push normally
-  to that feature/fix branch; confirm the remote commit. Preserve planning-only
+  to that task branch; confirm the remote commit. Preserve planning-only
   limits and unrelated staged/dirty work; report delivery blockers honestly.
 - Record observed failures/blockers and every attempt in the plan's persistent
   failure register. Diagnose, repair and rerun failed/affected checks until current
@@ -40,7 +42,7 @@ rules. Keep this section about writing and checking code, not module inventories
   tests that only mirror implementation or add a framework without a real need.
 - Before redundancy cleanup, present the exact changes and ask for approval.
   Preserve uncommitted/untracked work and scoped instructions.
-- Read [ARCHITECTURE.md](ARCHITECTURE.md) for design context. At feature/fix
+- Read [ARCHITECTURE.md](ARCHITECTURE.md) for design context. At task
   completion, check whether implemented structure or behavior changed. Use
   `dawg-architecture-maintain` in the same task for changes to component boundaries,
   interfaces, dependencies, data flow, or deployment; preserve an accurate document
