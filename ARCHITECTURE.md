@@ -153,9 +153,15 @@ historical test inputs and evidence, not additional plugin components. Repositor
 `.gitignore` excludes new `.dawgy/` artifacts; previously tracked history remains
 tracked.
 
-Repository sources and an installed plugin cache are separate copies. The local
-installation used during development was verified against the source package;
-later source edits need an explicit plugin refresh to reach the installed copy.
+Codex installations and Git-sourced Claude Code installations use cached package
+copies. Repository edits do not change an already cached payload; releases update
+the manifest versions and installed copies through the relevant host's update flow.
+Claude Code marketplaces registered from a local directory instead read plugins
+at relative source paths in place. Their inventory can expose `readFromFolder` as the active
+source; a new session or `/reload-plugins` loads edits without copying a new release,
+as described in Claude Code's
+[in-place loading rules](https://code.claude.com/docs/en/plugins/host-marketplace#edit-plugins-in-place-on-a-shared-directory).
+Development verification covered both cached and local-directory installations.
 Installation records are historical evidence, not a guarantee of current account
 state.
 
