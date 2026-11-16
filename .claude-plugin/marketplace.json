@@ -1,0 +1,14 @@
+{
+  "name": "pdawgy-skills",
+  "owner": {
+    "name": "pdawgy"
+  },
+  "description": "Shared Dawg skills for coding agents.",
+  "plugins": [
+    {
+      "name": "pdawgy-skills",
+      "source": "./plugins/pdawgy-skills",
+      "description": "Planning, repository guidance, architecture maintenance and MR drafting."
+    }
+  ]
+}

@@ -60,6 +60,9 @@
   hyphenated. Write a precise `description` explaining when the skill applies.
 - Keep UI metadata and `$skill-name` prompts consistent with the skill. Preserve
   automatic discovery unless the user requests otherwise.
+- Keep Codex and Claude Code plugin names/versions aligned. Both catalogs point
+  to one canonical `skills/` tree; do not duplicate skills for each client.
+  Codex uses `$skill-name`; Claude Code uses `/pdawgy-skills:skill-name`.
 - Resolve resource paths from their owning skill. Resolve manifest paths from
   the plugin root and marketplace paths from the repository root. Preserve the
   existing supported manifest layout and verify schema changes against current
@@ -93,6 +96,17 @@ For changed skills, use the installed skill-creator validator. Set
 ```sh
 python "$DAWG_SKILL_CREATOR_DIR/scripts/quick_validate.py" "plugins/pdawgy-skills/skills/$DAWG_SKILL_NAME"
 ```
+
+For Claude Code catalog/manifest changes, use native checks and a scoped install
+smoke test with a fresh `CLAUDE_CONFIG_DIR` under `/tmp`, preserving real settings:
+
+```sh
+claude plugin validate --strict .
+claude plugin validate --strict plugins/pdawgy-skills
+```
+
+Inspect installed component inventory as well as schema validity. Do not claim
+an LLM/coding workflow ran merely because packaging loaded.
 
 Inspect UI YAML, sibling/resource links, and changed behavior in addition to
 frontmatter validation. `git diff --check` excludes untracked files; inspect new
