@@ -15,10 +15,12 @@ rules. Keep this section about writing and checking code, not module inventories
 
 - Use `dawg-plan` for features, fixes and refactors. Resolve material uncertainty,
   keep work in small parts, and record enough verification/evidence for each part. Include
-  a meaningful TLA+ model/config and completed parent plus every required reviewer
+  a meaningful TLA+ model/config and completed author plus every required reviewer
   TLC check on identical final inputs. Select by active host: Codex uses
-  gpt-6.1-sol/high and adds gpt-6-astra/high for large work; Claude Code uses native
-  sonnet/high and adds opus/high for large work. Record host/tier/rationale, ask
+  gpt-6.1-sol/high and adds gpt-6-astra/high for large work; Claude Code uses Sonnet 5.5/high only
+  for small work and adds a separate Opus 5.5/high reviewer for large work. Use
+  its pinned Opus 5.5/high planner and authorized Opus 5.5/medium implementer
+  as coordinator-scheduled siblings; planner receipts are not independent reviews. Record host/tier/rationale, ask
   if host is unknown, and reassess scope/risk or host changes before readiness.
   Only the selected set is required; the optional second reviewer does not block
   small work. Never credit a different provider's receipt as the selected model.

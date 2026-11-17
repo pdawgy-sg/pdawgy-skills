@@ -9,15 +9,18 @@
   show state diagrams, and break work into small parts with reproducible verification.
   Record active execution host and size/risk rationale. Codex small work uses
   `gpt-6.1-sol`/high; large adds `gpt-6-astra`/high. Claude Code small work uses
-  native `sonnet`/high; large adds `opus`/high. Follow dawg-plan's host detection,
+  Sonnet 5.5/high only; large adds a separate Opus 5.5/high reviewer. Use
+  its pinned Opus 5.5/high planner and authorized Opus 5.5/medium implementer
+  as coordinator-scheduled siblings; the planner is not an independent reviewer. Follow dawg-plan's host detection,
   effective-model/effort and escalation rules. Unknown host and missing required
   execution block readiness; optional second reviewers do not block small work.
   Revoke readiness on host changes; never relabel wrong-provider receipts.
 - Every plan includes a meaningful TLA+ model/configuration and actual completed
-  TLC checks by the parent and every required reviewer on identical final inputs.
+  TLC checks by the author and every required reviewer on identical final inputs.
   Review assumptions, finite bounds, properties, reachability and implementation mapping;
   preserve logs/identities/counterexamples under the plan's `verifications/tla/`.
-  Missing, incomplete, failed or stale checks block readiness. Rerun the parent
+  The author is the Codex parent or Claude pinned planner.
+  Missing, incomplete, failed or stale checks block readiness. Rerun the author
   and all required reviewers after material requirement/model/config changes. Bounded model checking
   complements implementation verification and does not prove arbitrary code.
 - Every feature/fix/refactor uses dawg-plan's dedicated Git worktree and task branch.

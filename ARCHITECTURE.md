@@ -2,8 +2,8 @@
 
 ## Purpose and scope
 
-Pdawgy Skills is a skills-only plugin distributed through separate Codex and
-Claude Code marketplace catalogs in the same repository. The current package contains four instruction-driven workflows.
+Pdawgy Skills is an instruction-based plugin distributed through separate Codex and
+Claude Code marketplace catalogs in the same repository. The current package contains four shared skill workflows and four Claude Code phase-agent definitions.
 There is no application service, bundled MCP server, lifecycle hook, or declared
 project build/test framework in the current source package.
 
@@ -19,8 +19,8 @@ project build/test framework in the current source package.
   source `./plugins/pdawgy-skills` relative to the repository root.
 - [plugins/pdawgy-skills/.claude-plugin/plugin.json](plugins/pdawgy-skills/.claude-plugin/plugin.json)
   provides Claude Code's package name/version/author/description. Its standard
-  `skills/` directory is discovered automatically; no skill copies or host adapter
-  scripts are maintained. Both host manifests use the same name and version.
+  `skills/` and `agents/` directories are discovered automatically; no skill copies
+  or host adapter scripts are maintained. Both host manifests use the same name and version.
 - [plugins/pdawgy-skills/.codex-plugin/plugin.json](plugins/pdawgy-skills/.codex-plugin/plugin.json)
   is the Codex compatibility manifest. It owns the plugin identity, version,
   listing metadata, and `./skills/` discovery path relative to the plugin root.
@@ -28,6 +28,11 @@ project build/test framework in the current source package.
   entrypoint and `agents/openai.yaml` Codex UI metadata. Supporting assets belong to
   the skill that uses them; no bundled executable scripts are required by the
   current skills.
+- `plugins/pdawgy-skills/agents/` contains Claude Code's native dawg-planner,
+  dawg-review-sonnet, dawg-review-opus and dawg-implementer definitions. Their YAML
+  pins full model IDs/effort; bodies reference the canonical dawg-plan workflow
+  and limit each worker to its assigned phase. They inherit permissions and use
+  the caller's mapped worktree; there is no extra worktree-isolation setting.
 - [README.md](README.md) describes the package and installation entry points.
   [AGENTS.md](AGENTS.md) defines repository development rules; [CLAUDE.md](CLAUDE.md)
   delegates to that coding guide.
@@ -37,10 +42,11 @@ project build/test framework in the current source package.
 [dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md) investigates a feature,
 fix or refactor, resolves material ambiguity, models its state transitions, and defines
 small verifiable tasks. Its assets provide plan and verification templates.
-Every plan requires a concrete TLA+ model/configuration and parent TLC run, followed
+Every plan requires a concrete TLA+ model/configuration and author TLC run, followed
 by independent TLC execution and semantic review selected by host and size.
 Codex uses gpt-6.1-sol/high for small work and adds gpt-6-astra/high for large work;
-Claude Code uses native sonnet/high and adds opus/high for large work. The plan
+Claude Code uses Sonnet 5.5/high only for small work and adds a distinct
+Opus 5.5/high review for large work. The plan
 records trusted execution-host evidence, size/risk rationale and requested/effective
 model identities. Unknown host blocks delegation rather than guessing from files.
 Scope growth or host changes revoke readiness until the new required set approves
@@ -50,8 +56,21 @@ reviewer does not block small work. The required
 defines domain/requirement mapping, enabled properties and assumptions, finite
 bounds, actual completion evidence, reachability checks, and shared final input
 identities. Missing, failed, incomplete or stale executions block readiness.
-Material formal-input or requirement changes invalidate the parent and every required reviewer receipt.
+Material formal-input or requirement changes invalidate the author and every required reviewer receipt.
 Bounded model checking and implementation verification remain separate checks.
+
+In Claude Code the coordinator schedules sibling agents: Opus 5.5/high planner,
+independent size-required reviewer(s), then an authorized Opus 5.5/medium
+implementer/verifier. The planner executes author TLC; its receipt is separate
+from the optional large-work Opus review. Codex's parent remains its author and
+implementation actor. Full version pins live in native definitions; invocation
+omits model/effort overrides. Runtime metadata and applicable forced overrides
+are checked, with unsupported/wrong model or effort blocking that phase. Workers
+do not delegate recursively or perform another phase. The coordinator relays
+questions, handles readiness and audited Git delivery, while material gaps return
+to high-effort planning/review before medium-effort implementation resumes.
+Planning-only requests never dispatch the implementer.
+
 
 The required [recovery loop](plugins/pdawgy-skills/skills/dawg-plan/references/recovery-loop.md)
 turns observed non-green results into persistent, check-linked issues. The
@@ -116,8 +135,14 @@ flowchart TD
     Init --> Plan
     Init --> Maintain
     Plan --> Worktree[Scoped task worktree and branch]
-    Plan --> Reviews[Size-based independent design reviews]
-    Reviews --> Artifacts[Target-project plan and verification artifacts]
+    Plan --> Host[Trusted execution host]
+    Host --> Code[Codex author and Sol/Astra reviews]
+    Host --> Planner[Claude Opus 5.5 high planner]
+    Planner --> Reviews[Sonnet review; add distinct Opus if large]
+    Reviews --> Implementer[Authorized Opus 5.5 medium implementation]
+    Code --> Artifacts
+    Implementer --> Artifacts
+    Artifacts[Target-project plan and verification artifacts]
     Init --> Guidance[Target-project AGENTS.md and CLAUDE.md]
     Maintain --> Architecture[Target-project ARCHITECTURE.md]
 ```
@@ -127,14 +152,16 @@ flowchart TD
 The calling coding agent executes these workflows with its available file,
 shell, and subagent tools. The plugin supplies instructions and templates rather
 than a separate execution service. Reviewer delegation uses the active client's
-native model profile: Sol/Astra in Codex, Sonnet/Opus in Claude Code, all high.
+native model profile: Sol/Astra in Codex, Sonnet 5.5/Opus 5.5 in Claude Code,
+both review roles high. Claude planning is Opus 5.5/high and implementation is
+Opus 5.5/medium, via the declarative phase agents.
 Native model/effort overrides are inspected and unsupported required selections
 remain blockers. Skill validation uses an
 external installed skill-creator validator with Python/PyYAML. Formal planning
 also needs external Java/TLC tooling. Those tools are used by the calling agents;
 neither their binaries nor a separate model-checking service are bundled here.
 
-Claude Code installation loads all four skills through its native marketplace
+Claude Code installation loads four skills and four phase agents through its native marketplace
 commands. GitHub installation pins `#main` explicitly; local checkout registration
 supports unpublished changes. Claude invokes skills as `/pdawgy-skills:<name>`;
 Codex uses `$<name>`. The shared instructions route to native host reviewer
@@ -150,7 +177,7 @@ Plans are written in the mapped project inside the task worktree at
 `verifications/` directory containing `verification.md`, reviews, and applicable
 logs/screenshots. `failures.md` is the durable issue/attempt register, linked to
 the checklist. Its `tla/` subtree holds specifications/configs, tool/input
-identities, parent/reviewer runs and relevant counterexamples. Reviewers use their
+identities, author/reviewer runs and relevant counterexamples. Reviewers use their
 own fresh metadata/log locations and preserve evidence without editing the model.
 The `dwag-plan` spelling is intentional. This repository's own
 `.dawgy/` tree preserves development plans, snapshot validation helpers, and

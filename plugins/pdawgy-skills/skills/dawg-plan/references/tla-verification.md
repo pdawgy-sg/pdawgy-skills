@@ -1,7 +1,7 @@
 # Required TLA+ verification
 
 Every plan requires a meaningful TLA+ specification and actual TLC model checking
-by the parent and every required reviewer before readiness. Keep the model as
+by the author and every required reviewer before readiness. Keep the model as
 small as the requested behavior permits; keep its abstraction explicit.
 
 ## Model the requested behavior
@@ -38,7 +38,7 @@ production-model failures. Never fix a counterexample merely by deleting its
 property, excluding the bad state, or weakening the requirement.
 Use the [recovery loop](recovery-loop.md) for unexpected formal failures: record
 the issue/attempt, diagnose and correct it, then actually rerun. Preserve failed
-traces after resolution. Material corrections invalidate the parent and all required reviewer receipts as
+traces after resolution. Material corrections invalidate the author and all required reviewer receipts as
 specified below; a failure report alone is not a completed verification task.
 
 ## Run TLC and preserve evidence
@@ -91,11 +91,12 @@ log alone does not identify the checked model.
 ## Every required reviewer executes independently
 
 Use dawg-plan's recorded execution host and size classification. Codex uses
-`gpt-6.1-sol`/high, adding `gpt-6-astra`/high for large work; Claude Code uses native
-`sonnet`/high, adding `opus`/high for large work. Unknown host blocks selection;
+`gpt-6.1-sol`/high, adding `gpt-6-astra`/high for large work; Claude Code uses
+Sonnet 5.5/high only for small work, adding a separate Opus 5.5/high for large work. Unknown host blocks selection;
 record requested and host-reported effective model/effort, without cross-profile
-substitution or invented alias versions. Give every required reviewer the same final
-module/configurations, dependency identities, acceptance mapping and parent evidence. Each must:
+substitution or unverified version/effort fallback. Its Opus 5.5/high planner
+executes author TLC; that is not the separate large-work Opus review. Give every required reviewer the same final
+module/configurations, dependency identities, acceptance mapping and author evidence. Each must:
 
 1. Read the actual spec/config and inspect assumptions, properties, abstraction,
    fairness/deadlock handling, finite scope, relevant reachability and omissions.
@@ -103,10 +104,10 @@ module/configurations, dependency identities, acceptance mapping and parent evid
    audited runner is allowed, but each must inspect its commands/configs and raw
    outputs instead of trusting the other agent's receipt or a summary boolean.
 3. Save its own identities, logs, outcomes and semantic findings. Verify its
-   checked input hashes match the final parent inputs. Independently assess whether
+   checked input hashes match the final author inputs. Independently assess whether
    those inputs represent the requested behavior and intended implementation.
 
-Readiness requires the parent's and every required reviewer's completed passing
+Readiness requires the author's and every required reviewer's completed passing
 checks on identical current inputs, all required semantic approvals and resolved
 material findings. Missing/blocked/unrun required reviewer execution is a blocker.
 The host's second reviewer is not required for small work; label it not required
@@ -115,8 +116,8 @@ must be resolved before that review counts.
 Keep expected negative/witness probes separate from successful required models.
 
 Material behavior, model/dependency, configuration/property, constant/bound,
-assumption or fairness changes invalidate the parent and all required reviewer
-receipts. Rerun the parent and every required reviewer on the changed contract.
+assumption or fairness changes invalidate the author and all required reviewer
+receipts. Rerun the author and every required reviewer on the changed contract.
 Scope growth to large requires the host's additional reviewer before readiness; valid current receipts may
 remain only when their reviewed inputs are unchanged and applicable. A host switch
 revokes readiness and requires reviews from the newly selected profile; old-provider
