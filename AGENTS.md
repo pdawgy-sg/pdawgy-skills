@@ -7,11 +7,12 @@
 - Use the bundled [dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md)
   workflow for features, fixes and refactors. Resolve material uncertainty,
   show state diagrams, and break work into small parts with reproducible verification.
-  Classify size with a concrete rationale: small work requires only `gpt-6.1-sol`
-  at high effort; large work adds `gpt-6-astra` at high effort. Follow dawg-plan's
-  impact/risk criteria and escalate on growth. Missing required reviewers block
-  readiness; optional Astra does not block small work. Do not claim unavailable
-  reviews ran.
+  Record active execution host and size/risk rationale. Codex small work uses
+  `gpt-6.1-sol`/high; large adds `gpt-6-astra`/high. Claude Code small work uses
+  native `sonnet`/high; large adds `opus`/high. Follow dawg-plan's host detection,
+  effective-model/effort and escalation rules. Unknown host and missing required
+  execution block readiness; optional second reviewers do not block small work.
+  Revoke readiness on host changes; never relabel wrong-provider receipts.
 - Every plan includes a meaningful TLA+ model/configuration and actual completed
   TLC checks by the parent and every required reviewer on identical final inputs.
   Review assumptions, finite bounds, properties, reachability and implementation mapping;

@@ -1,6 +1,6 @@
 ---
 name: dawg-plan
-description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and size-based independent review (Sol for small work, Sol plus Astra for large work). During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
+description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and host-aware independent review (Sol/Astra in Codex, Sonnet/Opus in Claude Code; one reviewer for small work, two for large work). During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
@@ -126,10 +126,11 @@ rerun checks. A plan must be independently executable; instructions like "test
 it" or "verify it works" are insufficient. Use repository-supported commands;
 label a command that cannot yet be confirmed and explain what must resolve it.
 
-## Select independent reviewers by change size
+## Select independent reviewers by host and change size
 
-Before delegation, classify the fix, feature or refactor as **small** or **large**.
-Record the tier, concrete rationale and required model/effort set in `PLAN.md`.
+Before delegation, identify the active execution host and classify the fix,
+feature or refactor as **small** or **large**. Record the host, tier, concrete
+rationale and required model/effort set in `PLAN.md`.
 
 - **Small:** A narrow, well-understood behavioral change with limited impact and
   straightforward focused verification. Repeating one policy across documentation
@@ -140,17 +141,39 @@ Record the tier, concrete rationale and required model/effort set in `PLAN.md`.
   Investigate unclear scope; use the large tier when material size/risk uncertainty
   remains. Resolve unclear product intent through the normal questions workflow.
 
-For **small** work, use only `gpt-6.1-sol` at `high` reasoning effort. For **large**
-work, use `gpt-6.1-sol` and `gpt-6-astra`, each at `high`, concurrently when supported.
-Do not spawn Astra for small work by default. An explicit user reviewer choice
-supersedes the default. Reassess as scope/risk changes: if work grows large, revoke
-readiness and add Astra before proceeding. Do not silently drop a required reviewer
-or downgrade the tier merely to avoid review.
+Determine the host from trusted session context and the active delegation API,
+not from `CLAUDE.md`, `AGENTS.md`, skill paths or installed executables. A repository
+can support both clients. If the execution host remains unknown, ask a focused
+question before delegation; do not guess a profile or mark the plan ready.
+
+| Active host | Small work | Large work |
+| --- | --- | --- |
+| Codex | `gpt-6.1-sol` / high | `gpt-6.1-sol` + `gpt-6-astra`, both high |
+| Claude Code | native `sonnet` / high | native `sonnet` + `opus`, both high |
+
+Use only the host's primary reviewer for small work. Add its second reviewer for
+large work, concurrently when supported. An explicit user reviewer choice
+supersedes these defaults when the required execution is available. Reassess
+scope/risk growth: revoke readiness and add Astra in Codex or Opus in Claude Code
+before proceeding. Do not silently drop a required reviewer or downgrade merely
+to avoid review. A host change also revokes readiness and selects the new profile;
+previous-provider receipts cannot be relabeled as the new required reviews.
 
 After drafting the concrete plan/checklist and TLA+ inputs and completing the
 parent's required TLC checks, spawn the selected reviewer(s). Use explicit model
-and effort selections. For `collaboration.spawn_agent`, set `fork_turns: "none"`
-so overrides apply. Give every required reviewer the same current requirements,
+and effort selections. In Codex, for `collaboration.spawn_agent`, set
+`fork_turns: "none"` so overrides apply. In Claude Code, use a non-fork `Agent`
+invocation with the selected `model` alias (`sonnet` or `opus`) and `effort: "high"`
+on a review-capable agent, such as `general-purpose`. Do not inherit an arbitrary
+parent model or change user-global model settings to satisfy the profile.
+
+Record requested model/effort and the effective model/effort reported by the host;
+for Claude aliases record a resolved model ID when exposed, rather than inventing
+an exact version. Inspect applicable model/effort overrides and runtime metadata
+(`/tasks` in Claude Code when available). A known forced fallback outside the
+selected family or required effort is a blocker, not the requested review.
+See Claude Code's [native subagent model and effort rules](https://code.claude.com/docs/en/sub-agents).
+Give every required reviewer the same current requirements,
 confirmed decisions, repository context, plan/checklist, formal inputs and parent
 evidence. Each independently reviews intent, state transitions/invariants, task
 boundaries, acceptance coverage, reproducibility and excessive testing/scope.
@@ -163,9 +186,11 @@ Keep project source unchanged and preserve separate reviewer evidence. Do not tr
 another agent's log or a shared runner summary as independent execution/review.
 
 Wait for every required review. Save model/effort, reviewed revision and findings
-in `verifications/design-review-sol.md` and, for large work,
-`verifications/design-review-astra.md`. For small work mark Astra not required,
-not missing/pending, and do not claim it ran. Record findings/dispositions in
+in host-specific records: Codex uses `verifications/design-review-sol.md` and,
+for large work, `design-review-astra.md`; Claude Code uses `design-review-sonnet.md`
+and, for large work, `design-review-opus.md`, all under `verifications/`. For small
+work mark the additional host reviewer not required, not missing/pending, and do
+not claim it ran. Record findings/dispositions in
 `PLAN.md`; resolve material findings and return missing product decisions to the
 user. Reuse required reviewers for reassessment after material design changes.
 
@@ -173,13 +198,14 @@ Material requirement, behavior, model/dependency, config/property/bound/assumpti
 or fairness changes invalidate the parent's and every required reviewer's receipts:
 rerun/review on identical final inputs. If only the required set expands and
 reviewed inputs are unchanged, retain valid current receipts and obtain the
-missing Astra execution and semantic review. Readiness requires the current parent
+missing host-specific reviewer execution and semantic review. Readiness requires the current parent
 run, every tier-required reviewer's current run and semantic approval, and no
 unresolved material findings.
 
 Unavailable required models/effort/delegation/TLC execution block readiness;
-record the exact dependency and tell the user. Missing Astra is not a blocker for
-small work. Do not substitute models or invent reviews. Continue independent
+record the exact dependency and tell the user. Missing the optional second
+reviewer does not block small work. Do not silently switch host profiles,
+substitute models or invent reviews. Continue independent
 drafting/investigation while a genuine required dependency remains blocked.
 
 ## Preserve evidence through implementation

@@ -38,11 +38,14 @@ project build/test framework in the current source package.
 fix or refactor, resolves material ambiguity, models its state transitions, and defines
 small verifiable tasks. Its assets provide plan and verification templates.
 Every plan requires a concrete TLA+ model/configuration and parent TLC run, followed
-by independent TLC execution and semantic review from `gpt-6.1-sol` at high effort
-for small work, adding `gpt-6-astra` at high effort for large work. The plan records
-size/risk rationale and the required set. Scope growth revokes readiness until
-the expanded set approves current inputs; missing optional Astra does not block
-small work. The required
+by independent TLC execution and semantic review selected by host and size.
+Codex uses gpt-6.1-sol/high for small work and adds gpt-6-astra/high for large work;
+Claude Code uses native sonnet/high and adds opus/high for large work. The plan
+records trusted execution-host evidence, size/risk rationale and requested/effective
+model identities. Unknown host blocks delegation rather than guessing from files.
+Scope growth or host changes revoke readiness until the new required set approves
+current inputs; wrong-provider receipts cannot be relabeled. The optional second
+reviewer does not block small work. The required
 [TLA+ guide](plugins/pdawgy-skills/skills/dawg-plan/references/tla-verification.md)
 defines domain/requirement mapping, enabled properties and assumptions, finite
 bounds, actual completion evidence, reachability checks, and shared final input
@@ -123,8 +126,10 @@ flowchart TD
 
 The calling coding agent executes these workflows with its available file,
 shell, and subagent tools. The plugin supplies instructions and templates rather
-than a separate execution service. Its reviewer requirement depends on Sol/high delegation for small work and
-Sol/high plus Astra/high for large work; unavailable required models block readiness. Skill validation uses an
+than a separate execution service. Reviewer delegation uses the active client's
+native model profile: Sol/Astra in Codex, Sonnet/Opus in Claude Code, all high.
+Native model/effort overrides are inspected and unsupported required selections
+remain blockers. Skill validation uses an
 external installed skill-creator validator with Python/PyYAML. Formal planning
 also needs external Java/TLC tooling. Those tools are used by the calling agents;
 neither their binaries nor a separate model-checking service are bundled here.
@@ -132,9 +137,10 @@ neither their binaries nor a separate model-checking service are bundled here.
 Claude Code installation loads all four skills through its native marketplace
 commands. GitHub installation pins `#main` explicitly; local checkout registration
 supports unpublished changes. Claude invokes skills as `/pdawgy-skills:<name>`;
-Codex uses `$<name>`. Packaging does not grant GPT reviewer access or configure a
-cross-model bridge. Planning/init retain exact selected-model/TLC requirements
-and report missing capabilities as blockers; installation is not evidence of a
+Codex uses `$<name>`. The shared instructions route to native host reviewer
+models without a cross-provider bridge; packaging does not grant model access.
+Planning/init retain selected-model/effort and TLC requirements and report missing
+capabilities as blockers; installation is not evidence of a
 completed planning or coding workflow. Native validation and isolated CLI
 registration/install/inventory checks verify packaging without invoking an LLM
 or changing the developer's real Claude settings.

@@ -12,7 +12,8 @@ Delivery checkpoint: <planning-only, or verified pre-delivery snapshot>
 Final commit/push receipt: <report in chat after delivery; no self-referential commit>
 Failure register: [failures.md](failures.md)
 Current phase / green gate: <required checks for this phase; open F IDs>
-Review tier / rationale / required models: <small: Sol/high; large: Sol+Astra/high; changes>
+Execution host / evidence: <Codex or Claude Code; trusted context, unresolved host blocks>
+Review tier / rationale / required models: <Codex Sol(+Astra)/high; Claude Sonnet(+Opus)/high; additional model only for large>
 
 ## Coverage checklist
 
@@ -53,16 +54,19 @@ unresolved. Keep later planned phases and exact expected negative probes distinc
 
 - Parent TLC: <revision/input/tool hashes; exact command; configs; completed
   outcomes/state counts; tla/runs/...; not run until actually executed>
-- Astra (large only): <design-review-astra.md with gpt-6-astra/high and own current
-  TLC/semantic review; for small mark not required, no execution claimed>
-- Sol: <design-review-sol.md; gpt-6.1-sol/high; own TLC hashes/logs/results;
-  abstraction/requirement review; matching final model identity>
+- Primary host reviewer: <sol/high in Codex or sonnet/high in Claude Code;
+  host-specific design-review file, requested/effective identity+effort, own current
+  TLC hashes/logs/results and semantic review on final inputs>
+- Additional host reviewer (large only): <astra/high in Codex or opus/high in
+  Claude Code; own current TLC/semantic review and actual identity; for small
+  explicitly mark not required, never fabricate execution>
 - Formal limits/probes: <finite bounds, assumptions, fairness/deadlock choices,
   actual nominal reachability; expected negative traces separate from failures>
 
 Changed behavior/model/config/dependencies/bounds/assumptions/fairness invalidate
 the parent and all required reviewer receipts.
-Scope growth requires the large-tier reviewer set before readiness. Missing, failed, stale or incomplete required executions block
+Scope growth requires the host-specific large-tier set before readiness. Host
+changes revoke readiness/reselect the profile; wrong-provider receipts do not count. Missing, failed, stale or incomplete required executions block
 readiness. These checks validate a bounded abstraction; implementation verification
 and source correspondence remain required.
 

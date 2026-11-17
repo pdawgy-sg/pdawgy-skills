@@ -90,8 +90,11 @@ log alone does not identify the checked model.
 
 ## Every required reviewer executes independently
 
-Use dawg-plan's recorded size classification: `gpt-6.1-sol`/high for small work;
-add `gpt-6-astra`/high for large work. Give every required reviewer the same final
+Use dawg-plan's recorded execution host and size classification. Codex uses
+`gpt-6.1-sol`/high, adding `gpt-6-astra`/high for large work; Claude Code uses native
+`sonnet`/high, adding `opus`/high for large work. Unknown host blocks selection;
+record requested and host-reported effective model/effort, without cross-profile
+substitution or invented alias versions. Give every required reviewer the same final
 module/configurations, dependency identities, acceptance mapping and parent evidence. Each must:
 
 1. Read the actual spec/config and inspect assumptions, properties, abstraction,
@@ -105,15 +108,19 @@ module/configurations, dependency identities, acceptance mapping and parent evid
 
 Readiness requires the parent's and every required reviewer's completed passing
 checks on identical current inputs, all required semantic approvals and resolved
-material findings. Missing/blocked/unrun required reviewer execution is a blocker. Astra
-is not required for small work; label it not required rather than pending/unrun.
+material findings. Missing/blocked/unrun required reviewer execution is a blocker.
+The host's second reviewer is not required for small work; label it not required
+rather than pending/unrun. A model/effort override preventing the selected profile
+must be resolved before that review counts.
 Keep expected negative/witness probes separate from successful required models.
 
 Material behavior, model/dependency, configuration/property, constant/bound,
 assumption or fairness changes invalidate the parent and all required reviewer
 receipts. Rerun the parent and every required reviewer on the changed contract.
-Scope growth to large requires Astra before readiness; valid current receipts may
-remain only when their reviewed inputs are unchanged. Unchanged exact inputs may
+Scope growth to large requires the host's additional reviewer before readiness; valid current receipts may
+remain only when their reviewed inputs are unchanged and applicable. A host switch
+revokes readiness and requires reviews from the newly selected profile; old-provider
+receipts cannot be credited as those models. Unchanged exact inputs may
 retain their executed receipts while reviewers inspect later implementation
 conformance; do not reuse stale results across a changed model or requirements.
 

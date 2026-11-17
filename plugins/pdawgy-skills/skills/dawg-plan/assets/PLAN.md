@@ -3,8 +3,9 @@
 Status: DRAFT | BLOCKED | READY | IMPLEMENTING | VERIFIED
 Project root: <mapped project path inside task worktree>
 Plan revision: <revision/date; update after material changes>
+Execution host and evidence: <Codex or Claude Code; trusted runtime context, ask if unknown>
 Review tier and rationale: <small or large; impact/complexity/risk, not file count>
-Required reviewers: <Sol/high; add Astra/high for large; record escalation>
+Required reviewers: <Codex Sol/high + Astra/high if large; Claude Sonnet/high + Opus/high if large>
 Source repository root: <original checkout>
 Selected target-relative path: <scope inside repository, or .>
 Worktree repository root: <linked task worktree>
@@ -65,8 +66,8 @@ Invariants: <properties that must hold across transitions and how they are check
 | Agent | Tool/input identity | Actual command and run evidence | Result / states / scope |
 | --- | --- | --- | --- |
 | Parent | <current hashes/version> | <verifications/tla/runs/...> | <not run or actual> |
-| Astra (large only) | <same final inputs if required> | <own run or not required for small> | <actual or not required> |
-| Sol | <same final inputs> | <own independent run> | <not run or actual> |
+| Primary host reviewer | <same final inputs; requested/effective model+effort> | <own independent run> | <not run or actual> |
+| Additional host reviewer (large only) | <same final inputs; actual identity if required> | <own run or not required for small> | <actual or not required> |
 
 Reachability/sensitivity: <evidence nominal paths are reachable; focused negative
 or regression probe when useful; expected violations separate from required runs>.
@@ -93,12 +94,13 @@ one ID when it proves multiple tasks or transitions.
 
 | Reviewer | Model / effort | Plan revision reviewed | Findings and disposition | Record |
 | --- | --- | --- | --- | --- |
-| Astra (large only) | gpt-6-astra / high | <revision if required> | <actual outcome or not required for small> | <verifications/design-review-astra.md when required> |
-| Sol | gpt-6.1-sol / high | <revision> | <pending or actual outcome> | verifications/design-review-sol.md |
+| Primary | <Codex gpt-6.1-sol/high or Claude sonnet/high; effective identity> | <revision> | <pending or actual> | <verifications/design-review-sol.md or design-review-sonnet.md> |
+| Additional (large only) | <Codex gpt-6-astra/high or Claude opus/high; effective identity> | <revision if required> | <actual or not required for small> | <verifications/design-review-astra.md or design-review-opus.md when required> |
 
 Readiness: <parent and every tier-required reviewer independently completed TLC
 on current inputs; all required semantic reviews approved; findings resolved;
-Astra explicitly not required for small work, no fabricated run>
+additional host reviewer explicitly not required for small work; no fabricated run;
+unknown/changed host or wrong-provider receipts cannot bypass readiness>
 
 ## Verification and handoff
 

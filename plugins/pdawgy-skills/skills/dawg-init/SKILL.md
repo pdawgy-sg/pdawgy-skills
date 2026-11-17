@@ -42,9 +42,10 @@ Save the plan, diagrams, checklist and evidence in that mapped project's
 checkout. Handle unborn baselines and unrelated work through dawg-plan's workflow.
 
 Honor the full workflow, including the concrete TLA+ model/configuration, parent
-TLC checks, and size-based independent TLC reruns/semantic reviews: `gpt-6.1-sol`
-at high effort for small work, adding `gpt-6-astra` at high effort for large work.
-Record the tier/rationale and follow dawg-plan's escalation rules. Do not write target guidance before those current
+TLC checks, and host/size-based independent TLC reruns/semantic reviews. Codex
+uses Sol/high for small work and adds Astra/high for large work; Claude Code uses
+native Sonnet/high and adds Opus/high for large work. Resolve the active host,
+record host/tier/rationale and follow dawg-plan's selection/escalation rules. Do not write target guidance before those current
 checks pass and the plan is ready. If the sibling skill, formal tools/execution
 or required reviewers are unavailable, report the blocker;
 continue inspection and drafting but do not invent a substitute review. Running
@@ -81,10 +82,11 @@ Encode these Dawg coding standards in `AGENTS.md`:
 
 - Use `dawg-plan` for features, fixes and refactors; clarify material uncertainty
   and keep tasks small with enough verification/evidence to prove they work. Require TLA+
-  modeling and completed parent/all-required-reviewer TLC runs on matching inputs.
-  Require Sol/high for small work and add Astra/high for large work; record the
-  size rationale and reassess growth. Missing required reviewers block readiness;
-  optional Astra does not block small work. State bounded formal claims and retain
+  modeling and completed TLC runs by the parent and all required reviewers on
+  matching inputs. Select by execution host: Codex Sol/high (+Astra/high for large),
+  Claude Code Sonnet/high (+Opus/high for large). Record host/tier/rationale, ask
+  when host is unknown, and reassess growth/host changes. Missing required reviewers
+  block readiness; the optional second reviewer does not block small work. State bounded formal claims and retain
   implementation checks. Require its
   task worktree/branch, ask before Git initialization when needed, and automatically
   conventionally commit/push authorized implementation only after required checks

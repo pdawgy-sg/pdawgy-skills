@@ -7,20 +7,17 @@ native marketplace catalog and manifest pointing to that same package.
 
 ## Install in Claude Code
 
-Once the Claude Code marketplace files are merged into `main`, run these
-commands in your terminal to install that published version:
+Run these commands in your terminal to install the version published on `main`:
+Unmerged feature-branch changes are not included in that version.
 
 ```sh
 claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#main'
 claude plugin install pdawgy-skills@pdawgy-skills
 ```
 
-Before that merge, install this feature-branch preview instead:
-
-```sh
-claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#codex/feature/claude-code-support'
-claude plugin install pdawgy-skills@pdawgy-skills
-```
+To test an unpublished feature branch, replace `#main` in the first command
+with that branch name. The plugin install ID stays the same. A local checkout
+of the desired branch also works, using the commands below.
 
 The explicit ref avoids relying on the repository's default branch. Choose one
 source for this marketplace name. Confirm installation with `claude plugin list`
@@ -50,21 +47,32 @@ explains `#main` or another branch/tag.
 | Architecture maintenance | `$dawg-architecture-maintain` | `/pdawgy-skills:dawg-architecture-maintain` |
 | MR description | `$dawg-mr` | `/pdawgy-skills:dawg-mr` |
 
-Installation supplies instructions, not model access or a reviewer bridge.
-`dawg-plan` and `dawg-init` retain the chosen Sol/high review for small work and
-Sol/high plus Astra/high for large work, and need Java/TLC for formal checks.
-The calling environment must provide those required capabilities; unavailable
-reviewers/tools remain explicit planning blockers. This package does not silently
-substitute Claude reviewers. `dawg-mr` drafts from committed changes without
-requiring the planning review cycle.
+`dawg-plan` and `dawg-init` select reviewers for the active client:
+
+| Host | Small change | Large change |
+| --- | --- | --- |
+| Codex | GPT-6.1 Sol / high | Sol + GPT-6 Astra, both high |
+| Claude Code | Sonnet / high | Sonnet + Opus, both high |
+
+Claude Code uses its native `sonnet` and `opus` aliases and per-agent effort
+selection. Codex retains its exact Sol/Astra model choices. Plans record host,
+size/risk rationale and model identities; scope growth or host changes revoke
+readiness until the required reviews are current. Unknown hosts require a focused
+question, and unavailable required models/effort remain blockers. Neither client
+silently falls back to the other client's reviewers.
+
+Java/TLC is still required for formal planning checks. Installation supplies
+instructions, not model entitlements or external tooling. `dawg-mr` drafts from
+committed changes without requiring the planning review cycle. See Claude Code's
+[subagent model/effort rules](https://code.claude.com/docs/en/sub-agents).
 
 ## Included skills
 
 - **dawg-plan** — Understand features, fixes and refactors, ask about missing requirements,
   diagram their state transitions, and break work into small verifiable tasks.
   Every plan includes a TLA+ model/config and completed parent plus required
-  reviewer TLC runs. Small work uses only `gpt-6.1-sol` at high effort; large work
-  adds `gpt-6-astra` at high effort. Record an impact/risk rationale, reassess growth
+  reviewer TLC runs. Codex uses Sol/high and adds Astra/high for large work;
+  Claude Code uses Sonnet/high and adds Opus/high for large work. Record an impact/risk rationale, reassess growth
   and obtain current runs and semantic approval from the required set. Missing/stale/incomplete runs block
   readiness; bounded model checks complement implementation tests. Features/fixes/refactors use a dedicated Git worktree
   and task branch; non-Git directories require initialization consent. After

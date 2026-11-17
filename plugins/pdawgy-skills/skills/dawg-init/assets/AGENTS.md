@@ -16,9 +16,12 @@ rules. Keep this section about writing and checking code, not module inventories
 - Use `dawg-plan` for features, fixes and refactors. Resolve material uncertainty,
   keep work in small parts, and record enough verification/evidence for each part. Include
   a meaningful TLA+ model/config and completed parent plus every required reviewer
-  TLC check on identical final inputs. Small work requires gpt-6.1-sol/high; large
-  work adds gpt-6-astra/high. Record tier/rationale, reassess scope/risk growth, and
-  require the expanded set before readiness; missing optional Astra does not block.
+  TLC check on identical final inputs. Select by active host: Codex uses
+  gpt-6.1-sol/high and adds gpt-6-astra/high for large work; Claude Code uses native
+  sonnet/high and adds opus/high for large work. Record host/tier/rationale, ask
+  if host is unknown, and reassess scope/risk or host changes before readiness.
+  Only the selected set is required; the optional second reviewer does not block
+  small work. Never credit a different provider's receipt as the selected model.
   Do not silently drop a required reviewer. State bounds and assumptions; retain implementation tests and rerun after material model or
   requirement changes. Use its
   dedicated Git worktree/task branch and preserve selected subdirectory scope.
