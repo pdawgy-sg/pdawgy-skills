@@ -1,6 +1,6 @@
 {
   "name": "pdawgy-skills",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "description": "Shared Dawg workflows for Codex and Claude Code.",
   "skills": "./skills/",
   "interface": {

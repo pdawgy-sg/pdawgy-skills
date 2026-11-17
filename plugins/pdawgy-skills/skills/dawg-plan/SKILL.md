@@ -1,6 +1,6 @@
 ---
 name: dawg-plan
-description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and size-based independent review (Sol for small work, Sol plus Astra for large work). During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
+description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and host-aware independent review (Sol/Astra in Codex, Sonnet/Opus in Claude Code; one reviewer for small work, two for large work). During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
@@ -18,6 +18,54 @@ user to initialize and wait for consent; do not silently initialize or proceed.
 Preserve an originally selected subdirectory by mapping it into the worktree.
 Tell callers the worktree repository root and mapped project directory, and use
 that mapped project for subsequent work. Do not implement in the source checkout.
+
+## Route Claude Code phases through pinned agents
+
+Determine the host from trusted session context and the active delegation API,
+not repository files or installed executables. If unknown, ask before choosing a
+profile. Codex keeps its current planning/implementation actor and Sol/Astra
+review policy. In Claude Code, the calling coordinator schedules these native
+plugin agents as separate non-fork siblings in the same mapped task worktree:
+
+| Phase | Qualified agent type | Model | Effort |
+| --- | --- | --- | --- |
+| Planning and author TLC | `pdawgy-skills:dawg-planner` | `claude-opus-5-5` | high |
+| Primary independent review | `pdawgy-skills:dawg-review-sonnet` | `claude-sonnet-5-5` | high |
+| Additional review, large only | `pdawgy-skills:dawg-review-opus` | `claude-opus-5-5` | high |
+| Authorized implementation and verification | `pdawgy-skills:dawg-implementer` | `claude-opus-5-5` | medium |
+
+Select these exact agent types with the native `Agent` tool; omit per-invocation
+`model` and `effort` overrides so their definition pins apply. A per-call family
+alias can replace a full-version pin. Keep inherited permissions; do not request
+extra worktree isolation, change user-global settings or add a provider bridge.
+Verify requested and effective model/effort from host metadata (including `/tasks`
+when available) and applicable overrides. A forced fallback, wrong version/effort,
+missing definition, or unavailable required execution blocks that phase. Record
+provider-specific equivalent IDs only with evidence they resolve to the same 5.5
+model; never invent a resolved identity. See the official
+[subagent model/effort rules](https://code.claude.com/docs/en/sub-agents).
+
+Before authoring a Claude plan, send the pinned planner the complete request,
+confirmed decisions, applicable instructions, mapped paths, existing plan and
+constraints. It performs the planning sections below and the actual author TLC
+runs, then returns artifacts, questions and findings to the coordinator. The
+coordinator relays material user questions and returns answers to that planner.
+After author checks, the coordinator launches only the size-required independent
+reviewer(s); the Opus planner never counts as the additional Opus review.
+
+These definitions are bounded phase workers. When executing as one, follow only
+your assigned phase and return to the coordinator; do not run this routing section
+recursively or spawn sibling/child agents. The coordinator owns delegation,
+readiness and mechanical Git delivery, and does not substitute its own model for
+planning or source implementation. Pass explicit role, current plan revision,
+requirements and evidence paths in every handoff. Material implementation gaps
+return to the coordinator for high-effort re-planning and required re-review.
+Planning-only requests never launch the implementation worker. Existing caller
+workflows such as dawg-init use the same phase workers rather than a second cycle.
+
+Throughout this skill, **author TLC** means the Codex parent or the Claude pinned
+planner's actual run, plus separate runs by every required reviewer. Claude does
+not require a redundant coordinator TLC run or count planning as a review.
 
 ## Understand the intended behavior
 
@@ -94,7 +142,7 @@ several transitions; do not create a separate test merely for every arrow.
 Read and follow [the required TLA+ workflow](references/tla-verification.md).
 Every plan includes a concrete TLA+ model/configuration of the requested behavior,
 mapped acceptance criteria/actions/properties, stated assumptions and finite bounds,
-and completed TLC checks. Keep diagrams and the model consistent. Parent and every required
+and completed TLC checks. Keep diagrams and the model consistent. The author and every required
 reviewer must actually run the same final model/configuration; an opinion or
 inspection of someone else's log does not satisfy independent execution.
 
@@ -126,10 +174,11 @@ rerun checks. A plan must be independently executable; instructions like "test
 it" or "verify it works" are insufficient. Use repository-supported commands;
 label a command that cannot yet be confirmed and explain what must resolve it.
 
-## Select independent reviewers by change size
+## Select independent reviewers by host and change size
 
-Before delegation, classify the fix, feature or refactor as **small** or **large**.
-Record the tier, concrete rationale and required model/effort set in `PLAN.md`.
+Before delegation, identify the active execution host and classify the fix,
+feature or refactor as **small** or **large**. Record the host, tier, concrete
+rationale and required model/effort set in `PLAN.md`.
 
 - **Small:** A narrow, well-understood behavioral change with limited impact and
   straightforward focused verification. Repeating one policy across documentation
@@ -140,20 +189,37 @@ Record the tier, concrete rationale and required model/effort set in `PLAN.md`.
   Investigate unclear scope; use the large tier when material size/risk uncertainty
   remains. Resolve unclear product intent through the normal questions workflow.
 
-For **small** work, use only `gpt-6.1-sol` at `high` reasoning effort. For **large**
-work, use `gpt-6.1-sol` and `gpt-6-astra`, each at `high`, concurrently when supported.
-Do not spawn Astra for small work by default. An explicit user reviewer choice
-supersedes the default. Reassess as scope/risk changes: if work grows large, revoke
-readiness and add Astra before proceeding. Do not silently drop a required reviewer
-or downgrade the tier merely to avoid review.
+Determine the host from trusted session context and the active delegation API,
+not from `CLAUDE.md`, `AGENTS.md`, skill paths or installed executables. A repository
+can support both clients. If the execution host remains unknown, ask a focused
+question before delegation; do not guess a profile or mark the plan ready.
+
+| Active host | Small work | Large work |
+| --- | --- | --- |
+| Codex | `gpt-6.1-sol` / high | `gpt-6.1-sol` + `gpt-6-astra`, both high |
+| Claude Code | Sonnet 5.5 / high only | Sonnet 5.5 + independent Opus 5.5, both high |
+
+Use only the host's primary reviewer for small work. Add its second reviewer for
+large work, concurrently when supported. An explicit user reviewer choice
+supersedes these defaults when the required execution is available. Reassess
+scope/risk growth: revoke readiness and add Astra in Codex or Opus in Claude Code
+before proceeding. Do not silently drop a required reviewer or downgrade merely
+to avoid review. A host change also revokes readiness and selects the new profile;
+previous-provider receipts cannot be relabeled as the new required reviews.
 
 After drafting the concrete plan/checklist and TLA+ inputs and completing the
-parent's required TLC checks, spawn the selected reviewer(s). Use explicit model
-and effort selections. For `collaboration.spawn_agent`, set `fork_turns: "none"`
-so overrides apply. Give every required reviewer the same current requirements,
-confirmed decisions, repository context, plan/checklist, formal inputs and parent
-evidence. Each independently reviews intent, state transitions/invariants, task
-boundaries, acceptance coverage, reproducibility and excessive testing/scope.
+author's required TLC checks, the coordinator spawns the selected reviewer(s).
+In Codex, use explicit model/effort with `collaboration.spawn_agent` and set
+`fork_turns: "none"` so overrides apply. In Claude Code, select the pinned
+`dawg-review-sonnet` agent and add the separate `dawg-review-opus` agent only for
+large work, using the qualified types and override checks above. Do not use the
+planner's context or receipt as a reviewer, inherit an arbitrary parent model,
+or change user-global settings. Record requested and host-reported effective
+identities/effort and the distinct worker context for each required review.
+Give every required reviewer the same current requirements, confirmed decisions,
+repository context, plan/checklist, formal inputs and author evidence. Each
+independently reviews intent, transitions/invariants, task boundaries, acceptance
+coverage, reproducibility and excessive testing/scope.
 
 Every required reviewer must actually run TLC with fresh private state/log paths,
 audit enabled properties/raw outputs, and assess abstraction, assumptions, bounds,
@@ -163,23 +229,26 @@ Keep project source unchanged and preserve separate reviewer evidence. Do not tr
 another agent's log or a shared runner summary as independent execution/review.
 
 Wait for every required review. Save model/effort, reviewed revision and findings
-in `verifications/design-review-sol.md` and, for large work,
-`verifications/design-review-astra.md`. For small work mark Astra not required,
-not missing/pending, and do not claim it ran. Record findings/dispositions in
+in host-specific records: Codex uses `verifications/design-review-sol.md` and,
+for large work, `design-review-astra.md`; Claude Code uses `design-review-sonnet.md`
+and, for large work, `design-review-opus.md`, all under `verifications/`. For small
+work mark the additional host reviewer not required, not missing/pending, and do
+not claim it ran. Record findings/dispositions in
 `PLAN.md`; resolve material findings and return missing product decisions to the
 user. Reuse required reviewers for reassessment after material design changes.
 
 Material requirement, behavior, model/dependency, config/property/bound/assumption
-or fairness changes invalidate the parent's and every required reviewer's receipts:
+or fairness changes invalidate the author's and every required reviewer's receipts:
 rerun/review on identical final inputs. If only the required set expands and
 reviewed inputs are unchanged, retain valid current receipts and obtain the
-missing Astra execution and semantic review. Readiness requires the current parent
+missing host-specific reviewer execution and semantic review. Readiness requires the current author
 run, every tier-required reviewer's current run and semantic approval, and no
 unresolved material findings.
 
 Unavailable required models/effort/delegation/TLC execution block readiness;
-record the exact dependency and tell the user. Missing Astra is not a blocker for
-small work. Do not substitute models or invent reviews. Continue independent
+record the exact dependency and tell the user. Missing the optional second
+reviewer does not block small work. Do not silently switch host profiles,
+substitute models or invent reviews. Continue independent
 drafting/investigation while a genuine required dependency remains blocked.
 
 ## Preserve evidence through implementation
@@ -187,6 +256,14 @@ drafting/investigation while a genuine required dependency remains blocked.
 Planning alone does not authorize implementation. If the user has already
 authorized implementation, proceed after the plan is ready without requesting
 redundant approval. Otherwise deliver the reviewed plan and checklist.
+In Claude Code, after readiness and implementation authorization, the coordinator
+starts the pinned `pdawgy-skills:dawg-implementer` (Opus 5.5/medium) with the ready
+plan, exact mapped worktree, source scope, authorization and evidence identities.
+That worker implements, verifies and follows the failure-repair loop below; it
+returns current evidence and source changes for coordinator audit, without
+committing/pushing. A material design gap pauses implementation and returns to the
+high-effort planner and required independent reviewers through the coordinator.
+Only then resume the medium implementer. Ordinary in-scope repairs stay with it.
 
 Use `verifications/verification.md` as the execution ledger. Each verification
 has a stable ID (`V1`, `V2`, ...), linked tasks and acceptance criteria/transitions,

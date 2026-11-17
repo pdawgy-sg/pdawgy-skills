@@ -7,24 +7,21 @@ native marketplace catalog and manifest pointing to that same package.
 
 ## Install in Claude Code
 
-Once the Claude Code marketplace files are merged into `main`, run these
-commands in your terminal to install that published version:
+Run these commands in your terminal to install the version published on `main`:
+Unmerged feature-branch changes are not included in that version.
 
 ```sh
 claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#main'
 claude plugin install pdawgy-skills@pdawgy-skills
 ```
 
-Before that merge, install this feature-branch preview instead:
-
-```sh
-claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#codex/feature/claude-code-support'
-claude plugin install pdawgy-skills@pdawgy-skills
-```
+To test an unpublished feature branch, replace `#main` in the first command
+with that branch name. The plugin install ID stays the same. A local checkout
+of the desired branch also works, using the commands below.
 
 The explicit ref avoids relying on the repository's default branch. Choose one
 source for this marketplace name. Confirm installation with `claude plugin list`
-and inspect the four skills with `claude plugin details pdawgy-skills`. Start a
+and inspect the four skills and four phase agents with `claude plugin details pdawgy-skills`. Start a
 new session to use them.
 
 To try an unpublished change from a checkout, run these from the repository root
@@ -50,21 +47,43 @@ explains `#main` or another branch/tag.
 | Architecture maintenance | `$dawg-architecture-maintain` | `/pdawgy-skills:dawg-architecture-maintain` |
 | MR description | `$dawg-mr` | `/pdawgy-skills:dawg-mr` |
 
-Installation supplies instructions, not model access or a reviewer bridge.
-`dawg-plan` and `dawg-init` retain the chosen Sol/high review for small work and
-Sol/high plus Astra/high for large work, and need Java/TLC for formal checks.
-The calling environment must provide those required capabilities; unavailable
-reviewers/tools remain explicit planning blockers. This package does not silently
-substitute Claude reviewers. `dawg-mr` drafts from committed changes without
-requiring the planning review cycle.
+`dawg-plan` and `dawg-init` select reviewers for the active client:
+
+| Host | Small change | Large change |
+| --- | --- | --- |
+| Codex | GPT-6.1 Sol / high | Sol + GPT-6 Astra, both high |
+| Claude Code | Sonnet 5.5 / high only | Sonnet 5.5 + separate Opus 5.5, both high |
+
+Claude Code plans with **Opus 5.5/high** and implements/verifies authorized
+ready plans with **Opus 5.5/medium**. Four native plugin agent definitions pin
+full model IDs and effort; the coordinator launches the planner, size-required
+reviewer(s) and implementer as separate siblings in the same task worktree.
+The planner does author TLC and never counts as an independent review. Small
+changes have exactly one reviewer; large changes add a separate Opus review.
+Planning-only requests stop before the implementer. Material design gaps return
+to the high-effort planner and required reviewers before implementation resumes.
+
+Codex retains Sol/Astra review choices and its current planning/implementation
+actor. Plans record host, size/risk rationale and requested/effective identities;
+growth or host changes revoke readiness until required checks are current.
+Unknown hosts require clarification. Unavailable or overridden required model
+versions/effort block the phase; there is no silent provider fallback or global
+model-setting change. Native definitions require a Claude Code version supporting
+full model IDs and effort; runtime metadata must confirm the selected settings.
+
+Java/TLC is still required for formal planning checks. Installation supplies
+instructions, not model entitlements or external tooling. `dawg-mr` drafts from
+committed changes without requiring the planning review cycle. See Claude Code's
+[subagent model/effort rules](https://code.claude.com/docs/en/sub-agents).
 
 ## Included skills
 
 - **dawg-plan** — Understand features, fixes and refactors, ask about missing requirements,
   diagram their state transitions, and break work into small verifiable tasks.
-  Every plan includes a TLA+ model/config and completed parent plus required
-  reviewer TLC runs. Small work uses only `gpt-6.1-sol` at high effort; large work
-  adds `gpt-6-astra` at high effort. Record an impact/risk rationale, reassess growth
+  Every plan includes a TLA+ model/config and completed author plus required
+  reviewer TLC runs. Codex uses Sol/high and adds Astra/high for large work;
+  Claude Code uses Sonnet 5.5/high only for small work and adds a separate
+  Opus 5.5/high reviewer for large work. Record an impact/risk rationale, reassess growth
   and obtain current runs and semantic approval from the required set. Missing/stale/incomplete runs block
   readiness; bounded model checks complement implementation tests. Features/fixes/refactors use a dedicated Git worktree
   and task branch; non-Git directories require initialization consent. After
@@ -100,9 +119,9 @@ Architecture stays current through coding-task maintenance, not a background job
 Plans are saved in the target project's
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/PLAN.md`, with the checklist and
 evidence in `verifications/verification.md` and the surrounding directory.
-Formal specifications, configurations and parent/reviewer logs live under that
+Formal specifications, configurations and author/reviewer logs live under that
 directory's `tla/`. Java and TLC are external authoring tools; the plugin does not
-bundle them. Material formal-input/requirement changes require the parent and all required
+bundle them. Material formal-input/requirement changes require the author and all required
 reviewers to rerun.
 The target project is mapped into the task worktree, preserving any selected
 subdirectory. Branches default to `codex/feature/<slug>` or `codex/fix/<slug>`.
@@ -128,6 +147,11 @@ pdawgy-skills/
         │   └── plugin.json
         ├── .claude-plugin/
         │   └── plugin.json
+        ├── agents/
+        │   ├── dawg-planner.md
+        │   ├── dawg-review-sonnet.md
+        │   ├── dawg-review-opus.md
+        │   └── dawg-implementer.md
         └── skills/
             ├── dawg-plan/
             │   ├── SKILL.md
@@ -156,7 +180,9 @@ pdawgy-skills/
 
 Both marketplace catalogs point to `./plugins/pdawgy-skills`, relative to the
 repository root. Codex declares `./skills/` in its manifest; Claude Code discovers
-the same standard `skills/` directory. Keep both manifest versions aligned.
+the same standard `skills/` directory and its native `agents/` definitions.
+Codex continues discovering shared skills through its declared skills path.
+Keep both manifest versions aligned.
 
 ## Add a skill
 

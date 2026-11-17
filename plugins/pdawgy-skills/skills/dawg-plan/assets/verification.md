@@ -12,11 +12,12 @@ Delivery checkpoint: <planning-only, or verified pre-delivery snapshot>
 Final commit/push receipt: <report in chat after delivery; no self-referential commit>
 Failure register: [failures.md](failures.md)
 Current phase / green gate: <required checks for this phase; open F IDs>
-Review tier / rationale / required models: <small: Sol/high; large: Sol+Astra/high; changes>
+Execution host / evidence: <Codex or Claude Code; trusted context, unresolved host blocks>
+Review tier / rationale / required models: <Codex Sol(+Astra)/high; Claude Sonnet 5.5(+separate Opus 5.5)/high; additional model only for large>
 
 ## Coverage checklist
 
-- [ ] FORMAL — parent and every tier-required exact reviewer independently completed TLC on
+- [ ] FORMAL — author and every tier-required exact reviewer independently completed TLC on
   identical current inputs; enabled properties/assumptions/bounds reviewed;
   logs/receipts/traces under tla/; bounded claims and implementation gaps recorded.
 - [ ] V1 — <observable check; task IDs; acceptance IDs; transition IDs/invariants>
@@ -49,20 +50,29 @@ invalidate affected old passes. Record real blockers and needed input, ask early
 continue independent work, and do not claim completion while required issues stay
 unresolved. Keep later planned phases and exact expected negative probes distinct.
 
-## Design review evidence
+## Phase identity and review evidence
 
-- Parent TLC: <revision/input/tool hashes; exact command; configs; completed
+- Claude phases when applicable: <qualified planner/reviewer(s)/implementer types;
+  requested and effective full model IDs/effort; overrides checked; distinct sibling
+  contexts; Opus 5.5/high author, Sonnet 5.5/high small review only, separate
+  Opus 5.5/high additional review for large; authorized ready implementation by
+  Opus 5.5/medium; plan-only skips implementer; material gaps re-plan/re-review>
+
+- Author TLC: <revision/input/tool hashes; exact command; configs; completed
   outcomes/state counts; tla/runs/...; not run until actually executed>
-- Astra (large only): <design-review-astra.md with gpt-6-astra/high and own current
-  TLC/semantic review; for small mark not required, no execution claimed>
-- Sol: <design-review-sol.md; gpt-6.1-sol/high; own TLC hashes/logs/results;
-  abstraction/requirement review; matching final model identity>
+- Primary host reviewer: <sol/high in Codex or Sonnet 5.5/high in Claude Code;
+  host-specific design-review file, requested/effective identity+effort, own current
+  TLC hashes/logs/results and semantic review on final inputs>
+- Additional host reviewer (large only): <astra/high in Codex or Opus 5.5/high in
+  Claude Code; own current TLC/semantic review and actual identity; for small
+  explicitly mark not required, never fabricate execution>
 - Formal limits/probes: <finite bounds, assumptions, fairness/deadlock choices,
   actual nominal reachability; expected negative traces separate from failures>
 
 Changed behavior/model/config/dependencies/bounds/assumptions/fairness invalidate
-the parent and all required reviewer receipts.
-Scope growth requires the large-tier reviewer set before readiness. Missing, failed, stale or incomplete required executions block
+the author and all required reviewer receipts.
+Scope growth requires the host-specific large-tier set before readiness. Host
+changes revoke readiness/reselect the profile; wrong-provider receipts do not count. Missing, failed, stale or incomplete required executions block
 readiness. These checks validate a bounded abstraction; implementation verification
 and source correspondence remain required.
 
