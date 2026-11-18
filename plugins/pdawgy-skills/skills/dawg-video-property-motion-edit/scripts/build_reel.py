@@ -112,6 +112,8 @@ def closer(stem, cues, hold=2.2, lift=320):
 
 
 def main():
+    if P.SPEED != 1:
+        raise SystemExit("build_reel.py is timed for SPEED = 1; use build_filmcraft.py or set SPEED=1")
     set_assets(os.path.join(P.WORK, "reel"))
     background()
     segs = [

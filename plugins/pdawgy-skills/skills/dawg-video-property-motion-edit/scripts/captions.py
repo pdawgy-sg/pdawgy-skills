@@ -29,6 +29,8 @@ def load_words():
                 merged.append(dict(w))
         for i, txt in WORD_FIXES.get(clip, {}).items():
             merged[i]["w"] = txt
+        if P.SPEED != 1:
+            merged = [dict(w, s=round(w["s"] / P.SPEED, 3), e=round(w["e"] / P.SPEED, 3)) for w in merged]
         out[clip] = merged
     return out
 

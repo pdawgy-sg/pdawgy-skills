@@ -8,18 +8,18 @@ import project as P
 import captions as CAP
 import locmap
 import motion
-from cards import ease_out, sh, text_width
+from cards import sh, text_width
 from fc import FC, ticks
-from motion import AMBER, BG, check_row, glow, plan_card, set_assets, take
+from motion import AMBER, BG, glow, plan_card, set_assets, take
 from music import house_bed
 
 W, H = 1080, 1920
 FC_PROJECT = os.path.join(P.ROOT, f"{P.NAME}-property-motion.fcproj")
-BG_BAND, GFX_BAND, TXT_BAND = (1, 3), (4, 8), (9, 14)
+BG_BAND, GFX_BAND, TXT_BAND, CAP_BAND = (1, 3), (4, 8), (9, 15), (16, 17)
+STACK_STEP = 158
 LOW = 1560
 CAPTION_MARGIN_BOTTOM = 0.165
 BOLD_TTF = P.FONT_BOLD
-MED_TTF = P.FONT_MED
 
 SECTIONS = [
     ("hook", "20261116151818"),
@@ -29,21 +29,30 @@ SECTIONS = [
     ("closer", "20261116153824"),
 ]
 CUES = {
+    "hook": {"best": 1.4, "core": 2.58},
     "size": {"counter": 0.5, "unit": 0.75, "flexi": 2.35, "shelter_cut": 3.05, "shelter": 3.15,
              "broll": "20261116151903", "value": 958},
     "price": {"label1": 1.1, "price1": 2.35, "label2": 5.6, "price2": 6.85, "theirs": 3.5, "ours": 2.54},
-    "location": {"map_in": 1.45, "schools": 1.72, "mrt": 3.36},
+    "location": {"map_in": 1.45, "schools": 1.72, "walking": 2.5, "mrt": 3.36},
     "closer": {"facilities": 0.8, "three": 2.3, "four": 2.88, "five": 3.36, "available": 4.1,
                "interested": 5.45, "contact": 6.5, "hold": 2.2, "lift": 320},
 }
+NOT_TIMES = {"broll", "value", "theirs", "ours", "hold", "lift"}
+
+
+def L(stem):
+    return int(P.TAKES[stem] / P.SPEED * 30) / 30
+
+
+def scale_cues():
+    for sec in CUES.values():
+        for k, v in sec.items():
+            if k not in NOT_TIMES:
+                sec[k] = v / P.SPEED
 
 
 def baseline(top, size, trimmed=True):
     return top + size * (0.74 if trimmed else 1.06)
-
-
-def widths(runs, size, ttf=BOLD_TTF):
-    return [text_width(t, ttf, size, 0) for t, _ in runs]
 
 
 def pill_png(name, w, h, fill, outline=None):
@@ -71,25 +80,8 @@ def full_png(name, h_off, fade_h, lift):
     return out
 
 
-def to_prores(frames_glob, out, fps=30):
-    sh(["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error", "-y", "-framerate", str(fps),
-        "-i", frames_glob, "-c:v", "prores_ks", "-profile:v", "4444", "-pix_fmt", "yuva444p10le", out])
-    return out
-
-
-def counter_mov(value, t_count, dur, y, size=160):
-    d = os.path.join(motion.A, "counter")
-    os.makedirs(d, exist_ok=True)
-    n = int(round(dur * 30))
-    for f in range(n):
-        v = int(round(value * ease_out(f / 30 / t_count)))
-        sh(["magick", "-size", f"{W}x{H}", "xc:none", "-font", BOLD_TTF, "-pointsize", str(size), "-fill", AMBER,
-            "-gravity", "north", "-annotate", f"+0+{y}", str(v), "PNG32:" + os.path.join(d, f"f{f:04d}.png")])
-    return to_prores(os.path.join(d, "f%04d.png"), os.path.join(motion.A, "counter.mov"))
-
-
 def map_mov(stem, map_in, schools_word, mrt_word, panel=(30, 70, 1050, 820, 40)):
-    dur = P.TAKES[stem] - map_in
+    dur = L(stem) - map_in
     labels = [(n, la, lo, schools_word - map_in + 0.15 * k) for k, (_, n, la, lo) in enumerate(locmap.pois("school"))]
     labels += [(n, la, lo, mrt_word - map_in + 0.15 * k) for k, (_, n, la, lo) in enumerate(locmap.pois("mrt"))]
     frames = locmap.render(os.path.join(motion.A, "map_frames"), dur, "card", P.MAP_PIN_LABEL, P.MAP_PIN_SUB,
@@ -133,16 +125,16 @@ def caption_lines(stem, t_from=-1.0, t_to=1e9):
 
 def main():
     set_assets(os.path.join(P.WORK, "filmcraft"))
+    scale_cues()
     starts, t = {}, 0.0
     for key, stem in SECTIONS:
         starts[key] = t
-        t += P.TAKES[stem]
+        t += L(stem)
     hold = CUES["closer"]["hold"]
     total = t + hold
 
     print("rendering overlay assets ...")
     cs = CUES["size"]
-    counter = counter_mov(cs["value"], 0.7, P.TAKES[SECTIONS[1][1]] - cs["counter"], 150)
     cl = CUES["location"]
     map_clip, map_dur = map_mov(SECTIONS[3][1], cl["map_in"], cl["schools"], cl["mrt"])
     music = house_bed(os.path.join(motion.A, "music.wav"), total, 118)
@@ -156,8 +148,7 @@ def main():
         "scrim_top_bright": scrim_png("scrim_top_bright", 820, strength=0.92),
         "scrim_bottom": scrim_png("scrim_bottom", 770, top=False, strength=0.9),
         "closer_fade": full_png("closer_fade", 0, 380, lift),
-        "row_flexi": check_row("row_flexi", "Flexi room", 470),
-        "row_shelter": check_row("row_shelter", "Bomb shelter", 470),
+        "rule": pill_png("rule", 8, 140, AMBER),
         "bar_theirs": pill_png("bar_theirs", 760, 78, "#8A8178"),
         "bar_ours": pill_png("bar_ours", 760, 78, AMBER),
         "save_pill": pill_png("save_pill", 210, 92, AMBER),
@@ -178,19 +169,19 @@ def main():
         os.replace(FC_PROJECT, FC_PROJECT + ".bak")
     fc = FC(FC_PROJECT, os.path.join(P.WORK, "filmcraft-actions.jsonl"))
     fc.new_sequence(f"{P.PROJECT_NAME if not P.HIDE_PROJECT_NAME else 'New launch'} | Property motion reel",
-                    30, TXT_BAND[1] + 1, 2)
-    media_paths = [take(s) for _, s in SECTIONS] + [take(cs["broll"]), hold_png, counter, map_clip, music] + \
+                    30, CAP_BAND[1] + 1, 2)
+    media_paths = [take(s) for _, s in SECTIONS] + [take(cs["broll"]), hold_png, map_clip, music] + \
         list(assets.values()) + [p for p, _, _ in plans]
     m = fc.import_media(media_paths)
-    names = {0: "Tour (agent takes, 3-bedder)", 1: "Backgrounds: scrims, dim, glass", 4: "Graphics: map, plans, ticks, bars",
-             9: "Text (editable)"}
+    names = {0: "Tour (agent takes, 3-bedder)", 1: "Backgrounds: scrims, dim, glass", 4: "Graphics: map, plans, bars, rules",
+             9: "Text: titles, prices, contact (editable)", 16: "Captions (editable text, amber keywords)"}
     for idx, name in names.items():
         fc.c("timeline.setTrack", track=f"V{idx + 1}", name=name)
     fc.c("timeline.setTrack", track="A2", name="Music bed (ducked)")
 
     voice = []
     for key, stem in SECTIONS:
-        t0, dur = starts[key], P.TAKES[stem]
+        t0, dur = starts[key], L(stem)
         clip = fc.place(m[take(stem)], t0, t0 + dur, track=0, audio=True)
         voice.append(clip)
         if key == "closer":
@@ -202,26 +193,50 @@ def main():
     hold_clip = fc.place(m[hold_png], t, total, track=0)
     fc.c("effects.setParam", clip=hold_clip, effect="motion", param="position", value=[W / 2, H / 2 - lift])
 
-    def txt(runs, top, size, t0, t1, trimmed=True, style="Bold", ttf=BOLD_TTF, **kw):
-        ws = widths(runs, size, ttf) if len(runs) > 1 else None
-        return fc.text(runs, W / 2, baseline(top, size, trimmed), size, t0, t1, TXT_BAND, style=style, widths=ws, **kw)
+    def txt(runs, top, size, t0, t1, trimmed=True, style="Bold", **kw):
+        return fc.text(runs, W / 2, baseline(top, size, trimmed), size, t0, t1, TXT_BAND, style=style, **kw)
+
+    def stack(pairs, x, y0, t1, t_out=None):
+        for i, (kicker, head, t) in enumerate(pairs):
+            y = y0 + i * STACK_STEP
+            fc.image(m[assets["rule"]], assets["rule"], x - 24, y - 6, t, t1, GFX_BAND, d=0.35, rise=20, t_out=t_out)
+            fc.text([(kicker, AMBER)], x, y + 30, 32, t, t1, TXT_BAND, style="SemiBold", font="Inter", align="left",
+                    rise=20, t_out=t_out, props=dict(tracking=180, shadow=True, shadow_blur=10, shadow_distance=2,
+                                                     shadow_opacity=60))
+            fc.text([(head, "#FFFFFF")], x, y + 30 + 92, 88, t + 0.08, t1, TXT_BAND, font="Inter", align="left",
+                    rise=20, t_out=t_out, props=dict(shadow=True, shadow_blur=12, shadow_distance=2,
+                                                     shadow_opacity=55))
+
+    def caption(line, t0, t1, y):
+        runs, pos, low_line = [], 0, line.lower()
+        marks = sorted({(low_line.find(k.lower()), len(k)) for k in P.KEYWORDS if k.lower() in low_line and
+                        low_line.find(k.lower()) >= 0})
+        for start, length in marks:
+            if start < pos:
+                continue
+            if start > pos:
+                runs.append((line[pos:start], "#FFFFFF"))
+            runs.append((line[start:start + length], AMBER))
+            pos = start + length
+        if pos < len(line):
+            runs.append((line[pos:], "#FFFFFF"))
+        fc.text(runs, W / 2, y + 14, 40, t0, t1, CAP_BAND, rise=0, d=0.12,
+                props=dict(background=True, background_color="#120E0A", background_opacity=82,
+                           background_radius=14, background_size=14))
 
     s = starts["hook"]
     e = starts["size"]
     fc.image(m[assets["scrim_top"]], assets["scrim_top"], 0, 0, s, e, BG_BAND, d=0.01, rise=0)
-    txt([("Best ", "#FFFFFF"), ("value buy.", AMBER)], 170, 86, s + 1.15, e)
-    txt([("CCR", AMBER)], 290, 200, s + 2.6, e, rise=50)
-    txt([("Core Central Region", "#FFFFFF")], 520, 40, s + 2.85, e, trimmed=False, style="Medium", ttf=MED_TTF, rise=20)
+    ch = CUES["hook"]
+    stack([("THE BEST", "Value buy", s + ch["best"]), ("RIGHT NOW IN THE", "Core Central Region", s + ch["core"])],
+          72, 150, e)
 
     s, e = starts["size"], starts["price"]
     shelter = fc.place(m[take(cs["broll"])], s + cs["shelter_cut"], e, track=0)
     fc.push_in(shelter, s + cs["shelter_cut"], e, 6)
     fc.image(m[assets["scrim_top_bright"]], assets["scrim_top_bright"], 0, 0, s, e, BG_BAND, d=0.01, rise=0)
-    fc.image(m[counter], counter, 0, 0, s + cs["counter"], e, GFX_BAND, d=0.25, rise=0)
-    txt([("square feet", "#FFFFFF")], 350, 42, s + cs["unit"], e, trimmed=False, style="Medium", ttf=MED_TTF, rise=20)
-    fc.image(m[assets["row_flexi"]], assets["row_flexi"], 50, 440, s + cs["flexi"], e, GFX_BAND, d=0.4, rise=0, dx=50)
-    fc.image(m[assets["row_shelter"]], assets["row_shelter"], 50, 556, s + cs["shelter"], e, GFX_BAND, d=0.4,
-             rise=0, dx=50)
+    stack([("3-BEDDER", f"{cs['value']} sq ft", s + cs["counter"]), ("WITH A", "Flexi room", s + cs["flexi"]),
+           ("RIGHT AT THE BACK", "Bomb shelter", s + cs["shelter"])], 72, 150, e)
 
     cp = CUES["price"]
     s, e = starts["price"], starts["location"]
@@ -265,15 +280,15 @@ def main():
     fc.image(m[map_clip], map_clip, 0, 0, s + cl["map_in"], e, GFX_BAND, d=0.35, rise=0)
     fc.text([("© OpenStreetMap contributors", "#D8D0C4")], 60, 830 + 22, 20, s + cl["map_in"], e, TXT_BAND,
             style="Medium", align="left", rise=0)
-    txt([("Near ", "#FFFFFF"), ("top schools.", AMBER)], 1330, 74, s + cl["schools"] - 0.07, e)
-    txt([("Walk to the ", "#FFFFFF"), ("MRT.", AMBER)], 1430, 74, s + cl["mrt"] - 0.86, e)
+    stack([("NEAR", "Top schools", s + cl["schools"] - 0.07), ("WALKING DISTANCE TO", "The MRT", s + cl["walking"])],
+          72, 1250, e)
 
     cc = CUES["closer"]
     s = starts["closer"]
     slot = 1440
     fc.image(m[assets["closer_fade"]], assets["closer_fade"], 0, 0, s, total, BG_BAND, d=0.01, rise=0)
-    txt([("Full-fledged ", "#FFFFFF"), ("facilities.", AMBER)], slot, 64, s + cc["facilities"], total,
-        t_out=s + cc["three"] - 0.15)
+    stack([("COMES WITH", "Full-fledged facilities", s + cc["facilities"])], 72, 1420, total,
+          t_out=s + cc["three"] - 0.15)
     for (png, x, y), key2 in zip(plans, ["three", "four", "five"]):
         fc.image(m[png], png, x, y, s + cc[key2], total, GFX_BAND, d=0.45, rise=140,
                  t_out=s + cc["interested"] - 0.25)
@@ -285,7 +300,7 @@ def main():
     txt([(f"{P.AGENT_NAME}  ·  {P.AGENT_PHONE}", "#FFFFFF")], slot + 108, 46, s + cc["contact"], total,
         trimmed=False, rise=20)
     txt([(f"CEA Reg No. {P.AGENT_CEA}  ·  {P.AGENCY} ({P.AGENCY_LICENCE})", "#8E867B")], slot + 182, 25,
-        s + cc["contact"] + 0.25, total, trimmed=False, style="Medium", ttf=MED_TTF, rise=10)
+        s + cc["contact"] + 0.25, total, trimmed=False, style="Medium", rise=10)
 
     print("captions, audio ...")
     low = fc.c("captions.newTrack", format="Subtitle", name="Captions")["track"]
@@ -293,19 +308,22 @@ def main():
     for tr, anchor, margin in [(low, "bottom", CAPTION_MARGIN_BOTTOM), (top, "top", 0.15)]:
         fc.c("captions.setStyle", track=tr, font="Noto Sans", fontStyle="Bold", size=26, color="#FFFFFF",
              background=True, backgroundColor="#120E0AD1", align="center", anchor=anchor, margin=margin)
+        fc.c("captions.setTrack", track=tr, enabled=False)
+    cap_y = {"hook": LOW, "size": LOW, "price": LOW, "location": 1690, "closer": 330}
     for key, stem in SECTIONS:
         s0 = starts[key]
         if key == "closer":
             hide = (cc["three"] - 0.05, cc["interested"] - 0.2)
-            lines = [l for l in caption_lines(stem, t_to=P.TAKES[stem]) if not hide[0] <= l[0] < hide[1]]
+            lines = [l for l in caption_lines(stem, t_to=L(stem)) if not hide[0] <= l[0] < hide[1]]
             lines = [(a, min(b, hide[0]) if a < hide[0] else b, txt_) for a, b, txt_ in lines]
             track = top
         else:
-            lines, track = caption_lines(stem, t_to=P.TAKES[stem]), low
+            lines, track = caption_lines(stem, t_to=L(stem)), low
         for a, b, line in lines:
             f0, f1 = round((s0 + a) * 30), round((s0 + b) * 30)
             if f1 > f0:
                 fc.c("captions.add", track=track, text=line, seconds=f0 / 30, durationSeconds=(f1 - f0) / 30)
+                caption(line, f0 / 30, f1 / 30, cap_y[key])
 
     mus = fc.c("timeline.place", item=m[music], track="A2", seconds=0, duration={"seconds": round(total, 4)})["clips"][0]
     fc.c("essentialSound.setType", clips=voice, type="dialogue")
@@ -314,7 +332,7 @@ def main():
     fc.c("essentialSound.generateDucking", clips=[mus])
 
     print("exporting ...")
-    fc.c("file.exportMedia", path=os.path.abspath(P.OUT), format="h264", crf=20, burnCaptions=True,
+    fc.c("file.exportMedia", path=os.path.abspath(P.OUT), format="h264", crf=20, burnCaptions=False,
          loudnessLufs=-14, wait=True)
     if not os.path.exists(P.OUT) or os.path.getmtime(P.OUT) < os.path.getmtime(FC_PROJECT) - 600:
         raise RuntimeError("export did not produce " + P.OUT)

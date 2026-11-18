@@ -8,6 +8,8 @@ RAW = os.path.join(ROOT, "..", "..", "raw", NAME)
 PROXY = os.path.join(WORK, "proxy")
 PROXY_BROLL = os.path.join(WORK, "proxy4")
 FPS = 30
+SPEED = float(os.environ.get("SPEED", "0.8"))
+PROXY_PLAY = PROXY if SPEED == 1 else os.path.join(WORK, f"proxy_x{round(SPEED * 100)}")
 
 AGENT_NAME = os.environ.get("AGENT_NAME", "Ivan Heng")
 AGENT_PHONE = os.environ.get("AGENT_PHONE", "+65 9201 2029")

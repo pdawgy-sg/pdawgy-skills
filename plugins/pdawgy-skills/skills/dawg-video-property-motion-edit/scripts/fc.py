@@ -88,28 +88,20 @@ class FC:
         return clip
 
     def text(self, runs, x, baseline, size, t0, t1, band, style="Bold", font="Noto Sans", align="center",
-             widths=None, d=0.45, rise=30, t_out=None):
+             widths=None, d=0.45, rise=30, t_out=None, props=None):
         end = t1 if t_out is None else min(t1, t_out + 0.3)
         idx = self.free_track(band, t0, end)
-        if len(runs) == 1 or widths is None:
-            total = None
-            starts = [x]
-        else:
-            total = sum(widths)
-            left = x - total / 2 if align == "center" else x
-            starts = [left + sum(widths[:i]) for i in range(len(runs))]
-        clip = None
-        for i, (txt, color) in enumerate(runs):
-            params = dict(text=txt, position=[round(starts[i], 1), round(baseline, 1)], size=size, font=font,
-                          fontStyle=style, seconds=round(end - t0, 4), track=idx, time=ticks(t0))
-            if clip is None:
-                params["newClip"] = True
-            else:
-                params["clip"] = clip
-            r = self.c("graphics.newText", **params)
-            clip = r["clip"]
-            self.c("graphics.set", clip=clip, layer=r["layer"],
-                   props=dict(align=align if total is None else "left", fill_color=color))
+        full = "".join(t for t, _ in runs)
+        r = self.c("graphics.newText", text=full, position=[round(x, 1), round(baseline, 1)], size=size, font=font,
+                   fontStyle=style, seconds=round(end - t0, 4), track=idx, time=ticks(t0), newClip=True)
+        clip, layer = r["clip"], r["layer"]
+        self.c("graphics.set", clip=clip, layer=layer, props=dict(align=align, fill_color=runs[0][1], **(props or {})))
+        pos = 0
+        for txt, color in runs:
+            if color != runs[0][1] and txt:
+                self.c("graphics.setCharStyle", clip=clip, layer=layer, start=pos, end=pos + len(txt),
+                       style={"color": color})
+            pos += len(txt)
         self.kf(clip, "opacity", "opacity", t0, 0)
         self.kf(clip, "opacity", "opacity", t0 + d * 0.7, 100)
         if rise:

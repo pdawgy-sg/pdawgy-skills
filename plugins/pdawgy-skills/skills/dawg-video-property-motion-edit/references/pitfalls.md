@@ -60,3 +60,13 @@
   sure the alpha is real (ffmpeg `drawbox` doesn't write alpha; draw with ImageMagick).
 - Image/graphic `motion.position` is the clip's centre in sequence pixels; text layer `position`
   is the first-line baseline alignment point.
+- Colour part of a text layer with `graphics.setCharStyle` (`start`/`end` character range,
+  `style.color`). Don't overprint a second coloured layer: FilmCraft's text metrics differ from
+  ImageMagick's, so it misregisters.
+- `graphics.list` reports each text layer's real bounds (`localBounds`, `quad`) when you need to
+  position against rendered text.
+- `tracking` is in thousandths of an em (180 ≈ the spaced caps used for kickers).
+- `clip.speedDuration` has no pitch preservation: a slowed take drops the voice. Slow takes in the
+  proxies instead (`make_proxies.py --speed`, ffmpeg `atempo`) and keep timeline speed at 100 %.
+- Slowed renders can come out a frame short of `length / speed` (frame-rate conversion drops the
+  last frame); render two frames of headroom and place the exact length on the timeline.

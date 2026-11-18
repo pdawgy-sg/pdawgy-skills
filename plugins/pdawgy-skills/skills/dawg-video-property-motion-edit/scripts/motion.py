@@ -21,7 +21,7 @@ def set_assets(path):
 
 
 def take(stem):
-    return os.path.join(P.PROXY, f"{stem}.mp4")
+    return os.path.join(P.PROXY_PLAY, f"{stem}.mp4")
 
 
 def ease(t0, d, var="t"):

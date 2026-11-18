@@ -40,3 +40,8 @@ both Downtown Line.
 10. Build it in FilmCraft so the edit stays editable (the earlier version rendered only an mp4).
     The FilmCraft export matched the ffmpeg render at every cue; captions became native caption
     tracks (no word-by-word highlight) in exchange for being retypeable in the editor.
+11. A second reference (another agency's Amberwood reel) contributed the stacked kicker + headline
+    titles and amber keyword captions; its plan minimap was held back until the 958 sqft unit's own
+    floor plan is available.
+12. "A bit too fast" → whole reel at 0.8x (`SPEED = 0.8`): 31.4 s became 38.6 s, voice pitch kept,
+    every caption and title re-timed from the scaled word timestamps.

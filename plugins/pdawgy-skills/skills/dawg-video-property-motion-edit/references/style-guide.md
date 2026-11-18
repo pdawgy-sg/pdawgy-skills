@@ -9,12 +9,18 @@ reel. They're why it got approved.
 - One section per agent take; sections cut hard. Segment length = the take's common A/V length.
 - Every overlay starts on a word timestamp (≈ word start, minus 0.05–0.1 s so it lands *as* he
   says it). Fade/rise in 0.3–0.45 s with cubic ease-out; clear 0.25 s before the next idea.
-- Captions: karaoke pills (active word amber), 48 px Noto Sans Bold on a dark rounded pill.
-  Default line y≈1560. Hide them while a graphic spells out the same words.
+- Captions: 40 px Noto Sans Bold, white on a dark rounded pill (82 %), keywords (`project.KEYWORDS`)
+  in amber. Default line y≈1560. Hide them while a graphic spells out the same words.
+  (The ffmpeg fallback highlights the spoken word instead — karaoke.)
 
 ## Palette and type
 - Background `#0D0B09`, accent amber `#E8A85C`, text white / warm grey `#B9B2A8`.
-- Headlines: Noto Sans Bold 64–96 px, one accent phrase in amber (`[("Best ", "white"), ("value buy.", AMBER)]`).
+- **Stacked titles** (main title system): a tracked caps kicker (Inter SemiBold 32 px, tracking 180,
+  amber) over a bold headline (Inter Bold 88 px, white, soft shadow), with an 8 px amber rule on the
+  left; left-aligned at x≈72; pairs step 158 px and stack downward as he lists things
+  ("3-BEDDER / 958 sq ft", "WITH A / Flexi room", "RIGHT AT THE BACK / Bomb shelter"). The kicker
+  carries the connective words he says, the headline the fact.
+- Panel headlines: Noto Sans Bold 64–96 px with one accent phrase in amber (character styles).
 - Labels: Noto Sans Medium 36–46 px. Fine print (CEA line): 25 px `#8E867B`.
 
 ## Layout zones (find them per take with a gridded frame grab)
@@ -58,3 +64,10 @@ reel. They're why it got approved.
 | `price_compare` | comparable vs our price | frosted-glass panel, two bars growing on the prices, "~x% less" pill |
 | `location` | schools / MRT / amenities | cream map card, POIs pop on the words, headline lines below |
 | `closer` | availability + "contact me" | facilities line, floor plans on the numbers, CTA + agent + CEA details, 2.2 s hold |
+
+## From the second Amberwood reference (another agency's cut)
+- Adopted: the stacked kicker + headline titles and amber keyword captions above.
+- Worth adding when the right documents exist: a corner **floor-plan minimap** with a red "you are
+  here" dot that moves room to room, and a full-screen plan that **zooms into the dot and dissolves
+  into that room's footage**. Only do this with the floor plan of the exact unit being toured — a dot
+  on a similar-but-different layout misleads buyers.

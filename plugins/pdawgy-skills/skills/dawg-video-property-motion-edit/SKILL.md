@@ -41,7 +41,13 @@ reads `tools/project.py` (the only per-project config, pre-filled with the Amber
 `python3 tools/make_proxies.py` → 1080×1920/30 fps proxies in `work/proxy/`, dead air trimmed by
 silencedetect, HDR tone-mapped (zscale + mobius), loudness-normalised. Paste its printed `TAKES`
 lengths (common video/audio length — the two streams differ by frames and drift over a long edit)
-into `project.py`.
+into `project.py`. It records each take's trim in `work/proxy/trims.json`.
+
+**Pacing.** If the reel feels rushed (fast talkers), set `SPEED` in `project.py` (Amberwood: 0.8)
+and run `python3 tools/make_proxies.py --speed 0.8`: it re-renders every take from the raw file into
+`work/proxy_x80/` with pitch-preserving `atempo` (60 fps sources stay smooth). Word timings, take
+lengths and every cue scale by 1/SPEED automatically in `captions.py` and `build_filmcraft.py`.
+FilmCraft's own clip speed doesn't preserve voice pitch, so don't slow the clips in the timeline.
 
 ### 3. Transcribe — the speech drives everything
 ```
@@ -57,8 +63,8 @@ timing); set phrase breaks in `CHUNKS`; drop silent b-roll via `SKIP_CLIPS`.
 
 ### 4. Plan the reel from what he says
 Write a table: take → line → which graphic → which word triggers it. Use the section patterns in
-`scripts/build_reel.py` (hook, size+features with b-roll cut, price bars, location map, closer with
-floor plans + CTA). Only put claims on screen that he says or that come from the client's
+`scripts/build_filmcraft.py` (hook, size+features with b-roll cut, price bars, location map, closer
+with floor plans + CTA). Only put claims on screen that he says or that come from the client's
 documents (floor plans, ID card). Order takes for the strongest hook (the client moved "best value
 buy" before "958 sqft"). Confirm the plan with the user before rendering.
 
@@ -78,18 +84,20 @@ hundred `filmcraft-cli exec` commands, logged to `work/filmcraft-actions.jsonl`)
 | --- | --- |
 | V1 | the takes (voice linked on A1), b-roll cuts, the lifted closer and its hold frame, push-in keyframes |
 | V2–V4 | scrims, footage dim, frosted panel (blurred, masked copy of the take), closer fade |
-| V5–V9 | stills and alpha ProRes clips: ticks, bars (`scale_width` keyframes), plan cards, pills, map card, counter |
-| V10–V15 | native text (two-colour headlines are adjacent layers) |
-| C1/C2 | caption tracks (bottom / top), burned in on export |
+| V5–V9 | stills and alpha ProRes clips: title rules, bars (`scale_width` keyframes), plan cards, pills, map card |
+| V10–V16 | native text: stacked kicker + headline titles, prices, labels, contact and CEA lines |
+| V17–V18 | captions as native text lines on a dark pill, keywords coloured amber with character styles |
+| C1/C2 | the same captions as caption tracks, switched off (for SRT/VTT export to the platforms) |
 | A2 | music bed, typed as music, ducking generated against the dialogue |
 
-Only the bespoke animations (map card, number counter) are pre-rendered; everything else stays
-editable. Section markers carry the spoken line. Export: `file.exportMedia` (H.264, CRF 20,
-captions burned in, −14 LUFS). `tools/fc.py` wraps the CLI (`place`, `kf`, `animate_in`, `image`,
-`text`, `push_in`, a per-band free-track allocator). Inspect with
-`filmcraft-cli --project <p> inspect sequence`; preview a frame with `render --seconds S --out f.png`
-(captions only show in exports). If `filmcraft-cli` isn't installed, `tools/build_reel.py` renders
-the same reel with ffmpeg alone (karaoke captions, no editable project).
+Only the map card is pre-rendered; everything else stays editable. Titles use the stacked
+kicker + headline system (`stack()`): pairs land on their words and build downward. Section
+markers carry the spoken line. Export: `file.exportMedia` (H.264, CRF 20, −14 LUFS).
+`tools/fc.py` wraps the CLI (`place`, `kf`, `animate_in`, `image`, `text` with character-style
+colour runs, `push_in`, a per-band free-track allocator). Inspect with
+`filmcraft-cli --project <p> inspect sequence`; preview a frame with `render --seconds S --out f.png`.
+If `filmcraft-cli` isn't installed, `tools/build_reel.py` renders an earlier version of the reel
+with ffmpeg alone (centred headlines, karaoke captions, no editable project; `SPEED = 1` only).
 
 ### 7. Verify before showing anything
 - Contact sheet of the whole reel + frame grabs **at each cue time**; read them.
