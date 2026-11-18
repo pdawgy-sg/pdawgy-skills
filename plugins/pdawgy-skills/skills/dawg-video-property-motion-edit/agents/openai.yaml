@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Video Property Motion Edit"
-  short_description: "Edit agent footage into a full-screen property reel"
-  default_prompt: "Use $dawg-video-property-motion-edit to turn the raw property-agent clips and floor plans into a vertical reel with full-screen tour footage and infographics synced to what the agent says."
+  short_description: "Build an editable FilmCraft property reel from agent footage"
+  default_prompt: "Use $dawg-video-property-motion-edit to turn the raw property-agent clips and floor plans into an editable FilmCraft project and vertical reel, with full-screen tour footage and infographics synced to what the agent says."

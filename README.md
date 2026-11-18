@@ -106,8 +106,9 @@ committed changes without requiring the planning review cycle. See Claude Code's
 - **dawg-video-property-motion-edit** — Edit raw property-agent footage into a
   vertical reel: the tour plays full-screen while infographics, a location map
   card, floor plans, captions and CEA-compliant agent details land on the words
-  the agent says. Bundles ffmpeg/ImageMagick Python scripts, a per-project
-  config, a style guide and a worked example. Invoke it with
+  the agent says. Builds an editable FilmCraft project headlessly through
+  `filmcraft-cli` (with an ffmpeg-only fallback), from bundled Python scripts,
+  a per-project config, a style guide and a worked example. Invoke it with
   `$dawg-video-property-motion-edit`.
 
 During implementation and verification, Dawg records observed failures in the

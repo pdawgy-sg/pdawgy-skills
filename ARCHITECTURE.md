@@ -27,8 +27,9 @@ project build/test framework in the current source package.
 - Each directory beneath `plugins/pdawgy-skills/skills/` contains a `SKILL.md`
   entrypoint and `agents/openai.yaml` Codex UI metadata. Supporting assets belong to
   the skill that uses them. Only dawg-video-property-motion-edit bundles
-  executable scripts: standard-library Python that drives the host's ffmpeg and
-  ImageMagick, copied into and run from the target project.
+  executable scripts: standard-library Python that drives the host's
+  filmcraft-cli, ffmpeg and ImageMagick, copied into and run from the target
+  project.
 - `plugins/pdawgy-skills/agents/` contains Claude Code's native dawg-planner,
   dawg-review-sonnet, dawg-review-opus and dawg-implementer definitions. Their YAML
   pins full model IDs/effort; bodies reference the canonical dawg-plan workflow
@@ -130,7 +131,9 @@ target project's `edits/<name>/tools/`, configured through one `project.py`, and
 write proxies, transcripts, map data and renders under that project's
 `edits/<name>/work/`. Transcription uses faster-whisper through `uv` only with
 user consent; map data comes from OpenStreetMap Nominatim at a polite rate. The
-output is a vertical reel plus a music-bed variant in the target project.
+main build drives the host's FilmCraft headlessly through `filmcraft-cli` and
+outputs an editable `.fcproj` with its H.264 export; an ffmpeg-only builder is
+the fallback when FilmCraft is absent.
 
 ```mermaid
 flowchart TD
@@ -143,7 +146,7 @@ flowchart TD
     Skills --> Maintain[dawg-architecture-maintain]
     Skills --> MR[dawg-mr]
     Skills --> Video[dawg-video-property-motion-edit]
-    Video --> Reel[Vertical property reel rendered in the target project]
+    Video --> Reel[Editable FilmCraft project and vertical reel export in the target project]
     MR --> Message[Committed-change MR draft in chat]
     Init --> Plan
     Init --> Maintain

@@ -37,3 +37,6 @@ both Downtown Line.
 7. Map too blended (twice) → solid cream map card with dark labels.
 8. Floor plans on "3, 4, 5" — below the agent, not above.
 9. Music bed under the reel; keep a voice-only cut for in-app trending audio.
+10. Build it in FilmCraft so the edit stays editable (the earlier version rendered only an mp4).
+    The FilmCraft export matched the ffmpeg render at every cue; captions became native caption
+    tracks (no word-by-word highlight) in exchange for being retypeable in the editor.

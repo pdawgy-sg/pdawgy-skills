@@ -41,3 +41,22 @@
   Nominatim (`fetch_map_data.py`) at 1 req/s with an honest UA is enough for a stylised map.
 - Installing faster-whisper / downloading models needs the user's go-ahead.
 - Trending music can't be embedded legally; deliver a voice-only cut for in-app audio.
+
+## FilmCraft (filmcraft-cli 0.17)
+- Drive it with `filmcraft-cli --project <p.fcproj> --save exec <command> '<json>'`; create the
+  project with `--save-as … exec file.newSequence`. `describe <id>` shows a command's parameters.
+- Times: 254,016,000,000 ticks per second. `timeline.place` takes `seconds`; text, markers and
+  keyframes take `time` in ticks.
+- `effects.setKeyframe` only edits an existing keyframe: `effects.addKeyframe` at a timeline time
+  first (it returns the clip-local `mediaTime`), then `setKeyframe` there with the value.
+- Effect ids are exact (`brightness_contrast`, not `brightness`); list them with `effects.list`.
+- One clip per track at a time — overlapping overlays need their own tracks (fc.py allocates).
+- Captions on a track can't overlap: clamp each line to its take's length and snap to frames.
+- `captions.setStyle` resets every option you don't pass — always send the full style.
+  Caption `size` is roughly half the pixel size used for burned-in images (26 ≈ 48 px pills).
+- `render --seconds` previews don't draw captions; export a short custom range to check them.
+- `loudnessLufs` is a `file.exportMedia` parameter, not an ExportSettings key.
+- Alpha clips: ProRes 4444 (`prores_ks -profile:v 4444 -pix_fmt yuva444p10le`) at 30 fps. Make
+  sure the alpha is real (ffmpeg `drawbox` doesn't write alpha; draw with ImageMagick).
+- Image/graphic `motion.position` is the clip's centre in sequence pixels; text layer `position`
+  is the first-line baseline alignment point.
