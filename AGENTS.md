@@ -7,19 +7,21 @@
 - Use the bundled [dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md)
   workflow for features, fixes and refactors. Resolve material uncertainty,
   show state diagrams, and break work into small parts with reproducible verification.
-  Record active execution host and size/risk rationale. Codex small work uses
-  `gpt-6.1-sol`/high; large adds `gpt-6-astra`/high. Claude Code small work uses
-  Sonnet 5.5/high only; large adds a separate Opus 5.5/high reviewer. Use
-  its pinned Opus 5.5/high planner and authorized Opus 5.5/medium implementer
-  as coordinator-scheduled siblings; the planner is not an independent reviewer. Follow dawg-plan's host detection,
-  effective-model/effort and escalation rules. Unknown host and missing required
-  execution block readiness; optional second reviewers do not block small work.
-  Revoke readiness on host changes; never relabel wrong-provider receipts.
+  Record active execution host and size/risk rationale. In Codex, plan with
+  `gpt-6.2-astra`/high, review small work with `gpt-6.2-sol`/high only, and
+  add a separate `gpt-6.2-astra`/high reviewer for large work. Use
+  `gpt-6.2-sol`/medium for authorized implementation and verification after
+  readiness. In Claude Code, use the pinned Opus 5.5/high planner, Sonnet 5.5/high
+  primary reviewer, separate Opus 5.5/high reviewer for large work and pinned
+  Opus 5.5/medium implementer when ready and authorized. Follow dawg-plan's
+  coordinator-scheduled sibling handoffs, host detection, model/effort evidence
+  and escalation rules. Unknown host and missing required execution block
+  readiness. Revoke readiness on host changes and use the new profile.
 - Every plan includes a meaningful TLA+ model/configuration and actual completed
-  TLC checks by the author and every required reviewer on identical final inputs.
-  Review assumptions, finite bounds, properties, reachability and implementation mapping;
-  preserve logs/identities/counterexamples under the plan's `verifications/tla/`.
-  The author is the Codex parent or Claude pinned planner.
+  TLC checks by the planner as author and by each independent required reviewer
+  on identical final inputs. Review assumptions, finite bounds, properties,
+  reachability and implementation mapping. Preserve logs, identities and
+  counterexamples under the plan's `verifications/tla/`.
   Missing, incomplete, failed or stale checks block readiness. Rerun the author
   and all required reviewers after material requirement/model/config changes. Bounded model checking
   complements implementation verification and does not prove arbitrary code.

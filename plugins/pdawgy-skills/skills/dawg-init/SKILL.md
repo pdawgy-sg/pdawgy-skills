@@ -41,19 +41,23 @@ Save the plan, diagrams, checklist and evidence in that mapped project's
 `.dawgy/dwag-plan/FEATURE_<PLAN_NAME>/` directory. Do not write back to the source
 checkout. Handle unborn baselines and unrelated work through dawg-plan's workflow.
 
-Honor the full workflow, including the concrete TLA+ model/configuration, author
-TLC checks, and host/size-based independent TLC reruns/semantic reviews. Codex
-uses Sol/high for small work and adds Astra/high for large work; Claude Code uses
-Sonnet 5.5/high only for small work and adds a separate Opus 5.5/high reviewer
-for large work. Its pinned Opus 5.5/high planner performs author TLC; after ready
-and authorized, the Opus 5.5/medium worker implements/verifies initialization.
-The coordinator handles sibling handoffs and audited delivery, not source edits. Resolve the active host,
-record host/tier/rationale and follow dawg-plan's selection/escalation rules. Do not write target guidance before those current
-checks pass and the plan is ready. If the sibling skill, formal tools/execution
-or required reviewers are unavailable, report the blocker;
-continue inspection and drafting but do not invent a substitute review. Running
-the skill authorizes requested guidance creation/updates; it does not authorize
-the cleanup described below. Preserve any planning-only limit from the user.
+Use dawg-plan's host phase routing for this same initialization task. The
+coordinator handles Git preflight, scoped worktree setup, clarifications, worker
+handoffs, readiness and audited delivery. In Codex, assign planning and author
+TLC to `gpt-6.2-astra`/high, independent review to `gpt-6.2-sol`/high only for
+small work and add a separate `gpt-6.2-astra`/high reviewer for large work.
+In Claude Code, use the pinned Opus 5.5/high planner, Sonnet 5.5/high primary
+reviewer and separate Opus 5.5/high reviewer for large work. Record host, tier
+and rationale and apply dawg-plan's dispatch, identity and evidence rules.
+
+After current author and reviewer TLC and semantic approvals establish readiness,
+the authorized implementer makes and verifies guidance changes in the mapped
+project. This is `gpt-6.2-sol`/medium in Codex and the pinned Opus 5.5/medium
+worker in Claude Code. Reuse this plan and worker through the remaining sections.
+If a required phase or skill is unavailable, report the blocker and continue
+independent inspection. An initialization request authorizes the requested
+guidance changes. The cleanup below requires separate approval. Preserve the
+user's planning-only limit.
 
 ## Establish shared, repository-specific guidance
 
@@ -86,14 +90,17 @@ Encode these Dawg coding standards in `AGENTS.md`:
 - Use `dawg-plan` for features, fixes and refactors; clarify material uncertainty
   and keep tasks small with enough verification/evidence to prove they work. Require TLA+
   modeling and completed TLC runs by the author and all required reviewers on
-  matching inputs. Select by execution host: Codex Sol/high (+Astra/high for large),
-  Claude Code Sonnet 5.5/high only for small (+separate Opus 5.5/high for large).
-  Its Opus 5.5/high planner is the author; Opus 5.5/medium implements/verifies
-  after readiness and authorization. Record host/tier/rationale, ask
-  when host is unknown, and reassess growth/host changes. Missing required reviewers
-  block readiness; the optional second reviewer does not block small work. State bounded formal claims and retain
-  implementation checks. Require its
-  task worktree/branch, ask before Git initialization when needed, and automatically
+  matching inputs. Use coordinator-scheduled siblings in the same worktree.
+  Codex uses `gpt-6.2-astra`/high for planning and author TLC, `gpt-6.2-sol`/high
+  for independent review and adds a separate `gpt-6.2-astra`/high review only for
+  large work. Claude Code uses the pinned Opus 5.5/high planner, Sonnet 5.5/high
+  primary reviewer and a separate Opus 5.5/high reviewer only for large work.
+  After readiness and authorization, Codex uses `gpt-6.2-sol`/medium to
+  implement and verify, and Claude Code uses its pinned Opus 5.5/medium implementer.
+  Record host, tier and rationale and follow dawg-plan's dispatch, identity and
+  escalation rules. Clarify unknown hosts and refresh readiness when scope or host
+  changes. Missing required reviewers block readiness. State bounded formal
+  claims and retain implementation checks. Require its task worktree/branch, ask before Git initialization when needed, and automatically
   conventionally commit/push authorized implementation only after required checks
   pass. Preserve planning-only and explicit delivery limits.
 - Keep code as simple as the behavior permits. Add complexity only for a concrete

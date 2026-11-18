@@ -44,33 +44,35 @@ fix or refactor, resolves material ambiguity, models its state transitions, and 
 small verifiable tasks. Its assets provide plan and verification templates.
 Every plan requires a concrete TLA+ model/configuration and author TLC run, followed
 by independent TLC execution and semantic review selected by host and size.
-Codex uses gpt-6.1-sol/high for small work and adds gpt-6-astra/high for large work;
-Claude Code uses Sonnet 5.5/high only for small work and adds a distinct
-Opus 5.5/high review for large work. The plan
-records trusted execution-host evidence, size/risk rationale and requested/effective
-model identities. Unknown host blocks delegation rather than guessing from files.
-Scope growth or host changes revoke readiness until the new required set approves
-current inputs; wrong-provider receipts cannot be relabeled. The optional second
-reviewer does not block small work. The required
+The coordinator schedules distinct phase workers in one mapped task worktree.
+Codex dispatches a GPT-6.2 Astra/high planner, a GPT-6.2 Sol/high independent
+reviewer, an additional distinct GPT-6.2 Astra/high reviewer for large work,
+and an authorized GPT-6.2 Sol/medium implementer/verifier. Each dispatch uses
+`collaboration.spawn_agent` with explicit model and reasoning effort and
+`fork_turns: "none"`. Claude Code dispatches its native pinned Opus 5.5/high
+planner, Sonnet 5.5/high reviewer, an additional distinct Opus 5.5/high reviewer
+for large work, and an authorized Opus 5.5/medium implementer/verifier. Native
+definitions hold Claude Code model/effort pins and invocation omits overrides.
+
+The coordinator handles worktree setup, user clarifications, readiness and Git
+delivery. Plans record trusted host evidence, size/risk rationale and distinct
+worker contexts with dispatch and model/effort evidence. Codex checks any
+available trusted effective metadata and records its limits. Claude Code checks
+effective metadata and applicable overrides. Unknown host and unavailable or
+known mismatched required execution block the applicable phase. Scope growth
+reassesses the required reviewer set, and host changes revoke readiness and
+select the new profile.
+
+The required
 [TLA+ guide](plugins/pdawgy-skills/skills/dawg-plan/references/tla-verification.md)
 defines domain/requirement mapping, enabled properties and assumptions, finite
 bounds, actual completion evidence, reachability checks, and shared final input
 identities. Missing, failed, incomplete or stale executions block readiness.
-Material formal-input or requirement changes invalidate the author and every required reviewer receipt.
-Bounded model checking and implementation verification remain separate checks.
-
-In Claude Code the coordinator schedules sibling agents: Opus 5.5/high planner,
-independent size-required reviewer(s), then an authorized Opus 5.5/medium
-implementer/verifier. The planner executes author TLC; its receipt is separate
-from the optional large-work Opus review. Codex's parent remains its author and
-implementation actor. Full version pins live in native definitions; invocation
-omits model/effort overrides. Runtime metadata and applicable forced overrides
-are checked, with unsupported/wrong model or effort blocking that phase. Workers
-do not delegate recursively or perform another phase. The coordinator relays
-questions, handles readiness and audited Git delivery, while material gaps return
-to high-effort planning/review before medium-effort implementation resumes.
-Planning-only requests never dispatch the implementer.
-
+Material formal-input or requirement changes invalidate the author and every
+required reviewer receipt. Bounded model checking and implementation verification
+remain separate checks. Planning-only requests stop at the reviewed plan.
+Material design gaps return through the coordinator to the planner and required
+reviewers before implementation resumes.
 
 The required [recovery loop](plugins/pdawgy-skills/skills/dawg-plan/references/recovery-loop.md)
 turns observed non-green results into persistent, check-linked issues. The
@@ -134,38 +136,39 @@ flowchart TD
     MR --> Message[Committed-change MR draft in chat]
     Init --> Plan
     Init --> Maintain
-    Plan --> Worktree[Scoped task worktree and branch]
-    Plan --> Host[Trusted execution host]
-    Host --> Code[Codex author and Sol/Astra reviews]
-    Host --> Planner[Claude Opus 5.5 high planner]
-    Planner --> Reviews[Sonnet review; add distinct Opus if large]
-    Reviews --> Implementer[Authorized Opus 5.5 medium implementation]
-    Code --> Artifacts
-    Implementer --> Artifacts
-    Artifacts[Target-project plan and verification artifacts]
+    Plan --> Coordinator[Coordinator sets up scoped task worktree]
+    Coordinator --> Host[Select trusted execution host]
+    Host --> CodexPlanner[Codex GPT-6.2 Astra high planner and author TLC]
+    Host --> ClaudePlanner[Claude Code Opus 5.5 high planner and author TLC]
+    CodexPlanner --> CodexReviews[GPT-6.2 Sol high review plus separate Astra high if large]
+    ClaudePlanner --> ClaudeReviews[Sonnet 5.5 high review plus separate Opus 5.5 high if large]
+    CodexReviews --> Ready[Coordinator audits readiness]
+    ClaudeReviews --> Ready
+    Ready --> Handoff[Reviewed plan for planning-only requests]
+    Ready --> CodexImplementer[Authorized GPT-6.2 Sol medium implementation and verification]
+    Ready --> ClaudeImplementer[Authorized Opus 5.5 medium implementation and verification]
+    CodexImplementer --> Delivery[Coordinator audits evidence and delivers]
+    ClaudeImplementer --> Delivery
     Init --> Guidance[Target-project AGENTS.md and CLAUDE.md]
     Maintain --> Architecture[Target-project ARCHITECTURE.md]
 ```
 
 ## Artifacts and execution context
 
-The calling coding agent executes these workflows with its available file,
-shell, and subagent tools. The plugin supplies instructions and templates rather
-than a separate execution service. Reviewer delegation uses the active client's
-native model profile: Sol/Astra in Codex, Sonnet 5.5/Opus 5.5 in Claude Code,
-both review roles high. Claude planning is Opus 5.5/high and implementation is
-Opus 5.5/medium, via the declarative phase agents.
-Native model/effort overrides are inspected and unsupported required selections
-remain blockers. Skill validation uses an
-external installed skill-creator validator with Python/PyYAML. Formal planning
+The coordinator and assigned workers execute these workflows with their host's
+file, shell and subagent tools. The plugin supplies instructions and templates
+rather than a separate execution service. Both hosts use distinct worker contexts
+for planning and author TLC, independent review, and authorized implementation
+and verification. Skill validation uses an installed skill-creator validator
+with Python/PyYAML. Formal planning
 also needs external Java/TLC tooling. Those tools are used by the calling agents;
 neither their binaries nor a separate model-checking service are bundled here.
 
 Claude Code installation loads four skills and four phase agents through its native marketplace
 commands. GitHub installation pins `#main` explicitly; local checkout registration
 supports unpublished changes. Claude invokes skills as `/pdawgy-skills:<name>`;
-Codex uses `$<name>`. The shared instructions route to native host reviewer
-models without a cross-provider bridge; packaging does not grant model access.
+Codex uses `$<name>`. The shared instructions route to host-specific phase
+workers using each host’s native delegation. Model access depends on the host.
 Planning/init retain selected-model/effort and TLC requirements and report missing
 capabilities as blockers; installation is not evidence of a
 completed planning or coding workflow. Native validation and isolated CLI

@@ -47,29 +47,27 @@ explains `#main` or another branch/tag.
 | Architecture maintenance | `$dawg-architecture-maintain` | `/pdawgy-skills:dawg-architecture-maintain` |
 | MR description | `$dawg-mr` | `/pdawgy-skills:dawg-mr` |
 
-`dawg-plan` and `dawg-init` select reviewers for the active client:
+`dawg-plan` and `dawg-init` share one coordinator-led workflow with these defaults:
 
-| Host | Small change | Large change |
-| --- | --- | --- |
-| Codex | GPT-6.1 Sol / high | Sol + GPT-6 Astra, both high |
-| Claude Code | Sonnet 5.5 / high only | Sonnet 5.5 + separate Opus 5.5, both high |
+| Host | Planning and author TLC | Small review | Large review | Authorized implementation and verification |
+| --- | --- | --- | --- | --- |
+| Codex | GPT-6.2 Astra / high | GPT-6.2 Sol / high only | GPT-6.2 Sol + separate GPT-6.2 Astra, both high | GPT-6.2 Sol / medium |
+| Claude Code | Opus 5.5 / high | Sonnet 5.5 / high only | Sonnet 5.5 + separate Opus 5.5, both high | Opus 5.5 / medium |
 
-Claude Code plans with **Opus 5.5/high** and implements/verifies authorized
-ready plans with **Opus 5.5/medium**. Four native plugin agent definitions pin
-full model IDs and effort; the coordinator launches the planner, size-required
-reviewer(s) and implementer as separate siblings in the same task worktree.
-The planner does author TLC and never counts as an independent review. Small
-changes have exactly one reviewer; large changes add a separate Opus review.
-Planning-only requests stop before the implementer. Material design gaps return
-to the high-effort planner and required reviewers before implementation resumes.
+The coordinator launches distinct sibling workers in the same mapped task
+worktree, handles user clarifications and readiness, and audits Git delivery.
+Codex uses explicit model and effort on each spawn. Claude Code uses four native
+agent definitions with full model and effort pins. The planner runs author TLC
+and each required reviewer independently runs TLC and assesses the design.
+Planning-only requests end at the reviewed plan. Material design gaps return
+to the planner and required reviewers before implementation resumes.
 
-Codex retains Sol/Astra review choices and its current planning/implementation
-actor. Plans record host, size/risk rationale and requested/effective identities;
-growth or host changes revoke readiness until required checks are current.
-Unknown hosts require clarification. Unavailable or overridden required model
-versions/effort block the phase; there is no silent provider fallback or global
-model-setting change. Native definitions require a Claude Code version supporting
-full model IDs and effort; runtime metadata must confirm the selected settings.
+Plans record host, size/risk rationale, worker contexts and model/effort evidence.
+Unknown hosts require clarification. Scope growth and host changes trigger a
+readiness reassessment. Unavailable required execution and known model or effort
+mismatches block the phase. Codex records explicit dispatch and checks effective
+identity when trusted runtime metadata is available. Claude Code checks the
+definition pins, runtime metadata and applicable overrides.
 
 Java/TLC is still required for formal planning checks. Installation supplies
 instructions, not model entitlements or external tooling. `dawg-mr` drafts from
@@ -81,10 +79,9 @@ committed changes without requiring the planning review cycle. See Claude Code's
 - **dawg-plan** — Understand features, fixes and refactors, ask about missing requirements,
   diagram their state transitions, and break work into small verifiable tasks.
   Every plan includes a TLA+ model/config and completed author plus required
-  reviewer TLC runs. Codex uses Sol/high and adds Astra/high for large work;
-  Claude Code uses Sonnet 5.5/high only for small work and adds a separate
-  Opus 5.5/high reviewer for large work. Record an impact/risk rationale, reassess growth
-  and obtain current runs and semantic approval from the required set. Missing/stale/incomplete runs block
+  reviewer TLC runs under the phase assignments above. Record an impact/risk
+  rationale, reassess growth and obtain current runs and semantic approval from
+  the required set. Missing, stale or incomplete runs block
   readiness; bounded model checks complement implementation tests. Features/fixes/refactors use a dedicated Git worktree
   and task branch; non-Git directories require initialization consent. After
   authorized implementation passes checks, the workflow creates a Conventional

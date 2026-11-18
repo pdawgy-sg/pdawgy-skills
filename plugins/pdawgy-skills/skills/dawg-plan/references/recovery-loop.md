@@ -40,8 +40,11 @@ failed check and the checks affected by that correction. Use existing task
 authorization; do not request permission for every ordinary fix or rerun.
 
 If code, behavior, configuration or relevant inputs change, invalidate affected
-prior passes and check the new input identity. Material formal/requirement changes
-also require author and every required reviewer to rerun/review as the TLA+ workflow says.
+prior passes and check the new input identity. The implementation worker owns
+ordinary in-scope repairs. Return a material design gap to the coordinator, who pauses implementation
+and routes it through the planner and required independent reviewers. Material
+formal or requirement changes require renewed author and reviewer evidence
+under the TLA+ workflow.
 Verification log updates alone do not change the tested implementation.
 
 Do not endlessly rerun an unchanged failing command without diagnosis or changed
@@ -79,9 +82,9 @@ Green is phase-specific:
   future implementation tests remain planned, not falsely executed.
 - Implementation completion: all required implementation/artifact checks are PASS
   on current inputs and no implementation failure/blocker remains unresolved.
-- Commit/push/delivery: existing scoped Git gates, hook and required CI/remote
-  confirmations apply. Record and work through failures while preserving the
-  existing commit/worktree; no force, bypass, or false delivery claim.
+- Commit/push/delivery: the coordinator audits the worker's evidence and applies
+  the scoped Git gates, hook and required CI/remote confirmations. Record and
+  work through failures while preserving the existing commit/worktree; no force, bypass, or false delivery claim.
 
 Declared negative/witness probes are checked against their exact expected outcome.
 An expected named counterexample can make that probe successful; a parser crash,

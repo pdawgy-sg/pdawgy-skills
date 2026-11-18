@@ -5,8 +5,9 @@ Project root: <mapped project path inside task worktree>
 Plan revision: <revision/date; update after material changes>
 Execution host and evidence: <Codex or Claude Code; trusted runtime context, ask if unknown>
 Review tier and rationale: <small or large; impact/complexity/risk, not file count>
-Claude phase workers (when applicable): <Opus 5.5/high planner; Opus 5.5/medium implementer only after ready + authorized; effective identities and separate contexts>
-Required reviewers: <Codex Sol/high + Astra/high if large; Claude Sonnet 5.5/high only; add separate Opus 5.5/high if large>
+Planner and implementer: <Codex gpt-6.2-astra/high planner and gpt-6.2-sol/medium implementer; Claude Code pinned Opus 5.5/high planner and Opus 5.5/medium implementer; distinct contexts; dispatch implementer only after ready and authorized>
+Required reviewers: <Codex gpt-6.2-sol/high only for small; add separate gpt-6.2-astra/high for large; Claude Code Sonnet 5.5/high only for small; add separate Opus 5.5/high for large>
+Phase identity evidence: <requested model/effort, worker context and dispatch evidence; available effective model/effort evidence, overrides and any metadata limits>
 Source repository root: <original checkout>
 Selected target-relative path: <scope inside repository, or .>
 Worktree repository root: <linked task worktree>
@@ -66,7 +67,7 @@ Invariants: <properties that must hold across transitions and how they are check
 
 | Agent | Tool/input identity | Actual command and run evidence | Result / states / scope |
 | --- | --- | --- | --- |
-| Author (Codex parent / Claude Opus 5.5 planner) | <current hashes/version> | <verifications/tla/runs/...> | <not run or actual> |
+| Author (Codex gpt-6.2-astra/high or Claude Code Opus 5.5/high planner) | <current hashes/version> | <verifications/tla/runs/...> | <not run or actual> |
 | Primary host reviewer | <same final inputs; requested/effective model+effort> | <own independent run> | <not run or actual> |
 | Additional host reviewer (large only) | <same final inputs; actual identity if required> | <own run or not required for small> | <actual or not required> |
 
@@ -95,8 +96,8 @@ one ID when it proves multiple tasks or transitions.
 
 | Reviewer | Model / effort | Plan revision reviewed | Findings and disposition | Record |
 | --- | --- | --- | --- | --- |
-| Primary | <Codex gpt-6.1-sol/high or Claude Sonnet 5.5/high; effective identity> | <revision> | <pending or actual> | <verifications/design-review-sol.md or design-review-sonnet.md> |
-| Additional (large only) | <Codex gpt-6-astra/high or Claude Opus 5.5/high; effective identity> | <revision if required> | <actual or not required for small> | <verifications/design-review-astra.md or design-review-opus.md when required> |
+| Primary | <Codex gpt-6.2-sol/high or Claude Sonnet 5.5/high; requested and available effective identity evidence> | <revision> | <pending or actual> | <verifications/design-review-sol.md or design-review-sonnet.md> |
+| Additional (large only) | <Codex gpt-6.2-astra/high or Claude Opus 5.5/high; requested and available effective identity evidence> | <revision if required> | <actual or not required for small> | <verifications/design-review-astra.md or design-review-opus.md when required> |
 
 Readiness: <author and every tier-required reviewer independently completed TLC
 on current inputs; all required semantic reviews approved; findings resolved;
@@ -109,6 +110,9 @@ Checklist: [verifications/verification.md](verifications/verification.md)
 Failure register: [verifications/failures.md](verifications/failures.md)
 
 - Implementation authorization: <planning only, or existing user authorization>
+- Coordinator handoff: <ready revision and evidence delivered to the authorized
+  implementer, or plan-only handoff. Return material design gaps to the planner
+  and required independent reviewers through the coordinator.>
 - Completion rule: all required checks passed with evidence; all tier-required design reviews
   and TLA+ runs cover the final design/inputs. Bounded model checking does not
   replace implementation tests. Authorized implementation also requires a scoped

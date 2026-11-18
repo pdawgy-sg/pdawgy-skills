@@ -8,6 +8,10 @@ authorizes implementation, committing, or pushing.
 
 ## Preflight and scope
 
+The coordinator owns preflight, task worktree setup and verified Git delivery.
+Phase workers use its mapped project and return artifacts or implementation
+changes and evidence to it.
+
 Use Git to detect context: `git rev-parse --is-inside-work-tree` and
 `git rev-parse --show-toplevel`. A linked worktree's `.git` is usually a file, so
 testing whether `.git` is a directory is insufficient. A bare repository is not
