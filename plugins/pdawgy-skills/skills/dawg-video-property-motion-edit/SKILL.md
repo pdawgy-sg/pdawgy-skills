@@ -1,6 +1,6 @@
 ---
 name: dawg-video-property-motion-edit
-description: Edit raw property-agent footage into a vertical 9:16 "property motion" reel — the agent's walkthrough plays full-screen while dark/amber infographics (stat counters, feature ticks, price-comparison bars, a location map card, floor-plan cards, CTA and CEA-compliant agent details) land on the exact words he says, built as an editable FilmCraft project (native text, captions, keyframes, ducked music) plus its export. Use whenever someone wants a real-estate / showflat / condo / new-launch reel, Instagram/TikTok property video, agent tour edit, or "make it like the Amberwood edit" from raw clips, floor plans and reference videos — even if they only say "edit these property videos" or "make a reel to sell this unit".
+description: Edit raw property-agent footage into a vertical 9:16 "property motion" reel — the agent's walkthrough plays full-screen while dark/amber infographics (stat counters, feature ticks, price-comparison bars, a location map card, floor-plan cards, CTA and CEA-compliant agent details) land on the exact words he says, built as an editable FilmCraft project (native text, captions, keyframes, ducked music) plus its export. Planning starts with research into the project, location, comparables, likely buyers, competitors' reels and platform craft, then a creative brief with the client covering how creative to go (Classic / Bold / Experimental), the hook, selling points, look, sound and deliverables. Use whenever someone wants a real-estate / showflat / condo / new-launch reel, Instagram/TikTok property video, agent tour edit, or "make it like the Amberwood edit" from raw clips, floor plans and reference videos — even if they only say "edit these property videos" or "make a reel to sell this unit".
 ---
 
 # Dawg Video — Property Motion Edit
@@ -20,6 +20,7 @@ Work in the user's project folder. Expected layout (create `edits/<name>/` if mi
 <project>/reference/          example reels the client likes (optional)
 <project>/edits/<name>/tools/ copy of this skill's scripts/  ← adapt here, per project
 <project>/edits/<name>/work/  proxies, words.json, map data, rendered overlay assets (generated)
+<project>/edits/<name>/work/brief/  research.md, creative-brief.md, lessons.md
 <project>/edits/<name>/<name>-property-motion.fcproj + .mp4   deliverables
 ```
 
@@ -61,21 +62,41 @@ transcript** — local names and accents get misheard ("Thompson Resort", "As a 
 "At such a price"). Fix with `CAPTION_FIXES` (display text) or `WORD_FIXES` (per token, keeps
 timing); set phrase breaks in `CHUNKS`; drop silent b-roll via `SKIP_CLIPS`.
 
-### 4. Plan the reel from what he says
+### 4. Research, then brief the client
+Don't plan from the footage alone. Learn what makes this property desirable, and who to, before
+choosing a hook.
+- **Research** (`references/research-playbook.md`): the project, the location (MRT, schools
+  within 1 km, amenities, planned infrastructure), comparables, likely buyer personas,
+  competitors' reels for this launch, and current platform craft (hooks, length, safe zones).
+  Use web search, in parallel subagents where the host supports them. Write
+  `work/brief/research.md` with a source, access date and tag on each fact (Verified, Agent's
+  claim, Unverified). Finish it with ranked **angles** mapped to takes and timestamps.
+- **Ask** (`references/creative-brief.md`): run 2–3 short rounds of questions with researched
+  options and a recommended default. Start with the creativity dial (Classic / Bold /
+  Experimental), the goal, the buyer and the platform. Then the hook and selling points. Then
+  look, sound, captions, pace and deliverables. Fold in the factual questions from step 1 that
+  are still open.
+- **Brief:** fill `assets/creative-brief-template.md` into `work/brief/creative-brief.md` and get
+  the user's yes. Tell them about any discrepancy research found in his figures, and leave
+  it to them to decide.
+
+### 5. Plan the reel from the brief and what he says
 Write a table: take → line → which graphic → which word triggers it. Use the section patterns in
 `scripts/build_filmcraft.py` (hook, size+features with b-roll cut, price bars, location map, closer
-with floor plans + CTA). Only put claims on screen that he says or that come from the client's
-documents (floor plans, ID card). Order takes for the strongest hook (the client moved "best value
-buy" before "958 sqft"). Confirm the plan with the user before rendering.
+with floor plans + CTA). The brief's dial sets how many effects you use, its hook sets the take
+order, and its selling points choose the graphics. At Experimental, add the agreed trend format
+on top of these patterns. Only put claims on screen that he says, that come from the client's
+documents (floor plans, ID card), or that research tagged Verified. Confirm the plan with the
+user before rendering.
 
-### 5. Location map
+### 6. Location map
 `python3 tools/fetch_map_data.py` (Nominatim, polite, ~70 requests at 1 req/s) writes
 `work/map/nominatim.json` and prints distance-ranked MRT/schools/parks. Check the site pin
 against the floor plans' key plan, then curate real, nearby POIs into `project.POIS`. If a map
 service refuses, don't hop mirrors or spoof user agents — tell the user. Keep the
 "© OpenStreetMap contributors" credit on screen.
 
-### 6. Build in FilmCraft
+### 7. Build in FilmCraft
 Adapt `tools/build_filmcraft.py`: `SECTIONS` (take order), `CUES` (word times from `words.json`)
 and the copy in each section, then `python3 tools/build_filmcraft.py` (≈3–4 min; it issues a few
 hundred `filmcraft-cli exec` commands, logged to `work/filmcraft-actions.jsonl`). It builds:
@@ -99,14 +120,14 @@ colour runs, `push_in`, a per-band free-track allocator). Inspect with
 If `filmcraft-cli` isn't installed, `tools/build_reel.py` renders an earlier version of the reel
 with ffmpeg alone (centred headlines, karaoke captions, no editable project; `SPEED = 1` only).
 
-### 7. Verify before showing anything
+### 8. Verify before showing anything
 - Contact sheet of the whole reel + frame grabs **at each cue time**; read them.
 - Video and audio durations match (`ffprobe -show_entries stream=duration`).
 - Graphics never cover the agent's face; captions don't repeat the graphic right next to them.
 - File < 30 MB for phone/web sharing (segments use CRF 20; raise it if needed).
 - If a render hangs at ~0 % CPU, it's an ffmpeg framesync deadlock — see `references/pitfalls.md`.
 
-### 8. Music and delivery
+### 9. Music and delivery
 The FilmCraft build lays a synthesized, royalty-free 118 BPM deep-house bed (`music.house_bed`) on
 A2 with generated ducking; mute A2 and re-export for a voice-only cut (ffmpeg path:
 `tools/add_music.py`). Deliver the `.fcproj` and both exports. Always offer the voice-only version: real trending tracks must be added in the Instagram/TikTok editor
@@ -128,6 +149,9 @@ Feedback this style has already absorbed is in `references/style-guide.md` — a
 - `scripts/locmap.py`, `scripts/fetch_map_data.py` — map rendering and data
 - `scripts/make_proxies.py`, `scripts/transcribe.py`, `scripts/captions.py` — media prep and captions
 - `scripts/music.py`, `scripts/add_music.py` — music bed and ducking
+- `references/research-playbook.md` — what to research, sourcing and tagging, angles, compliance
+- `references/creative-brief.md` — the creativity dial, the question bank and how to ask
+- `assets/creative-brief-template.md` — the brief to fill in and get approved
 - `references/style-guide.md` — layout zones, palette, timing and the client-feedback rules
 - `references/pitfalls.md` — ffmpeg 9 / ImageMagick / data gotchas and their fixes
 - `references/amberwood-example.md` — the worked example: footage, transcript, section map
