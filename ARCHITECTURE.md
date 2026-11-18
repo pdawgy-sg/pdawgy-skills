@@ -130,10 +130,12 @@ is a media workflow independent of dawg-plan. Its scripts are copied into the
 target project's `edits/<name>/tools/`, configured through one `project.py`, and
 write proxies, transcripts, map data and renders under that project's
 `edits/<name>/work/`. Transcription uses faster-whisper through `uv` only with
-user consent; map data comes from OpenStreetMap Nominatim at a polite rate. The
-main build drives the host's FilmCraft headlessly through `filmcraft-cli` and
-outputs an editable `.fcproj` with its H.264 export; an ffmpeg-only builder is
-the fallback when FilmCraft is absent.
+user consent; map data comes from OpenStreetMap Nominatim at a polite rate.
+Planning uses the host's web search and question tools to write a sourced
+`work/brief/research.md` and a client-approved `work/brief/creative-brief.md`
+before any render. The main build drives the host's FilmCraft headlessly
+through `filmcraft-cli` and outputs an editable `.fcproj` with its H.264
+export; an ffmpeg-only builder is the fallback when FilmCraft is absent.
 
 ```mermaid
 flowchart TD
