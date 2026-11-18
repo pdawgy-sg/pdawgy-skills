@@ -3,7 +3,7 @@
 ## Purpose and scope
 
 Pdawgy Skills is an instruction-based plugin distributed through separate Codex and
-Claude Code marketplace catalogs in the same repository. The current package contains four shared skill workflows and four Claude Code phase-agent definitions.
+Claude Code marketplace catalogs in the same repository. The current package contains five shared skill workflows and four Claude Code phase-agent definitions.
 There is no application service, bundled MCP server, lifecycle hook, or declared
 project build/test framework in the current source package.
 
@@ -26,8 +26,9 @@ project build/test framework in the current source package.
   listing metadata, and `./skills/` discovery path relative to the plugin root.
 - Each directory beneath `plugins/pdawgy-skills/skills/` contains a `SKILL.md`
   entrypoint and `agents/openai.yaml` Codex UI metadata. Supporting assets belong to
-  the skill that uses them; no bundled executable scripts are required by the
-  current skills.
+  the skill that uses them. Only dawg-video-property-motion-edit bundles
+  executable scripts: standard-library Python that drives the host's ffmpeg and
+  ImageMagick, copied into and run from the target project.
 - `plugins/pdawgy-skills/agents/` contains Claude Code's native dawg-planner,
   dawg-review-sonnet, dawg-review-opus and dawg-implementer definitions. Their YAML
   pins full model IDs/effort; bodies reference the canonical dawg-plan workflow
@@ -123,6 +124,14 @@ Its MR/PR message covers problem, fix, blast radius and verified/tested outcomes
 including failures or missing evidence. Drafting does not invoke dawg-plan,
 launch tests, alter Git state or publish an MR. It adds no scripts or services.
 
+[dawg-video-property-motion-edit](plugins/pdawgy-skills/skills/dawg-video-property-motion-edit/SKILL.md)
+is a media workflow independent of dawg-plan. Its scripts are copied into the
+target project's `edits/<name>/tools/`, configured through one `project.py`, and
+write proxies, transcripts, map data and renders under that project's
+`edits/<name>/work/`. Transcription uses faster-whisper through `uv` only with
+user consent; map data comes from OpenStreetMap Nominatim at a polite rate. The
+output is a vertical reel plus a music-bed variant in the target project.
+
 ```mermaid
 flowchart TD
     CodexCatalog[Codex marketplace catalog] --> CodexManifest[Codex manifest]
@@ -133,6 +142,8 @@ flowchart TD
     Skills --> Plan[dawg-plan]
     Skills --> Maintain[dawg-architecture-maintain]
     Skills --> MR[dawg-mr]
+    Skills --> Video[dawg-video-property-motion-edit]
+    Video --> Reel[Vertical property reel rendered in the target project]
     MR --> Message[Committed-change MR draft in chat]
     Init --> Plan
     Init --> Maintain

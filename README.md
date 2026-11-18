@@ -46,6 +46,7 @@ explains `#main` or another branch/tag.
 | Repository initialization | `$dawg-init` | `/pdawgy-skills:dawg-init` |
 | Architecture maintenance | `$dawg-architecture-maintain` | `/pdawgy-skills:dawg-architecture-maintain` |
 | MR description | `$dawg-mr` | `/pdawgy-skills:dawg-mr` |
+| Property motion video edit | `$dawg-video-property-motion-edit` | `/pdawgy-skills:dawg-video-property-motion-edit` |
 
 `dawg-plan` and `dawg-init` share one coordinator-led workflow with these defaults:
 
@@ -102,6 +103,12 @@ committed changes without requiring the planning review cycle. See Claude Code's
   the problem, fix, blast radius, and verified/tested evidence. Labels missing or
   stale results honestly; drafts in chat without publishing or running tests.
   Invoke it with `$dawg-mr`.
+- **dawg-video-property-motion-edit** — Edit raw property-agent footage into a
+  vertical reel: the tour plays full-screen while infographics, a location map
+  card, floor plans, captions and CEA-compliant agent details land on the words
+  the agent says. Bundles ffmpeg/ImageMagick Python scripts, a per-project
+  config, a style guide and a worked example. Invoke it with
+  `$dawg-video-property-motion-edit`.
 
 During implementation and verification, Dawg records observed failures in the
 plan's `verifications/failures.md`, diagnoses and repairs them, and reruns failed
@@ -170,9 +177,14 @@ pdawgy-skills/
             ├── dawg-architecture-maintain/
             │   ├── SKILL.md
             │   └── agents/openai.yaml
-            └── dawg-mr/
+            ├── dawg-mr/
+            │   ├── SKILL.md
+            │   └── agents/openai.yaml
+            └── dawg-video-property-motion-edit/
                 ├── SKILL.md
-                └── agents/openai.yaml
+                ├── agents/openai.yaml
+                ├── references/
+                └── scripts/
 ```
 
 Both marketplace catalogs point to `./plugins/pdawgy-skills`, relative to the
