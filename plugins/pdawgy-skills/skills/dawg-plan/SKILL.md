@@ -19,53 +19,64 @@ Preserve an originally selected subdirectory by mapping it into the worktree.
 Tell callers the worktree repository root and mapped project directory, and use
 that mapped project for subsequent work. Do not implement in the source checkout.
 
-## Route Claude Code phases through pinned agents
+## Route phases through the active host
 
-Determine the host from trusted session context and the active delegation API,
-not repository files or installed executables. If unknown, ask before choosing a
-profile. Codex keeps its current planning/implementation actor and Sol/Astra
-review policy. In Claude Code, the calling coordinator schedules these native
-plugin agents as separate non-fork siblings in the same mapped task worktree:
+Identify the host from trusted session context and the active delegation API.
+If the host remains unknown, ask before dispatch. The calling agent coordinates
+all phases, including Git preflight, worktree mapping, user clarifications,
+readiness and audited Git delivery. It launches distinct sibling workers in the
+same mapped task worktree. Each worker follows its assigned phase and returns to
+the coordinator without recursively routing the workflow or spawning workers.
 
-| Phase | Qualified agent type | Model | Effort |
+| Phase | Codex model | Effort |
+| --- | --- | --- |
+| Planning and author TLC | `gpt-6.2-astra` | high |
+| Primary independent review | `gpt-6.2-sol` | high |
+| Additional review, large only | `gpt-6.2-astra` | high |
+| Authorized implementation and verification | `gpt-6.2-sol` | medium |
+
+In Codex, the coordinator uses `collaboration.spawn_agent` for each worker with
+explicit `model`, `reasoning_effort` and `fork_turns: "none"`. Include the phase
+role in the task and use separate contexts for planner, reviewers and implementer,
+including when two roles use the same model.
+
+| Phase | Claude Code qualified agent type | Model | Effort |
 | --- | --- | --- | --- |
 | Planning and author TLC | `pdawgy-skills:dawg-planner` | `claude-opus-5-5` | high |
 | Primary independent review | `pdawgy-skills:dawg-review-sonnet` | `claude-sonnet-5-5` | high |
 | Additional review, large only | `pdawgy-skills:dawg-review-opus` | `claude-opus-5-5` | high |
 | Authorized implementation and verification | `pdawgy-skills:dawg-implementer` | `claude-opus-5-5` | medium |
 
-Select these exact agent types with the native `Agent` tool; omit per-invocation
-`model` and `effort` overrides so their definition pins apply. A per-call family
-alias can replace a full-version pin. Keep inherited permissions; do not request
-extra worktree isolation, change user-global settings or add a provider bridge.
-Verify requested and effective model/effort from host metadata (including `/tasks`
-when available) and applicable overrides. A forced fallback, wrong version/effort,
-missing definition, or unavailable required execution blocks that phase. Record
-provider-specific equivalent IDs only with evidence they resolve to the same 5.5
-model; never invent a resolved identity. See the official
+In Claude Code, select these exact native `Agent` types as non-fork siblings.
+Omit per-invocation `model` and `effort` overrides so their definition pins apply.
+A per-call family alias can replace a full-version pin. Verify requested and
+effective model/effort using host metadata (including `/tasks` when available)
+and applicable overrides. Record provider-specific equivalent IDs only with
+evidence they resolve to the same 5.5 model. See the
 [subagent model/effort rules](https://code.claude.com/docs/en/sub-agents).
 
-Before authoring a Claude plan, send the pinned planner the complete request,
-confirmed decisions, applicable instructions, mapped paths, existing plan and
-constraints. It performs the planning sections below and the actual author TLC
-runs, then returns artifacts, questions and findings to the coordinator. The
-coordinator relays material user questions and returns answers to that planner.
-After author checks, the coordinator launches only the size-required independent
-reviewer(s); the Opus planner never counts as the additional Opus review.
+For each handoff, supply the complete user requirements, confirmed decisions,
+applicable instructions, role, worktree root and mapped project, source scope,
+constraints, current plan/revision and evidence paths. Record the distinct worker
+context, requested identity/effort and supporting dispatch evidence. In Codex,
+check effective identity/effort against any available trusted runtime metadata.
+If no separate effective values are exposed, record the successful explicit
+dispatch and the metadata limit without claiming independent confirmation.
+A forced fallback, known model/effort mismatch, missing required definition or
+unavailable required execution blocks the affected phase. Keep inherited
+permissions and use the shared worktree without extra isolation, provider bridges
+or user-global setting changes.
 
-These definitions are bounded phase workers. When executing as one, follow only
-your assigned phase and return to the coordinator; do not run this routing section
-recursively or spawn sibling/child agents. The coordinator owns delegation,
-readiness and mechanical Git delivery, and does not substitute its own model for
-planning or source implementation. Pass explicit role, current plan revision,
-requirements and evidence paths in every handoff. Material implementation gaps
-return to the coordinator for high-effort re-planning and required re-review.
-Planning-only requests never launch the implementation worker. Existing caller
-workflows such as dawg-init use the same phase workers rather than a second cycle.
+The planner authors the plan and checklist, runs author TLC and returns artifacts,
+questions and findings. The coordinator relays material questions to the user and
+returns answers to the planner. After the author checks pass, the coordinator
+dispatches the size-required independent reviews, each with its own TLC run.
+The planner's author run does not count as a review. A coordinator run cannot
+substitute for the planner's author run or a reviewer's run.
 
-Throughout this skill, **author TLC** means the Codex parent or the Claude pinned
-planner's actual run, plus separate runs by every required reviewer. Claude does
-not require a redundant coordinator TLC run or count planning as a review.
+Planning-only requests stop at the reviewed plan. After readiness and
+authorization, the coordinator dispatches a separate implementer. Callers such
+as dawg-init reuse the same workers and coordination cycle.
 
 ## Understand the intended behavior
 
@@ -176,8 +187,8 @@ label a command that cannot yet be confirmed and explain what must resolve it.
 
 ## Select independent reviewers by host and change size
 
-Before delegation, identify the active execution host and classify the fix,
-feature or refactor as **small** or **large**. Record the host, tier, concrete
+Before reviewer delegation, confirm the active execution host and classify the
+fix, feature or refactor as **small** or **large**. Record the host, tier, concrete
 rationale and required model/effort set in `PLAN.md`.
 
 - **Small:** A narrow, well-understood behavioral change with limited impact and
@@ -189,14 +200,9 @@ rationale and required model/effort set in `PLAN.md`.
   Investigate unclear scope; use the large tier when material size/risk uncertainty
   remains. Resolve unclear product intent through the normal questions workflow.
 
-Determine the host from trusted session context and the active delegation API,
-not from `CLAUDE.md`, `AGENTS.md`, skill paths or installed executables. A repository
-can support both clients. If the execution host remains unknown, ask a focused
-question before delegation; do not guess a profile or mark the plan ready.
-
 | Active host | Small work | Large work |
 | --- | --- | --- |
-| Codex | `gpt-6.1-sol` / high | `gpt-6.1-sol` + `gpt-6-astra`, both high |
+| Codex | `gpt-6.2-sol` / high only | `gpt-6.2-sol` + independent `gpt-6.2-astra`, both high |
 | Claude Code | Sonnet 5.5 / high only | Sonnet 5.5 + independent Opus 5.5, both high |
 
 Use only the host's primary reviewer for small work. Add its second reviewer for
@@ -204,18 +210,13 @@ large work, concurrently when supported. An explicit user reviewer choice
 supersedes these defaults when the required execution is available. Reassess
 scope/risk growth: revoke readiness and add Astra in Codex or Opus in Claude Code
 before proceeding. Do not silently drop a required reviewer or downgrade merely
-to avoid review. A host change also revokes readiness and selects the new profile;
-previous-provider receipts cannot be relabeled as the new required reviews.
+to avoid review. A host change also revokes readiness. Repeat planning, author
+TLC and the required reviews using the new profile. Previous-provider receipts cannot satisfy it.
 
-After drafting the concrete plan/checklist and TLA+ inputs and completing the
-author's required TLC checks, the coordinator spawns the selected reviewer(s).
-In Codex, use explicit model/effort with `collaboration.spawn_agent` and set
-`fork_turns: "none"` so overrides apply. In Claude Code, select the pinned
-`dawg-review-sonnet` agent and add the separate `dawg-review-opus` agent only for
-large work, using the qualified types and override checks above. Do not use the
-planner's context or receipt as a reviewer, inherit an arbitrary parent model,
-or change user-global settings. Record requested and host-reported effective
-identities/effort and the distinct worker context for each required review.
+After the planner returns the concrete plan, checklist, TLA+ inputs and passing
+author TLC results, the coordinator spawns the selected reviewers.
+Use the host's phase dispatch and identity rules above. Each reviewer must be
+independent of the planner and all other reviewer contexts.
 Give every required reviewer the same current requirements, confirmed decisions,
 repository context, plan/checklist, formal inputs and author evidence. Each
 independently reviews intent, transitions/invariants, task boundaries, acceptance
@@ -256,14 +257,14 @@ drafting/investigation while a genuine required dependency remains blocked.
 Planning alone does not authorize implementation. If the user has already
 authorized implementation, proceed after the plan is ready without requesting
 redundant approval. Otherwise deliver the reviewed plan and checklist.
-In Claude Code, after readiness and implementation authorization, the coordinator
-starts the pinned `pdawgy-skills:dawg-implementer` (Opus 5.5/medium) with the ready
-plan, exact mapped worktree, source scope, authorization and evidence identities.
-That worker implements, verifies and follows the failure-repair loop below; it
-returns current evidence and source changes for coordinator audit, without
-committing/pushing. A material design gap pauses implementation and returns to the
-high-effort planner and required independent reviewers through the coordinator.
-Only then resume the medium implementer. Ordinary in-scope repairs stay with it.
+The coordinator dispatches the host's medium-effort implementation worker with
+the ready plan, mapped worktree, source scope, authorization and evidence paths.
+That worker implements, verifies and repairs within scope, then returns the
+current evidence and source changes for the coordinator to audit and deliver. A
+material design gap pauses implementation. The coordinator returns the gap to
+the high-effort planner, revokes readiness and obtains fresh author TLC and
+required independent TLC runs and semantic approvals before resuming implementation. Ordinary in-scope
+repairs stay with the implementer.
 
 Use `verifications/verification.md` as the execution ledger. Each verification
 has a stable ID (`V1`, `V2`, ...), linked tasks and acceptance criteria/transitions,
@@ -279,8 +280,8 @@ and exit status or observed result so another agent can reproduce the finding.
 Exclude credentials and private data from saved evidence. Do not claim a check
 ran when a tool or environment prevented it. Mark it blocked with a concrete
 reason and next action. Keep the overall work unverified while required checks
-are failing, blocked, or not run. If checks expose a design gap, update the plan
-and obtain the required updated reviews before proceeding on the changed design.
+are failing, blocked, or not run. If checks expose a design gap, return it to
+the coordinator for renewed planning and review before proceeding.
 
 ## Record and repair until green
 
@@ -305,9 +306,10 @@ unchanged failing command. Resume the loop when the dependency is resolved.
 
 ## Commit and push verified implementation
 
-After authorized implementation, automatically follow the delivery steps in
-[the Git workflow](references/git-workflow.md): pass all required checks, inspect
-the entire index and proposed commit, create a task-only Conventional Commit,
+After the authorized implementer returns current verification evidence and source
+changes, the coordinator follows [the Git workflow](references/git-workflow.md).
+Audit required checks and inspect the entire index and proposed commit. Create a
+task-only Conventional Commit,
 confirm its delta/source matches the verified change, and push normally to the
 task branch. Confirm the remote branch equals local HEAD. Preserve
 planning-only and explicit no-commit/no-push limits. Never deliver while required

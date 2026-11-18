@@ -90,13 +90,15 @@ log alone does not identify the checked model.
 
 ## Every required reviewer executes independently
 
-Use dawg-plan's recorded execution host and size classification. Codex uses
-`gpt-6.1-sol`/high, adding `gpt-6-astra`/high for large work; Claude Code uses
-Sonnet 5.5/high only for small work, adding a separate Opus 5.5/high for large work. Unknown host blocks selection;
-record requested and host-reported effective model/effort, without cross-profile
-substitution or unverified version/effort fallback. Its Opus 5.5/high planner
-executes author TLC; that is not the separate large-work Opus review. Give every required reviewer the same final
-module/configurations, dependency identities, acceptance mapping and author evidence. Each must:
+Use the [phase routing and identity rules](../SKILL.md#route-phases-through-the-active-host).
+The Codex `gpt-6.2-astra`/high or Claude Code Opus 5.5/high planner executes
+author TLC. Codex review uses `gpt-6.2-sol`/high only for small work and adds a
+distinct `gpt-6.2-astra`/high reviewer for large work. Claude Code review uses
+Sonnet 5.5/high only for small work and adds a distinct Opus 5.5/high reviewer
+for large work. The planner's author TLC and each review require separate
+contexts and receipts. Give every required reviewer the same final module and
+configurations, dependency identities, acceptance mapping and author evidence.
+Each must:
 
 1. Read the actual spec/config and inspect assumptions, properties, abstraction,
    fairness/deadlock handling, finite scope, relevant reachability and omissions.
@@ -120,8 +122,8 @@ assumption or fairness changes invalidate the author and all required reviewer
 receipts. Rerun the author and every required reviewer on the changed contract.
 Scope growth to large requires the host's additional reviewer before readiness; valid current receipts may
 remain only when their reviewed inputs are unchanged and applicable. A host switch
-revokes readiness and requires reviews from the newly selected profile; old-provider
-receipts cannot be credited as those models. Unchanged exact inputs may
+revokes readiness and requires new planner/author TLC and reviewer receipts
+using the newly selected profile. Unchanged exact inputs may
 retain their executed receipts while reviewers inspect later implementation
 conformance; do not reuse stale results across a changed model or requirements.
 

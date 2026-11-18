@@ -16,16 +16,19 @@ rules. Keep this section about writing and checking code, not module inventories
 - Use `dawg-plan` for features, fixes and refactors. Resolve material uncertainty,
   keep work in small parts, and record enough verification/evidence for each part. Include
   a meaningful TLA+ model/config and completed author plus every required reviewer
-  TLC check on identical final inputs. Select by active host: Codex uses
-  gpt-6.1-sol/high and adds gpt-6-astra/high for large work; Claude Code uses Sonnet 5.5/high only
-  for small work and adds a separate Opus 5.5/high reviewer for large work. Use
-  its pinned Opus 5.5/high planner and authorized Opus 5.5/medium implementer
-  as coordinator-scheduled siblings; planner receipts are not independent reviews. Record host/tier/rationale, ask
-  if host is unknown, and reassess scope/risk or host changes before readiness.
-  Only the selected set is required; the optional second reviewer does not block
-  small work. Never credit a different provider's receipt as the selected model.
-  Do not silently drop a required reviewer. State bounds and assumptions; retain implementation tests and rerun after material model or
-  requirement changes. Use its
+  TLC check on identical final inputs. Use coordinator-scheduled phase workers
+  in the same mapped worktree. For Codex, use `gpt-6.2-astra`/high for planning
+  and author TLC, `gpt-6.2-sol`/high alone for small review, a separate
+  `gpt-6.2-astra`/high reviewer in addition for large review, and
+  `gpt-6.2-sol`/medium for authorized implementation and verification after
+  readiness. In Claude Code, use the pinned Opus 5.5/high planner, Sonnet 5.5/high
+  reviewer alone for small work, an additional distinct Opus 5.5/high reviewer
+  for large work, and the pinned Opus 5.5/medium implementer when ready and
+  authorized. Record host, tier and rationale. Follow dawg-plan's dispatch and
+  model/effort evidence rules, ask when host is unknown and reassess growth or
+  host changes before readiness. Require the selected profile's current receipts.
+  State bounds and assumptions, retain implementation tests and rerun formal
+  checks after material model or requirement changes. Use its
   dedicated Git worktree/task branch and preserve selected subdirectory scope.
   Outside Git, ask before initialization and wait. After authorized implementation
   passes required checks, create a task-only Conventional Commit and push normally

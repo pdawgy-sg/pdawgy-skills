@@ -13,7 +13,7 @@ Final commit/push receipt: <report in chat after delivery; no self-referential c
 Failure register: [failures.md](failures.md)
 Current phase / green gate: <required checks for this phase; open F IDs>
 Execution host / evidence: <Codex or Claude Code; trusted context, unresolved host blocks>
-Review tier / rationale / required models: <Codex Sol(+Astra)/high; Claude Sonnet 5.5(+separate Opus 5.5)/high; additional model only for large>
+Review tier / rationale / required models: <Codex gpt-6.2-sol/high; add separate gpt-6.2-astra/high for large; Claude Code Sonnet 5.5/high; add separate Opus 5.5/high for large>
 
 ## Coverage checklist
 
@@ -52,6 +52,11 @@ unresolved. Keep later planned phases and exact expected negative probes distinc
 
 ## Phase identity and review evidence
 
+- Codex phases when applicable: <gpt-6.2-astra/high planner and author,
+  gpt-6.2-sol/high independent reviewer, separate gpt-6.2-astra/high reviewer for
+  large work, gpt-6.2-sol/medium implementer if ready and authorized. Record each
+  context, explicit dispatch arguments and available trusted effective metadata
+  or its limits. Report known mismatches.>
 - Claude phases when applicable: <qualified planner/reviewer(s)/implementer types;
   requested and effective full model IDs/effort; overrides checked; distinct sibling
   contexts; Opus 5.5/high author, Sonnet 5.5/high small review only, separate
@@ -60,10 +65,10 @@ unresolved. Keep later planned phases and exact expected negative probes distinc
 
 - Author TLC: <revision/input/tool hashes; exact command; configs; completed
   outcomes/state counts; tla/runs/...; not run until actually executed>
-- Primary host reviewer: <sol/high in Codex or Sonnet 5.5/high in Claude Code;
-  host-specific design-review file, requested/effective identity+effort, own current
+- Primary host reviewer: <gpt-6.2-sol/high in Codex or Sonnet 5.5/high in Claude Code;
+  host-specific design-review file, requested and available effective identity/effort, own current
   TLC hashes/logs/results and semantic review on final inputs>
-- Additional host reviewer (large only): <astra/high in Codex or Opus 5.5/high in
+- Additional host reviewer (large only): <gpt-6.2-astra/high in Codex or Opus 5.5/high in
   Claude Code; own current TLC/semantic review and actual identity; for small
   explicitly mark not required, never fabricate execution>
 - Formal limits/probes: <finite bounds, assumptions, fairness/deadlock choices,
@@ -83,7 +88,7 @@ and source correspondence remain required.
 - All-green evidence: <current phase's required checks PASS on current inputs,
   zero unresolved relevant F IDs, failed history retained; blocked is not complete>
 - Evidence shared in chat: <plan/checklist links and screenshot embeds, if any>
-- Commit/push prerequisites: <all checks passed, entire existing index/task hunks
+- Coordinator audit and commit/push prerequisites: <all checks passed, entire existing index/task hunks
   in scope, complete commit delta matches intended/tested source, identity/remote>
 - Delivery handoff: <actual Conventional Commit, task branch and remote OID
   confirmation in chat; distinguish local commit, push and required CI outcomes>
