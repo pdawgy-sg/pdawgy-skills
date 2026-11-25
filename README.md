@@ -1,14 +1,62 @@
 # Pdawgy Skills
 
-A shared collection of coding-agent skills for Codex and Claude Code.
+A shared collection of skills for Codex, Claude Code, and OpenBot.
 
-One `pdawgy-skills` plugin contains the canonical skills. Each client has its own
-native marketplace catalog and manifest pointing to that same package.
+One `pdawgy-skills` plugin contains the five canonical skills. The native Codex
+and Claude Code catalogs point to it. OpenBot installs the same skills as one
+`dawg` pack.
+
+## Install in OpenBot
+
+Use Python 3.9 or later. From the checkout you want to install, set
+`DAWG_WORKSPACE` to the absolute path of the selected OpenBot agent's workspace.
+Build into a fresh directory within that workspace.
+
+```sh
+DAWG_WORKSPACE=/absolute/path/to/agent/workspace
+python scripts/build_openbot_pack.py --output "$DAWG_WORKSPACE/candidate"
+```
+
+The builder prints the staged folder and the versioned ZIP paths. From that
+agent's chat, ask OpenBot to run `create_skill` once with
+`sourcePath: "candidate/dawg"`. This saves the pack in the shared local library
+and installs it on the calling agent. If it's already in the library, use
+`install_local_skill` once with its `skillId` and `revision`. Supply `agentId`
+to install it on another selected agent.
+
+To update, build into a fresh workspace directory and get the current library
+revision with `read_local_skill`. On the agent with the installed pack, ask
+OpenBot to run `revise_skill` with the same `skillId`, that `expectedRevision`,
+and the workspace-relative `sourcePath` of the new staged `dawg` folder.
+Other agents update when you install the new revision on each of them. If
+OpenBot reports that it saved a revision but could not install it, fix the
+reported problem and retry `install_local_skill` for the saved ID and revision.
+
+Verify that OpenBot discovers `dawg` and the five names in the invocation table.
+The selected workspace has those six folders in both `.agents/skills/` and
+`.claude/skills/`, with one pack entry at the requested revision in
+`.openbot/skills-lock.json`. OpenBot assigns integer library revisions. The
+package version in `dawg/SKILL.md` and the ZIP filename comes from the aligned
+native plugin manifests.
+
+In OpenBot, invoke a child by its canonical name, for example `$dawg-plan`, or
+use `$dawg` to choose a workflow. Planning and initialization require Git,
+Java/TLC, and the active provider's pinned delegation and model access shown
+below. For Claude Code, also install the separate native plugin using the next
+section and enable **Use my Claude Code setup** so OpenBot can load that user
+configuration. Verify the session exposes the applicable native agent types
+before starting a phase. They are `pdawgy-skills:dawg-planner`,
+`pdawgy-skills:dawg-review-sonnet`, `pdawgy-skills:dawg-review-opus`, and
+`pdawgy-skills:dawg-implementer`. The pack provides skill files. If the session
+lacks a required agent type, pinned model or effort, or tool, the workflow
+reports the missing capability and stops that phase.
+
+For public distribution, submit the generated ZIP to the OpenBot Skills
+Marketplace for review. Marketplace listings expose an approved version.
 
 ## Install in Claude Code
 
-Run these commands in your terminal to install the version published on `main`:
-Unmerged feature-branch changes are not included in that version.
+Use these commands to install the version published on `main`.
 
 ```sh
 claude plugin marketplace add 'https://github.com/pdawgy-sg/pdawgy-skills.git#main'
@@ -21,14 +69,14 @@ of the desired branch also works, using the commands below.
 
 The explicit ref avoids relying on the repository's default branch. Choose one
 source for this marketplace name. Confirm installation with `claude plugin list`
-and inspect the four skills and four phase agents with `claude plugin details pdawgy-skills`. Start a
-new session to use them.
+and inspect the five skills and four phase agents with
+`claude plugin details pdawgy-skills`. Start a new session to use them.
 
 To try an unpublished change from a checkout, run these from the repository root
 instead of adding the GitHub source:
 
 ```sh
-claude plugin marketplace add .
+claude plugin marketplace add "$PWD"
 claude plugin install pdawgy-skills@pdawgy-skills
 ```
 
@@ -152,6 +200,8 @@ pdawgy-skills/
 │   └── marketplace.json
 ├── .gitignore
 ├── README.md
+├── packaging/openbot/SKILL.md
+├── scripts/build_openbot_pack.py
 └── plugins/
     └── pdawgy-skills/
         ├── .codex-plugin/
