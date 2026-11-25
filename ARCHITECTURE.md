@@ -2,8 +2,9 @@
 
 ## Purpose and scope
 
-Pdawgy Skills is an instruction-based plugin distributed through separate Codex and
-Claude Code marketplace catalogs in the same repository. The current package contains five shared skill workflows and four Claude Code phase-agent definitions.
+Pdawgy Skills distributes one tree of five skill workflows through separate native
+Codex and Claude Code catalogs and a buildable OpenBot pack. The native Claude
+Code plugin also supplies four phase-agent definitions.
 There is no application service, bundled MCP server, lifecycle hook, or declared
 project build/test framework in the current source package.
 
@@ -24,6 +25,10 @@ project build/test framework in the current source package.
 - [plugins/pdawgy-skills/.codex-plugin/plugin.json](plugins/pdawgy-skills/.codex-plugin/plugin.json)
   is the Codex compatibility manifest. It owns the plugin identity, version,
   listing metadata, and `./skills/` discovery path relative to the plugin root.
+- [scripts/build_openbot_pack.py](scripts/build_openbot_pack.py) stages the
+  [dawg root](packaging/openbot/SKILL.md) and the canonical skill tree for OpenBot.
+  It reads the version from both native manifests, checks that they agree, and
+  writes a staged folder and deterministic ZIP to the requested output directory.
 - Each directory beneath `plugins/pdawgy-skills/skills/` contains a `SKILL.md`
   entrypoint and `agents/openai.yaml` Codex UI metadata. Supporting assets belong to
   the skill that uses them. Only dawg-video-property-motion-edit bundles
@@ -149,6 +154,10 @@ flowchart TD
     ClaudeCatalog[Claude Code marketplace catalog] --> ClaudeManifest[Claude manifest]
     CodexManifest --> Skills[Shared skill entrypoints]
     ClaudeManifest --> Skills
+    CodexManifest --> PackBuilder[OpenBot pack builder]
+    ClaudeManifest --> PackBuilder
+    Skills --> PackBuilder
+    PackBuilder --> OpenBot[OpenBot local library and per-agent install]
     Skills --> Init[dawg-init]
     Skills --> Plan[dawg-plan]
     Skills --> Maintain[dawg-architecture-maintain]
@@ -186,9 +195,10 @@ with Python/PyYAML. Formal planning
 also needs external Java/TLC tooling. Those tools are used by the calling agents;
 neither their binaries nor a separate model-checking service are bundled here.
 
-Claude Code installation loads four skills and four phase agents through its native marketplace
-commands. GitHub installation pins `#main` explicitly; local checkout registration
-supports unpublished changes. Claude invokes skills as `/pdawgy-skills:<name>`;
+Claude Code installation loads five skills and four phase agents through its
+native marketplace commands. GitHub installation pins `#main` explicitly.
+Local registration takes the checkout's absolute path and supports unpublished
+changes. Claude invokes skills as `/pdawgy-skills:<name>`;
 Codex uses `$<name>`. The shared instructions route to host-specific phase
 workers using each host’s native delegation. Model access depends on the host.
 Planning/init retain selected-model/effort and TLC requirements and report missing
@@ -196,6 +206,17 @@ capabilities as blockers; installation is not evidence of a
 completed planning or coding workflow. Native validation and isolated CLI
 registration/install/inventory checks verify packaging without invoking an LLM
 or changing the developer's real Claude settings.
+
+The OpenBot local library records revisions of the pack separately from the
+native package version. It installs the root and five children as sibling skill
+folders under `.agents/skills/` and `.claude/skills/` in the selected workspace.
+One entry in `.openbot/skills-lock.json` manages all six folders. Revising the
+library updates the calling agent's installed pack, and other agents select the
+new revision explicitly. The agent uses the actual Codex or Claude Code
+provider for delegation. Claude phase dispatch requires the four native types
+from the separately installed plugin and the session's effective settings to
+load that plugin. A public Marketplace listing follows approval of a submitted
+version.
 
 Plans are written in the mapped project inside the task worktree at
 `.dawgy/dwag-plan/<FIX|FEATURE>_<PLAN_NAME>/`. Each has `PLAN.md` and a
