@@ -1,4 +1,4 @@
 interface:
   display_name: "Dawg Plan"
-  short_description: "Plan with host-aware review and verified recovery"
-  default_prompt: "Use $dawg-plan with GPT-6.2 Astra/high planning, GPT-6.2 Sol/high review plus a separate GPT-6.2 Astra/high reviewer for large work, and GPT-6.2 Sol/medium implementation and verification once the plan is ready and implementation is authorized."
+  short_description: "Plan with independent review and project lint checks"
+  default_prompt: "Use $dawg-plan to plan this change with independent review, identify applicable project lint, and verify it during authorized implementation."

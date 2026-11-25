@@ -77,6 +77,12 @@ results are green with no unresolved implementation issues. Do not finish merely
 at the first red result. A plan-only task stops at its reviewed
 plan, with no automatic implementation commit/push.
 
+Before committing, audit the plan's lint/static inventory and confirm every
+applicable check has a current passing receipt with the recorded worktree
+working directory. If the inventory is empty, verify the inspected sources and
+reason no checks apply. Missing, stale, failed, blocked or unrun required
+results hold delivery alongside the existing test and CI requirements.
+
 Save implementation evidence under the mapped project's plan `verifications/`.
 Identify tested source using revision and file/diff fingerprints. If source or
 generated outputs change after checking, rerun affected checks. Review the final
@@ -114,6 +120,9 @@ hook-modified source must be reverified before pushing.
 Inspect the complete created commit delta (`git show --format= HEAD`) and confirm
 it matches the reviewed task change and tested source fingerprints. Unexpected
 content stops push; do not automatically amend/reset a user's commit to hide it.
+Before pushing, recheck the required evidence against the commit, including
+lint/static results or the documented reason none apply. Any newly failed or
+blocked result holds push until fresh passing evidence resolves it.
 
 Use the user-specified remote, a matching resumed task upstream, or an unambiguous
 configured remote. If uncertain/missing, ask for the remote URL/name. Do not guess

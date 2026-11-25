@@ -92,6 +92,14 @@ semantic review. Scope growth requires the large-tier set before readiness.
 Repeat for the smallest useful remaining tasks. Keep shared verification under
 one ID when it proves multiple tasks or transitions.
 
+## Project lint and static checks
+
+Summarize the applicable repository instructions, tooling/configuration and CI
+inspected for this scope. Map each applicable check to its exact command and
+worktree working directory in [the checklist](verifications/verification.md).
+If none apply, explain why using the inspected sources. Record missing
+prerequisites as blockers for the applicable checks.
+
 ## Independent design reviews
 
 | Reviewer | Model / effort | Plan revision reviewed | Findings and disposition | Record |
