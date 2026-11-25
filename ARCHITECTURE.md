@@ -43,7 +43,11 @@ project build/test framework in the current source package.
 
 [dawg-plan](plugins/pdawgy-skills/skills/dawg-plan/SKILL.md) investigates a feature,
 fix or refactor, resolves material ambiguity, models its state transitions, and defines
-small verifiable tasks. Its assets provide plan and verification templates.
+small verifiable tasks. Its plan and verification templates capture project lint
+and static checks discovered from applicable guidance, tooling and CI. The
+planner records each command and its worktree working directory or explains
+why no checks apply. The authorized implementer runs applicable checks and
+records results against the tested inputs.
 Every plan requires a concrete TLA+ model/configuration and author TLC run, followed
 by independent TLC execution and semantic review selected by host and size.
 The coordinator schedules distinct phase workers in one mapped task worktree.
@@ -93,10 +97,12 @@ selected relative scope, mapping the project into that worktree. Plans, evidence
 implementation and caller changes stay in the mapped target. After authorized
 implementation passes checks, it audits the entire index and commit delta,
 creates a Conventional Commit, and normally pushes the task branch
-with remote OID confirmation. Unrelated staging, failed checks and delivery errors
-remain explicit blockers. Planning-only requests stop before implementation and
-delivery; final delivery receipts are reported in chat rather than requiring a
-self-referential tracked receipt.
+with remote OID confirmation. Before both commit and push, the coordinator
+checks that required lint and static results match the current inputs, or
+verifies the documented reason none apply, alongside other required evidence.
+Unrelated staging, failed checks and delivery errors remain explicit blockers.
+Planning-only requests stop before implementation and delivery. Final delivery
+receipts are reported in chat to avoid self-referential tracked receipts.
 
 [dawg-init](plugins/pdawgy-skills/skills/dawg-init/SKILL.md) inspects an existing
 project or new directory and runs dawg-plan before guidance writes. It establishes

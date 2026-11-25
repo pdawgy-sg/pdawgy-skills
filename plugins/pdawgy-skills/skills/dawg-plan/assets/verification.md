@@ -15,6 +15,20 @@ Current phase / green gate: <required checks for this phase; open F IDs>
 Execution host / evidence: <Codex or Claude Code; trusted context, unresolved host blocks>
 Review tier / rationale / required models: <Codex gpt-6.2-sol/high; add separate gpt-6.2-astra/high for large; Claude Code Sonnet 5.5/high; add separate Opus 5.5/high for large>
 
+## Project lint and static checks
+
+- Inspected sources: <applicable instructions, tooling/scripts/configuration and CI paths>
+- If none apply: <why the inspected sources yield no applicable check for this scope>
+
+| Check ID | Requirement source and applicability | Exact command | Working directory in the task worktree |
+| --- | --- | --- | --- |
+| <V ID> | <path and why this check applies> | <command> | <absolute mapped path> |
+
+List applicable checks here and record runs, tested inputs, and failure or
+blocker evidence under their check IDs below. Use the absence rationale when
+the inventory is empty. A missing prerequisite for a required command is BLOCKED.
+Keep required tests and CI in the coverage checklist.
+
 ## Coverage checklist
 
 - [ ] FORMAL — author and every tier-required exact reviewer independently completed TLC on
@@ -88,7 +102,8 @@ and source correspondence remain required.
 - All-green evidence: <current phase's required checks PASS on current inputs,
   zero unresolved relevant F IDs, failed history retained; blocked is not complete>
 - Evidence shared in chat: <plan/checklist links and screenshot embeds, if any>
-- Coordinator audit and commit/push prerequisites: <all checks passed, entire existing index/task hunks
-  in scope, complete commit delta matches intended/tested source, identity/remote>
+- Coordinator audit before commit and before push: <current passing required
+  checks, lint/static evidence or justified non-applicability, entire existing
+  index/task hunks in scope, complete commit delta matches tested source, identity/remote>
 - Delivery handoff: <actual Conventional Commit, task branch and remote OID
   confirmation in chat; distinguish local commit, push and required CI outcomes>

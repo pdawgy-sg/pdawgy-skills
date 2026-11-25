@@ -1,6 +1,6 @@
 ---
 name: dawg-plan
-description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and host-aware independent review (Sol/Astra in Codex, Sonnet/Opus in Claude Code; one reviewer for small work, two for large work). During authorized implementation, record failures and repair/reverify until required checks are green before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
+description: Plan features, fixes and refactors in Git worktrees with TLA+ checks, state diagrams and host-aware independent review (Sol/Astra in Codex, Sonnet/Opus in Claude Code; one reviewer for small work, two for large work). Discover existing project lint and, during authorized implementation, repair and reverify required checks before Conventional Commit and push. Use when planning a feature, fix or refactor or explicitly asked to use dawg-plan.
 ---
 
 # Dawg Plan
@@ -185,6 +185,20 @@ rerun checks. A plan must be independently executable; instructions like "test
 it" or "verify it works" are insufficient. Use repository-supported commands;
 label a command that cannot yet be confirmed and explain what must resolve it.
 
+## Discover required project lint and static checks
+
+During planning, inspect the instructions that apply to the selected scope,
+existing tooling, scripts and configuration, and CI definitions for lint,
+format checks and other static quality checks. Follow the project's entrypoints
+and working-directory rules. In the verification checklist, record the source of
+each requirement, exact command, working directory in the mapped worktree,
+and why it applies to this change. Include checks specific to the changed
+artifacts even when there is no project-wide linter.
+
+If none apply, record what you inspected and why no check applies. An unavailable
+tool or prerequisite leaves an applicable check blocked. Keep required tests and
+CI gates in the checklist.
+
 ## Select independent reviewers by host and change size
 
 Before reviewer delegation, confirm the active execution host and classify the
@@ -273,10 +287,12 @@ procedure, expected result, actual result, evidence paths, and status. Use
 the actual check passes. Planned evidence paths and a successful design review
 are not implementation evidence. Preserve failed results and rerun history.
 
-When executing authorized work, run the planned checks and save relevant output,
-observed behavior, or screenshots under `verifications/`. Record the tested code
-revision (and uncommitted changes when present), environment, command/procedure,
-and exit status or observed result so another agent can reproduce the finding.
+When executing authorized work, run the applicable lint and static commands from
+their recorded worktree directories, along with the other planned checks. Save
+relevant output, observed behavior, or screenshots under `verifications/`.
+Record the tested code revision (and uncommitted changes when present),
+environment, command/procedure, and exit status or observed result so another
+agent can reproduce the finding.
 Exclude credentials and private data from saved evidence. Do not claim a check
 ran when a tool or environment prevented it. Mark it blocked with a concrete
 reason and next action. Keep the overall work unverified while required checks
@@ -308,8 +324,9 @@ unchanged failing command. Resume the loop when the dependency is resolved.
 
 After the authorized implementer returns current verification evidence and source
 changes, the coordinator follows [the Git workflow](references/git-workflow.md).
-Audit required checks and inspect the entire index and proposed commit. Create a
-task-only Conventional Commit,
+Before commit and again before push, audit current required checks, including
+lint/static results or the documented reason none apply. Inspect the entire
+index and proposed commit. Create a task-only Conventional Commit,
 confirm its delta/source matches the verified change, and push normally to the
 task branch. Confirm the remote branch equals local HEAD. Preserve
 planning-only and explicit no-commit/no-push limits. Never deliver while required

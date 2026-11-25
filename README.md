@@ -84,10 +84,13 @@ committed changes without requiring the planning review cycle. See Claude Code's
   rationale, reassess growth and obtain current runs and semantic approval from
   the required set. Missing, stale or incomplete runs block
   readiness; bounded model checks complement implementation tests. Features/fixes/refactors use a dedicated Git worktree
-  and task branch; non-Git directories require initialization consent. After
-  authorized implementation passes checks, the workflow creates a Conventional
-  Commit and pushes the task branch with remote confirmation. Planning-only
-  requests do not commit or push. Invoke it with `$dawg-plan`.
+  and task branch; non-Git directories require initialization consent. Planning
+  records applicable lint and static checks from project guidance, tooling and CI,
+  or explains why none apply. During authorized implementation, run those checks
+  in the task worktree and rerun failed and affected checks after repairs. The
+  coordinator checks current evidence before Conventional Commit and again before
+  pushing the task branch with remote confirmation. Planning-only requests do
+  not commit or push. Invoke it with `$dawg-plan`.
 - **dawg-init** — Inspect an existing repository or new directory, run
   `dawg-plan`, and create/update shared coding guidance. Keeps `AGENTS.md`
   focused on coding, creates missing `CLAUDE.md` delegation, and maintains

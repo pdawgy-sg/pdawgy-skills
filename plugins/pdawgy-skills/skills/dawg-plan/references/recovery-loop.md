@@ -3,8 +3,10 @@
 During implementation and verification, keep working on observed non-green
 results until the required checks for that phase pass on current inputs and
 their issues meet recorded exit criteria. Reporting a failure alone is not task
-completion. This includes tests, formal checks, source/artifact checks, hooks,
-required CI and delivery verification when those stages apply.
+completion. This includes project lint and static checks, tests, formal checks,
+source/artifact checks, hooks, required CI and delivery verification when those
+stages apply. A missing prerequisite for required lint is a blocker. Record the
+issue and rerun the check in its worktree working directory once it is available.
 
 ## Record promptly and preserve attempts
 
